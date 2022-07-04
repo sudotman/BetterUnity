@@ -128,6 +128,20 @@ public class BetterTransform : Editor
                 menu_visibility.ShowAsContext();
             }
 
+            if (EditorGUILayout.DropdownButton(new GUIContent("Make Unit Scale Parent"), FocusType.Keyboard))
+            {
+                Debug.Log("pressed");
+
+                GameObject newChild = new GameObject("test");
+                //newChild.transform.loca
+
+                //newChild.transform.parent = transform;
+
+                transform.parent = newChild.transform;
+
+                newChild.name = transform.gameObject.name + "Parent";
+            }
+
             m_object.ApplyModifiedProperties();
 
             //Debug.Log(Selection.activeContext);

@@ -6,7 +6,7 @@ There are some key features pan other game engines that seem to be lacking in Un
 <br>
 
 ## Installation
-You can download the latest ```.unitypackage``` [through releases or the [repository]("link") folders] and double-click to import it.
+You can download the latest ```.unitypackage``` [through [releases]("https://github.com/sudotman/BetterUnity/releases/tag/v0.1") and double-click to import it.
 
 
 # Contents

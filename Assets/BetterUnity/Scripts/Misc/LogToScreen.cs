@@ -5,7 +5,10 @@ using UnityEditor;
 public class LogToScreen : MonoBehaviour
 {
     string tempLogString;
-    Queue logQueue = new Queue();
+    Queue logQueue = new Queue();   
+
+    [InspectorButton("testFunc")]
+    public char MyButton;
 
     private GUIStyle defaultGUIStyle;
 

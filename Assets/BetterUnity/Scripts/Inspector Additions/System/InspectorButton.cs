@@ -5,28 +5,42 @@ using UnityEditor;
 using System.Reflection;
 
 /// <summary>
-/// This attribute can only be applied to fields because its
-/// associated PropertyDrawer only operates on fields (either
-/// public or tagged with the [SerializeField] attribute) in
-/// the target MonoBehaviour.
+/// Suceed this with a field where you specify the button's text as the variable name
 /// </summary>
 [System.AttributeUsage(System.AttributeTargets.Field)]
 public class InspectorButtonAttribute : PropertyAttribute
 {
-    public static float kDefaultButtonWidth = 80;
+    public static float defaultButtonWidth = 80;
 
-    public readonly string MethodName;
+    public readonly string methodToBeCalled;
 
-    private float _buttonWidth = kDefaultButtonWidth;
+    private float _buttonWidth = defaultButtonWidth;
     public float ButtonWidth
     {
         get { return _buttonWidth; }
         set { _buttonWidth = value; }
     }
 
-    public InspectorButtonAttribute(string MethodName)
+    /// <summary>
+    /// Create a inspector button with the button text being based on the suceeding variable's name.
+    /// </summary>
+    /// <param name="methodNamePassed">The name of the method to be called.</param>
+    /// <returns>Creates a button in inspector.</returns>
+    public InspectorButtonAttribute(string methodNamePassed)
     {
-        this.MethodName = MethodName;
+        this.methodToBeCalled = methodNamePassed;
+    }
+
+    /// <summary>
+    /// Create a inspector button with the button text being based on the suceeding variable's name.
+    /// </summary>
+    /// <param name="methodNamePassed">The name of the method to be called.</param>
+    /// <param name="buttonWidth">The width of the button, keep it greater than 80 as below that becomes too small.</param>
+    /// <returns>Creates a button in inspector.</returns>
+    public InspectorButtonAttribute(string methodNamePassed,float buttonWidth)
+    {
+        this.methodToBeCalled = methodNamePassed;
+        this._buttonWidth = buttonWidth;
     }
 }
 
@@ -43,7 +57,7 @@ public class InspectorButtonPropertyDrawer : PropertyDrawer
         if (GUI.Button(buttonRect, label.text))
         {
             System.Type eventOwnerType = prop.serializedObject.targetObject.GetType();
-            string eventName = inspectorButtonAttribute.MethodName;
+            string eventName = inspectorButtonAttribute.methodToBeCalled;
 
             if (_eventMethodInfo == null)
                 _eventMethodInfo = eventOwnerType.GetMethod(eventName, BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);

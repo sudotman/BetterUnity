@@ -6,7 +6,7 @@ There are some key features pan other game engines that seem to be lacking in Un
 <br>
 
 ## Installation
-You can download the latest ```.unitypackage``` through [Releases](https://github.com/sudotman/BetterUnity/releases/tag/v0.1) and double-click to import it.
+You can download the latest ```.unitypackage``` through [Releases](https://github.com/sudotman/BetterUnity/releases/tag/v0.2) and double-click to import it.
 
 
 # Contents
@@ -137,7 +137,6 @@ currentItem = myList.RandomItem();
 ```
 
 ## 5. VR Scripts
-[todo: add more]
 Useful scripts that aid in my VR development.
 
 ### 5.1 Head Level
@@ -151,8 +150,6 @@ Tools to do various functions, called by menus.
 
 ### 6.1 Rename Suite
 Works similar to BetterRename except its for remaining them only once. [We can attach the script, do the rename, and then remove it if we would want but this has a much cleaner UX]. Further, it allows you to rename any random [from anywhere to anywhere] selection at any place in the heirarchy.
-
-//todo: update the demo gif below with the new tool
 
 !["6.1 Demo - Rename"](Demo/6_1_Rename.gif)
 
@@ -180,10 +177,16 @@ Right click on any GameObject in the heirarchy to "Resolve Import Issues". A lot
 ## 8. Miscellaneous
 
 ### 8.1 Controllers
-Various basic controller templates, such as FPS, VR. //todo: Add More
+Various basic controller templates, such as FPS, VR.
 
 <br>
 
 # Contribution
-Generate a pull request for whatever change you feel is necessary and I will be happy to review them.
+Generate a pull request for whatever change you feel is necessary and I will be happy to review and add them.
+
+### Current to-do:
+- Add more controllers templates.
+- Add more VR utiltiy scripts.
+- Update RenameSuite's gif
+- Store GIFs on the cloud
 

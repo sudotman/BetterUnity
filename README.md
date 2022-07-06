@@ -145,17 +145,45 @@ Make an object always align with our headset's level.
 
 !["5.1 Demo - HeadLevel"](Demo/5_1_Head.gif)
 
-## 6. Miscellaneous
+## 6. Toolbar Tools
 
-### 6.1 Controllers
-Various basic controller templates, such as FPS, VR.
+Tools to do various functions, called by menus.
 
-### 6.2 Toolbar Tools
-[todo: add more]
+### 6.1 Rename Suite
+Works similar to BetterRename except its for remaining them only once. [We can attach the script, do the rename, and then remove it if we would want but this has a much cleaner UX]. Further, it allows you to rename any random [from anywhere to anywhere] selection at any place in the heirarchy.
 
-Tools to do some one-time functions.
-Such as, a toolbar version of the better rename, if we require to do it uniquely once.
+//todo: update the demo gif below with the new tool
 
-!["6.2 Demo - Toolbar"](Demo/6_2_Toolbar.gif)
+!["6.1 Demo - Rename"](Demo/6_1_Rename.gif)
 
+### 6.2 Setup Default Project
+A one click button that set-ups directories in our project folder in a standardish way.
+
+!["6.2 Demo - Default"](Demo/6_2_Default.gif)
+
+## 7. BetterContext
+A collection of additions to various context menus throughout Unity.
+
+### 7.1 Solve Import
+Right click on any GameObject in the heirarchy to "Resolve Import Issues". A lot of times when importing 3D models, we tend to get empty objects, cameras, lights etc [usually dependent on the way the modeller exports them] and hence this button gets rid of them in one-go.
+
+!["7.1 Demo - Solve Import"](Demo/7_1_SolveImport.gif)
+
+### 7.2 Other Contexts
+- Rigidbody: I find myself wanting to freeze X, Z rotation and turn interpolation on and also make sure it's not kinematic. Right click and pressing this button does it all for me.
+
+- AudioSource: One key feature missing from inspecting an AudioSource is the ability to play, pause and stop it at will. Right click and pressing this does the aforementioned.
+
+!["7.2 - AudioSource"](Demo/7_2_AudioSource.gif)
+
+
+## 8. Miscellaneous
+
+### 8.1 Controllers
+Various basic controller templates, such as FPS, VR. //todo: Add More
+
+<br>
+
+# Contribution
+Generate a pull request for whatever change you feel is necessary and I will be happy to review them.
 

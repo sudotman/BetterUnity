@@ -33,11 +33,9 @@ public class ContextMenus : EditorWindow
                 DestroyImmediate(tempArray[i].gameObject);
             }
         }
-
-       
     }
 
-    // Add a menu item called "Double Mass" to a Rigidbody's context menu.
+    // Add a menu item called "usual player settings" to a Rigidbody's context menu.
     [MenuItem("CONTEXT/Rigidbody/BetterUnity/Usual Player Settings")]
     static void DoubleMass(MenuCommand command)
     {
@@ -50,6 +48,7 @@ public class ContextMenus : EditorWindow
         Debug.Log("Set usual player settings of Rigidbody.");
     }
 
+
     [MenuItem("CONTEXT/AudioSource/BetterUnity/Play Source")]
     static void PlayAudio(MenuCommand command)
     {
@@ -58,7 +57,7 @@ public class ContextMenus : EditorWindow
         //Debug.Log("Doubled Rigidbody's Mass to " + body.mass + " from Context Menu.");
         Debug.Log("Playing audio now.");
     }
-
+ 
     [MenuItem("CONTEXT/AudioSource/BetterUnity/Stop Source")]
     static void StopAudio(MenuCommand command)
     {

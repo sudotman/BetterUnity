@@ -146,22 +146,32 @@ public class BetterTransform : Editor
 
             //Debug.Log(Selection.activeContext);
 
-            if (locked && !lockScaleInternal)
+            if (transform != null)
             {
-                xy = 1 / (transform.localScale.x / transform.localScale.y);
-                xz = 1 / (transform.localScale.x / transform.localScale.z);
+                if (locked && !lockScaleInternal)
+                {
 
-                lockScaleInternal = true;
+                    xy = 1 / (transform.localScale.x / transform.localScale.y);
+                    xz = 1 / (transform.localScale.x / transform.localScale.z);
+
+                    lockScaleInternal = true;
+
+
+                }
+                else if (locked && lockScaleInternal)
+                {
+
+                    if (transform.localScale.x / transform.localScale.y != 1 / xy)
+                        transform.localScale = new Vector3(transform.localScale.x, transform.localScale.x * xy, transform.localScale.x * xz);
+
+
+                }
+                else if (!locked)
+                {
+                    lockScaleInternal = false;
+                }
             }
-            else if (locked && lockScaleInternal)
-            {
-                if (transform.localScale.x / transform.localScale.y != 1 / xy)
-                    transform.localScale = new Vector3(transform.localScale.x, transform.localScale.x * xy, transform.localScale.x * xz);
-            }
-            else if (!locked)
-            {
-                lockScaleInternal = false;
-            }
+
         }      
 
     }

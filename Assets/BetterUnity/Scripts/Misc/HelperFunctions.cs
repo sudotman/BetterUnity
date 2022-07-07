@@ -152,5 +152,17 @@ public static class HelperFunctions
         return list[Random.Range(0, list.Count)];
     }
 
+    //06 - July
+    /// <summary>
+    /// Changes a Vector3 without modifying the Y-component.
+    /// <param name="keepYFrom">The Vector3 from which we want the Y-Position to retain.</param>
+    /// </summary>
+    /// <returns>A Vector3 with the calculated distance.</returns>
+    public static Vector3 ExcludeY(this Vector3 currentVec, Vector3 keepYFrom)
+    {
+        return new Vector3(currentVec.x,keepYFrom.y,currentVec.z);
+    }
+
+
 
 }

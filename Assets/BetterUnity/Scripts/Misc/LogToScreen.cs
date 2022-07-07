@@ -7,39 +7,19 @@ public class LogToScreen : MonoBehaviour
     string tempLogString;
     Queue logQueue = new Queue();   
 
-    [InspectorButton("testFunc")]
-    public char MyButton;
-
     private GUIStyle defaultGUIStyle;
 
     void Start()
     {
-        Debug.Log("Log1");
-        Debug.Log("Log2");
-        Debug.Log("Log3");
-        Debug.Log("Log4");
-
-        Debug.LogError("This is an error plus time: " + Time.time);
-
-        Debug.LogWarning("Warning plus position: " + transform.position);
-
-        Debug.LogAssertion("Assertion plus time: " + Time.deltaTime);
-
-        //a repeating function to test logging
-        InvokeRepeating("LogTest", 1, 2);
-
-        //remove debug elements after a certain time
-        InvokeRepeating("RemoveInTime", 2, 5);
-
         //Set the default style for our GUI elements
         defaultGUIStyle = new GUIStyle(EditorStyles.label);
         defaultGUIStyle.normal.textColor = Color.white; //We can multiply our elements with any color later to get our desired color
     }
 
+  
+
     void OnEnable()
     {
-        
-
         Application.logMessageReceived += HandleLog;
     }
 
@@ -95,6 +75,25 @@ public class LogToScreen : MonoBehaviour
     //    yield return new WaitForSeconds(4f);
     //    myLogQueue.Dequeue();
     //}
+    void RandomLogsForTesting()
+    {
+        Debug.Log("Log1");
+        Debug.Log("Log2");
+        Debug.Log("Log3");
+        Debug.Log("Log4");
 
+        Debug.LogError("This is an error plus time: " + Time.time);
+
+        Debug.LogWarning("Warning plus position: " + transform.position);
+
+        Debug.LogAssertion("Assertion plus time: " + Time.deltaTime);
+
+        //a repeating function to test logging
+        InvokeRepeating("LogTest", 1, 2);
+
+        //remove debug elements after a certain time
+        InvokeRepeating("RemoveInTime", 2, 5);
+
+    }
 
 }

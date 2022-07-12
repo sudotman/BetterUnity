@@ -179,14 +179,25 @@ Right click on any GameObject in the heirarchy to "Resolve Import Issues". A lot
 ### 8.1 Controllers
 Various basic controller templates, such as FPS, VR.
 
+### 8.2 Navigation System
+A simple walking navigation system for NPCs with appropriate turning/path following.
+
+Group all points into one parent and drop the parent into the points prefab and configure everything accordingly. You can keep the entire points children messy and maybe use BetterRename to organize them (wink, wink).
+
+!["8.2 - Navigation System"](Demo/8_2_Navigation.gif)
+
 <br>
 
 # Contribution
 Generate a pull request for whatever change you feel is necessary and I will be happy to review and add them.
 
-### Current to-do:
+## Current to-do:
 - Add more controllers templates.
 - Add more VR utiltiy scripts.
 - Update RenameSuite's gif
 - Store GIFs on the cloud
 
+### Navigation To-Do:
+- Create a parent script to automatically configure animation states and attach script to all children gameobjects and also populate if empty objects positions.
+- Use mixamo characters and give selection for different states such as walking, running etc and have a unit scale for speed/animation sync and procedurally modify walking running speeds.
+- Create an accompanying editor script so that the Inspector isnt as confusing as it is right now.

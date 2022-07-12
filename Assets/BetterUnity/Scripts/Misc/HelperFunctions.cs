@@ -74,7 +74,7 @@ public static class HelperFunctions
     /// <param name="start">The start value in Vector3.</param>
     /// <param name="end">The end value in Vector3.</param>
     /// <returns>A Vector3 with the required interpolation.</returns>
-    public static Vector3 EaseOutLerp(this float t, Vector3 start, Vector3 end)
+    public static Vector3 EaseOutLerp(this Vector3 start, Vector3 end, float t)
     {
         t = Mathf.Sin(t * Mathf.PI * 0.5f);
         return Vector3.Lerp(start, end, t);
@@ -86,7 +86,7 @@ public static class HelperFunctions
     /// <param name="start">The start value in Vector3.</param>
     /// <param name="end">The end value in Vector3.</param>
     /// <returns>A Vector3 with the required interpolation.</returns>
-    public static Vector3 EaseInLerp(this float t, Vector3 start, Vector3 end)
+    public static Vector3 EaseInLerp(this Vector3 start, Vector3 end, float t)
     {
         t = 1f - Mathf.Cos(t * Mathf.PI * 0.5f);
         return Vector3.Lerp(start, end, t);

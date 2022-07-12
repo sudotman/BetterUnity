@@ -26,6 +26,9 @@ public class BetterTransform : Editor
 
     GenericMenu menu_visibility;
     GenericMenu menu_reset;
+    GenericMenu menu_freeze;
+
+    private bool[] freezeArray = new bool[6];
 
     private void OnEnable()
     {   
@@ -41,7 +44,7 @@ public class BetterTransform : Editor
 
         transform = Selection.activeTransform;
 
-        locked = true;
+        locked = false;
 
         menu_reset = new GenericMenu();
         menu_reset.AddItem(new GUIContent("Reset Position"), false, ResetScale, 1);
@@ -51,6 +54,13 @@ public class BetterTransform : Editor
         menu_visibility = new GenericMenu();
         menu_visibility.AddItem(new GUIContent("Make Object Visible"), false, ObjectVisiblity, 1);
         menu_visibility.AddItem(new GUIContent("Make Object Invisible"), false, ObjectVisiblity, 2);
+
+        menu_freeze = new GenericMenu();
+
+        for(int i = 0; i < 6; i++)
+        {
+            freezeArray[i] = false;
+        }
     }
 
     void ResetScale(object parameter)
@@ -142,9 +152,14 @@ public class BetterTransform : Editor
                 newChild.name = transform.gameObject.name + "Parent";
             }
 
+          
+            // set the GUI to use the color stored in m_Color
+            //GUI.color = m_Color;
+
             m_object.ApplyModifiedProperties();
 
             //Debug.Log(Selection.activeContext);
+
 
             if (transform != null)
             {
@@ -175,5 +190,11 @@ public class BetterTransform : Editor
         }      
 
     }
+
+  
+
+
+
+ 
 
 }

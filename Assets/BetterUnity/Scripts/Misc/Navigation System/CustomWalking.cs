@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CustomWalking : MonoBehaviour
 {
-    [SerializeField] Transform pointParent;
+    [SerializeField] public Transform pointParent;
 
     Transform[] points;
 
@@ -35,10 +35,7 @@ public class CustomWalking : MonoBehaviour
 
 
     [Header("Randomizing Spawn Point [if disabled, will calculate the least distance to the nearest point]")]
-    [SerializeField]
-    private bool randomizeSpawnPoints;
-
-
+    public bool randomizeSpawnPoints;
 
     private Transform currentStartMarker;
     private Transform currentEndMarker;

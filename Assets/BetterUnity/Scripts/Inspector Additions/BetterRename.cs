@@ -6,11 +6,11 @@ using UnityEngine;
 public class BetterRename : MonoBehaviour
 {
     [Tooltip("Prefix to attach to every child's name.")]
-    [SerializeField] private string prefix;
+    public string prefix;
     Transform[] list;
 
     [Tooltip("Children's suffix numbering will start from this number.")]
-    [SerializeField] private int startNumberingFrom = 0;
+    public int startNumberingFrom = 0;
 
     private int currentChildCount;
 

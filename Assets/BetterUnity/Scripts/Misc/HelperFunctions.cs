@@ -56,6 +56,19 @@ public static class HelperFunctions
     }
 
     /// <summary>
+    /// Destroy all children of a parent from the editor.
+    /// </summary>
+    /// <param name="_transform">Parent transform.</param>
+    public static void DestroyChildrenEditor(this Transform _transform)
+    {
+        foreach (Transform child in _transform)
+        {
+            Object.DestroyImmediate(child.gameObject);
+        }
+    }
+
+
+    /// <summary>
     /// Subtract one float value from x, y, z components of a Vector3.
     /// </summary>
     /// <param name="vector">Vector to be subtracted from..</param>
@@ -163,6 +176,33 @@ public static class HelperFunctions
         return new Vector3(currentVec.x,keepYFrom.y,currentVec.z);
     }
 
+    //12 - July
+    /// <summary>
+    /// Reset local position, rotation, scale to default values.
+    /// </summary>
+    /// <param name="_transform">The transform to be reset.</param>
+    public static void ResetLocalTransform(this Transform _transform)
+    {
+        _transform.localPosition = new Vector3(0, 0, 0);
+        _transform.localRotation = Quaternion.identity;
+        _transform.localScale = new Vector3(1, 1, 1);
+    }
 
+    /// <summary>
+    /// Not recommended to be used because applying lossy scale is stupid.
+    /// Reset global position, rotation, scale to origin.
+    /// </summary>
+    /// <param name="_transform">The transform to be reset.</param>
+    public static void ResetGlobalTransform(this Transform _transform)
+    {
+        _transform.position = new Vector3(0, 0, 0);
+        _transform.rotation = Quaternion.identity;
+        Transform tempParent = _transform.parent;
+        _transform.parent = null;
+
+        _transform.localScale = new Vector3(1, 1, 1);
+
+        _transform.parent = tempParent;
+    }
 
 }

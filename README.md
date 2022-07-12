@@ -196,8 +196,11 @@ Generate a pull request for whatever change you feel is necessary and I will be 
 - Add more VR utiltiy scripts.
 - Update RenameSuite's gif
 - Store GIFs on the cloud
+- Organize Helper Functions
 
 ### Navigation To-Do:
 - Create a parent script to automatically configure animation states and attach script to all children gameobjects and also populate if empty objects positions.
 - Use mixamo characters and give selection for different states such as walking, running etc and have a unit scale for speed/animation sync and procedurally modify walking running speeds.
 - Create an accompanying editor script so that the Inspector isnt as confusing as it is right now.
+
+

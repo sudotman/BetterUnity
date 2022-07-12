@@ -14,6 +14,8 @@ public class InspectorButtonAttribute : PropertyAttribute
 
     public readonly string methodToBeCalled;
 
+    public bool dynamicWidth = false;
+
     private float _buttonWidth = defaultButtonWidth;
     public float ButtonWidth
     {
@@ -35,12 +37,17 @@ public class InspectorButtonAttribute : PropertyAttribute
     /// Create a inspector button with the button text being based on the suceeding variable's name.
     /// </summary>
     /// <param name="methodNamePassed">The name of the method to be called.</param>
-    /// <param name="buttonWidth">The width of the button, keep it greater than 80 as below that becomes too small.</param>
+    /// <param name="buttonWidth">The width of the button, keep it greater than 80 as below that becomes too small. Pass 0 for dynamic scaling. </param>
     /// <returns>Creates a button in inspector.</returns>
     public InspectorButtonAttribute(string methodNamePassed,float buttonWidth)
     {
         this.methodToBeCalled = methodNamePassed;
         this._buttonWidth = buttonWidth;
+
+        if(buttonWidth == 0)
+        {
+            dynamicWidth = true;
+        }
     }
 }
 
@@ -53,6 +60,11 @@ public class InspectorButtonPropertyDrawer : PropertyDrawer
     public override void OnGUI(Rect position, SerializedProperty prop, GUIContent label)
     {
         InspectorButtonAttribute inspectorButtonAttribute = (InspectorButtonAttribute)attribute;
+
+        if (inspectorButtonAttribute.dynamicWidth)
+        {
+            inspectorButtonAttribute.ButtonWidth = HelperFunctions.ScaleRange(label.text.Length, 1, label.text.Length, 80, label.text.Length * 8);
+        }
         Rect buttonRect = new Rect(position.x + (position.width - inspectorButtonAttribute.ButtonWidth) * 0.5f, position.y, inspectorButtonAttribute.ButtonWidth, position.height);
         if (GUI.Button(buttonRect, label.text))
         {

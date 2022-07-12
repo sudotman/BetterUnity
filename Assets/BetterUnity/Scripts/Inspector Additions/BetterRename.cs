@@ -14,6 +14,9 @@ public class BetterRename : MonoBehaviour
 
     private int currentChildCount;
 
+    [InspectorButton("Reset")]
+    public char reset;
+
     private void Awake()
     {
         FetchList();
@@ -37,5 +40,10 @@ public class BetterRename : MonoBehaviour
     {
         list = GetComponentsInChildren<Transform>();
         currentChildCount = transform.childCount;
+    }
+
+    void Reset()
+    {
+        FetchList();
     }
 }

@@ -64,7 +64,17 @@ public class CustomWalking : MonoBehaviour
     {
         currentLookAtEnd = new GameObject("CurrentLookAt").transform;
 
-        Transform dumper = GameObject.Find("Dumper").transform;
+        Transform dumper;
+
+        if (GameObject.Find("Dumper") == null)
+        {
+            GameObject gb = new GameObject("Dumper");
+            dumper = gb.transform;
+        }
+        else
+        {
+            dumper = GameObject.Find("Dumper").transform;
+        }
 
         if(dumper!=null)
             currentLookAtEnd.parent = dumper;

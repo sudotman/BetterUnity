@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEditor.Animations;
 
 public class CreateRandomNavigationSystem : MonoBehaviour
 {
@@ -13,6 +14,11 @@ public class CreateRandomNavigationSystem : MonoBehaviour
     [SerializeField] bool randomizeStartPoint;
 
     [SerializeField] GameObject[] characters;
+
+    public enum AnimationState  { Walking, Running }
+
+    [SerializeField]
+    private AnimationState currentAnimationState;
 
     [Header("Make sure the gameobject is empty because it will destroy everything below it.")]
     [InspectorButton("CreateNavigationSystem", 0)]
@@ -91,6 +97,33 @@ public class CreateRandomNavigationSystem : MonoBehaviour
 
             gb.AddComponent<CustomWalking>();
             gb.GetComponent<CustomWalking>().randomizeSpawnPoints = randomizeStartPoint;
+
+            //Animation thingies / beautiful code btw satyam, whoa
+            Animator animator = gb.GetComponent<Animator>();
+
+            var controller = (AnimatorController)animator.runtimeAnimatorController;
+
+            var newState = controller.layers[0].stateMachine.defaultState;  
+
+            AnimationClip currentClip = null;
+
+            foreach (AnimationClip clip in controller.animationClips)
+            {
+                if (clip.name == currentAnimationState.ToString())
+                {
+                    currentClip = clip;
+                    controller.SetStateEffectiveMotion(newState, currentClip);
+                }
+            }
+
+            gb.GetComponent<CustomWalking>().speed = currentAnimationState.ToString().Equals("Walking") ? 1 : 2;
+
+            if (currentClip == null)
+            {
+                Debug.LogError("Animation: " + currentAnimationState.ToString() + " doesnt exist in your people Animator. Please make sure it exists as a state [Remember, the clip name matters. Not the state name].");
+            }
+
+            //Animation Thingies end here
 
             gb.GetComponent<CustomWalking>().pointParent = pointsParent.transform;
         }

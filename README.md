@@ -202,5 +202,8 @@ Generate a pull request for whatever change you feel is necessary and I will be 
 - Create a parent script to automatically configure animation states and attach script to all children gameobjects and also populate if empty objects positions.
 - Use mixamo characters and give selection for different states such as walking, running etc and have a unit scale for speed/animation sync and procedurally modify walking running speeds.
 - Create an accompanying editor script so that the Inspector isnt as confusing as it is right now.
+- Give options to control animation states from the inspector
+- Multiple lanes/paths
+- Continue walking from where the start location as opposed to moving them to the preferred location
 
 

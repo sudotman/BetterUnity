@@ -36,6 +36,7 @@ public class CustomWalking : MonoBehaviour
 
     [Header("Randomizing Spawn Point [if disabled, will calculate the least distance to the nearest point]")]
     public bool randomizeSpawnPoints;
+    public WalkingEnums.StartPoint startAt = WalkingEnums.StartPoint.ClosestPoint;
 
     private Transform currentStartMarker;
     private Transform currentEndMarker;
@@ -59,6 +60,13 @@ public class CustomWalking : MonoBehaviour
 
     private float fakeFraction = 0.5f;
 
+    [Header("Lanes")]
+    public int currentLaneWalkingOn = 1;
+
+    public int numberOfLanes = 1;
+
+    public float distanceBetweenLanes = 0.5f;
+
 
     void Start()
     {
@@ -81,6 +89,11 @@ public class CustomWalking : MonoBehaviour
 
         points = pointParent.GetComponentsInChildren<Transform>();
 
+        if (numberOfLanes > 1)
+        {
+
+        }
+
         startTime = Time.time;
 
         pathIndex = 0;
@@ -90,11 +103,14 @@ public class CustomWalking : MonoBehaviour
             speed = Random.Range(randomSpeedMinimumRange, randomSpeedMaximumRange);
         }
 
-        if (randomizeSpawnPoints)
+        if (startAt == WalkingEnums.StartPoint.Randomize)
         {
             pathIndex = Random.Range(1, points.Length - 3);
+            currentStartMarker = points[pathIndex];
+            currentEndMarker = points[pathIndex + 1];
+            cachedEndForFace = points[pathIndex + 2];
         }
-        else
+        else if(startAt == WalkingEnums.StartPoint.ClosestPoint)
         {
             //Find the closest point to start from
 
@@ -117,14 +133,49 @@ public class CustomWalking : MonoBehaviour
             {
                 pathIndex -= 3;
             }
+
+            currentStartMarker = points[pathIndex]; 
+            currentEndMarker = points[pathIndex + 1];
+            cachedEndForFace = points[pathIndex + 2];
         }
-            
+        else if(startAt == WalkingEnums.StartPoint.WalkToClosest)
+        {
+            //Find the closest point to start from
 
-        currentStartMarker = points[pathIndex];
-        currentEndMarker = points[pathIndex + 1];
+            float leastDistanceYet = 10000;
+            int pathIndexToAssign = 1;
+            for (int i = 1; i < points.Length - 1; i++)
+            {
+                float temp = Vector3.Distance(transform.position, points[i].position);
 
-        cachedEndForFace = points[pathIndex + 2];
+                if (temp < leastDistanceYet)
+                {
+                    leastDistanceYet = Vector3.Distance(transform.position, points[i].position);
+                    pathIndexToAssign = i;
+                }
+            }
 
+            pathIndex = pathIndexToAssign - 1;
+
+            GameObject gb = new GameObject("DummyWalkClosest" + gameObject.name);
+
+            if (dumper != null)
+            {
+                gb.transform.parent = dumper;
+            }
+
+            gb.transform.position = transform.position;
+
+            currentStartMarker = gb.transform;
+            currentEndMarker = points[pathIndex + 1];
+            cachedEndForFace = points[pathIndex + 2];
+
+            if (pathIndex > points.Length - 3)
+            {
+                pathIndex -= 3;
+            }
+        }
+                
         currentLookAtEnd.position = currentEndMarker.position;
 
         journeyLength = Vector3.Distance(currentStartMarker.position, currentEndMarker.position);
@@ -145,8 +196,18 @@ public class CustomWalking : MonoBehaviour
                 }
                 else
                 {
+                    if(respawnEndPoint+1 > points.Length - 1)
+                    {
+                        respawnEndPoint = points.Length - 1;
+                    }
                     pathIndex = Random.Range(respawnStartPoint, respawnEndPoint);
-                    distCovered = 0;
+
+                   
+
+                    currentStartMarker = points[pathIndex];
+                    currentEndMarker = points[pathIndex + 1];
+
+                    currentLookAtEnd.position = currentEndMarker.position;
                 }
             }
             else
@@ -181,16 +242,24 @@ public class CustomWalking : MonoBehaviour
             }
 
             fakeFraction = fractionOfJourney.ScaleRange(0.5f, 1, 0, 1);
-            Debug.Log(fakeFraction);
+            //Debug.Log(fakeFraction);
 
             DoFaceLerp();
         }
 
-        transform.position = Vector3.Lerp(currentStartMarker.position, currentEndMarker.position, fractionOfJourney);
+        if(numberOfLanes > 1)
+        {
+            transform.position = Vector3.Lerp(currentStartMarker.position.PlusFloatX(distanceBetweenLanes * currentLaneWalkingOn), currentEndMarker.position.PlusFloatX(distanceBetweenLanes * currentLaneWalkingOn), fractionOfJourney);
+            transform.LookAt(currentLookAtEnd.position.PlusFloatX(distanceBetweenLanes));
+        }
+        else
+        {
+            transform.position = Vector3.Lerp(currentStartMarker.position, currentEndMarker.position, fractionOfJourney);
+            transform.LookAt(currentLookAtEnd);
+        }
 
-        transform.LookAt(currentLookAtEnd);
-
-        
+       
+ 
     }
 
     void DoFaceLerp()

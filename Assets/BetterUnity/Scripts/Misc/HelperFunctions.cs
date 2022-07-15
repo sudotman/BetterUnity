@@ -79,6 +79,28 @@ public static class HelperFunctions
         return new Vector3(vector.x - f, vector.y - f, vector.z - f);
     }
 
+    /// <summary>
+    /// Add a float to the x component and return the vector3.
+    /// </summary>
+    /// <param name="vector">Vector to be added to.</param>
+    /// <param name="f">The value to be added to the Vector3's x component.</param>
+    /// <returns>A new Vector3 with added x value.</returns>
+    public static Vector3 PlusFloatX(this Vector3 vector, float f)
+    {
+        return new Vector3(vector.x + f, vector.y, vector.z);
+    }
+
+    /// <summary>
+    /// Subtract a float to the x component and return the vector3.
+    /// </summary>
+    /// <param name="vector">Vector to be subtracted from</param>
+    /// <param name="f">The value to be subtracted from the Vector3's x component.</param>
+    /// <returns>A new Vector3 with added x value.</returns>
+    public static Vector3 MinusFloatX(this Vector3 vector, float f)
+    {
+        return new Vector3(vector.x + f, vector.y, vector.z);
+    }
+
     // Interpolations
 
     /// <summary>

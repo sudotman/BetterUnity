@@ -6,12 +6,18 @@ using UnityEditor.Animations;
 
 public class CreateRandomNavigationSystem : MonoBehaviour
 {
+    [Header("General Settings")]
     [SerializeField] int amountOfPoints = 6;
 
     [SerializeField] int amountOfPeople = 6;
 
-    [Header("Randomize spawn point or start from the closest point")]
-    [SerializeField] bool randomizeStartPoint;
+    [Header("Number of lanes to walk on")]
+    [SerializeField] int numberOfLanes = 1;
+    [SerializeField] float distanceBetweenLanes = 0.5f;
+    [SerializeField] bool randomlyAssignLane = false;
+
+    [Header("The startpoint for the characters")]
+    [SerializeField] WalkingEnums.StartPoint startPoint;
 
     [SerializeField] GameObject[] characters;
 
@@ -19,6 +25,10 @@ public class CreateRandomNavigationSystem : MonoBehaviour
 
     [SerializeField]
     private AnimationState currentAnimationState;
+
+    [Header("Will start looking at the new target when they are how much through the current two points' journey (0.0-1.0)")]
+    [Range(0.2f, 1f)]
+    public float startTurningBodyAt = 0.7f;
 
     [Header("Make sure the gameobject is empty because it will destroy everything below it.")]
     [InspectorButton("CreateNavigationSystem", 0)]
@@ -31,13 +41,19 @@ public class CreateRandomNavigationSystem : MonoBehaviour
     [InspectorButton("CleanUp", 0)]
     public char cleanUpObject;
 
+    [Header("Use this to update any variables changes without disturbing already placed paths/people")]
+    [InspectorButton("UpdateVariables", 0)]
+    public char updateVariables;
+
+    [SerializeField] private bool updateAutomatically = false;
+
     GameObject pointsParent;
     GameObject peopleParent;
 
     private Transform[] points;
 
 
-    [Header("prettiness")]
+    [Header("editor prettiness")]
     [SerializeField] private Color pathColor = Color.red;
     [SerializeField] private Color individualPointsColor = Color.white;
 
@@ -49,11 +65,6 @@ public class CreateRandomNavigationSystem : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     void CreateNavigationSystem()
     {
@@ -96,7 +107,10 @@ public class CreateRandomNavigationSystem : MonoBehaviour
             gb.transform.localPosition = new Vector3(gb.transform.localPosition.x + Random.Range(-25, 25f), gb.transform.localPosition.y, gb.transform.localPosition.z + Random.Range(-25, 25f));
 
             gb.AddComponent<CustomWalking>();
-            gb.GetComponent<CustomWalking>().randomizeSpawnPoints = randomizeStartPoint;
+
+            CustomWalking currentCW = gb.GetComponent<CustomWalking>();
+
+            currentCW.startAt = startPoint;
 
             //Animation thingies / beautiful code btw satyam, whoa
             Animator animator = gb.GetComponent<Animator>();
@@ -116,7 +130,7 @@ public class CreateRandomNavigationSystem : MonoBehaviour
                 }
             }
 
-            gb.GetComponent<CustomWalking>().speed = currentAnimationState.ToString().Equals("Walking") ? 1 : 2;
+            currentCW.speed = currentAnimationState == AnimationState.Walking ? 1 : 2;
 
             if (currentClip == null)
             {
@@ -125,11 +139,74 @@ public class CreateRandomNavigationSystem : MonoBehaviour
 
             //Animation Thingies end here
 
-            gb.GetComponent<CustomWalking>().pointParent = pointsParent.transform;
+            //--------------------
+
+            //Lane thingies start here
+            currentCW.numberOfLanes = numberOfLanes;
+
+            if(randomlyAssignLane)
+                currentCW.currentLaneWalkingOn = Random.Range(0, numberOfLanes);
+            currentCW.distanceBetweenLanes = distanceBetweenLanes;
+
+            currentCW.startTurningBodyAt = startTurningBodyAt;
+
+            currentCW.pointParent = pointsParent.transform;
         }
+    }
 
+    void UpdateVariables()
+    {
+        if(transform.childCount > 0)
+        {
+            pointsParent = transform.GetChild(0).gameObject;
+            peopleParent = transform.GetChild(1).gameObject; 
+            //spawn people
+            for (int i = 0; i < peopleParent.transform.childCount; i++)
+            {
+                GameObject gb = peopleParent.transform.GetChild(i).gameObject;
 
+                CustomWalking currentCW = gb.GetComponent<CustomWalking>();
 
+                currentCW.startAt = startPoint;
+
+                //Animation thingies / beautiful code btw satyam, whoa
+                Animator animator = gb.GetComponent<Animator>();
+
+                var controller = (AnimatorController)animator.runtimeAnimatorController;
+
+                var newState = controller.layers[0].stateMachine.defaultState;
+
+                AnimationClip currentClip = null;
+
+                foreach (AnimationClip clip in controller.animationClips)
+                {
+                    if (clip.name == currentAnimationState.ToString())
+                    {
+                        currentClip = clip;
+                        controller.SetStateEffectiveMotion(newState, currentClip);
+                    }
+                }
+
+                currentCW.speed = currentAnimationState == AnimationState.Walking ? 1 : 2;
+
+                if (currentClip == null)
+                {
+                    Debug.LogError("Animation: " + currentAnimationState.ToString() + " doesnt exist in your people Animator. Please make sure it exists as a state [Remember, the clip name matters. Not the state name].");
+                }
+
+                currentCW.numberOfLanes = numberOfLanes;
+
+                if (randomlyAssignLane)
+                    currentCW.currentLaneWalkingOn = Random.Range(0, numberOfLanes);
+
+                currentCW.distanceBetweenLanes = distanceBetweenLanes;
+
+                currentCW.startTurningBodyAt = startTurningBodyAt;
+
+                currentCW.pointParent = pointsParent.transform;
+            }
+        }
+        
     }
 
     private void OnDrawGizmos()
@@ -146,13 +223,40 @@ public class CreateRandomNavigationSystem : MonoBehaviour
 
             Gizmos.color = pathColor;
             points = pointsParent.GetComponentsInChildren<Transform>();
+       
+
             for (int i = 0; i < points.Length; i++)
             {
                 if ((i + 1) < points.Length && i != 0)
-                    Gizmos.DrawLine(points[i].position, points[i + 1].position);
+                {
+                    if (numberOfLanes > 1)
+                    {
+                        Gizmos.DrawLine(points[i].position, points[i + 1].position);
+
+                        for(int j = 1; j < numberOfLanes; j++)
+                        {
+                            Gizmos.DrawLine(points[i].position.PlusFloatX(distanceBetweenLanes * j), points[i + 1].position.PlusFloatX(distanceBetweenLanes * j));
+                        }
+                        
+                    }
+                    else
+                    {
+                        Gizmos.DrawLine(points[i].position, points[i + 1].position);
+                    }
+                }
+                    
             }
+
         }
 
+    }
+
+    private void OnValidate()
+    {
+        if (updateAutomatically)
+        {
+            UpdateVariables();
+        } 
     }
 
     private void OnDrawGizmosSelected()
@@ -174,9 +278,21 @@ public class CreateRandomNavigationSystem : MonoBehaviour
 
     void RandomizePoints()
     {
-        foreach (Transform child in pointsParent.transform)
+        if(transform.childCount > 0)
         {
-            child.transform.localPosition = new Vector3(Random.Range(-25, 25f), child.transform.localPosition.y, Random.Range(-25, 25f));    
+            if(pointsParent == null)
+            {
+                pointsParent = transform.GetChild(0).gameObject;
+            }
+
+            foreach (Transform child in pointsParent.transform)
+            {
+                child.transform.localPosition = new Vector3(Random.Range(-25, 25f), child.transform.localPosition.y, Random.Range(-25, 25f));
+            }
+        }
+        else
+        {
+            Debug.LogError("Make sure the points and people exist as children");
         }
     }
 }

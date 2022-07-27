@@ -70,9 +70,38 @@ public char myButton;
 
 !["2.2 Demo - Inpsector Button"](Demo/2_2_1_Button.png)
 
+You can also specify a custom text for your button (by default, it takes button name from the variable name below it [the aforementioned variable will still be required in the script regardless of if we use this]):
+```C#
+[InspectorButton("funcToBeCalled",100)]
+public char myButton;
+```
+
+*The extra step to create a character and invoke the function through specifying the name is for abstraction and prevent unnecessarily having to make functions public just for them to work on inspectors [a better solution involving invoking even private functions probably exists, will explore later].
+
 <br>
 
-### 2.3 Better Scale
+### 2.3 Inspector Fields
+Various inspector fields which can be used to output text to the Inspector without having to write a custom editor GUI for simple text labels. [a better solution involving attributes without need for a variable should exist, will look into it later]
+
+- InspectorText: Outputs normal text.
+- InspectorFocusText: Outputs text with focus, with a rectangle around it.
+- NullCheck: Forces a field to not be null, and if a reference isn't assigned to it, it will be highlighted red.
+
+Usage:
+```C#
+[InspectorText("This is a normal text")]
+public char normalText;
+
+[InspectorFocusText("This is a text with focus")]
+public char focusText;
+
+[NullCheck]
+public Transform myField;
+```
+
+!["2.3 Demo - Inpsector Button"](Demo/2_3_InspectorFields.png)
+
+### 2.4 Better Scale
 A script which works similar to the BetterTransform component but given incase you dont wish to override default transform and just want the uniform scaling on one object.
 
 <br>
@@ -197,6 +226,7 @@ Generate a pull request for whatever change you feel is necessary and I will be 
 - Update RenameSuite's gif
 - Store GIFs on the cloud
 - Organize Helper Functions
+- A better way of installation - possibly with a package through our Git url and inbuilt Unity's package manager.
 
 ### Navigation To-Do:
 - Create a parent script to automatically configure animation states and attach script to all children gameobjects and also populate if empty objects positions.

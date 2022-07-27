@@ -16,6 +16,20 @@ public class TestScript : MonoBehaviour
     [InspectorButton("myFunc", 200)]
     public char big;
 
+    [InspectorText("This is a normal text")]
+    public char normText;
+
+    [InspectorFocusText("This is a text with focus")]
+    public char focusText;
+
+    [NullCheck]
+    public Transform myField;
+
+    public Transform isThatSo2;
+
+
+
+
     void myFunc()
     {
         Debug.Log("log from my func!");
@@ -31,5 +45,7 @@ public class TestScript : MonoBehaviour
         
         
     }
+
+    
   
 }

@@ -35,6 +35,9 @@ public class InspectorButtonAttribute : PropertyAttribute
         this.methodToBeCalled = methodNamePassed;
 
         this.buttonText = "";
+
+        dynamicWidth = true;
+
     }
 
     /// <summary>

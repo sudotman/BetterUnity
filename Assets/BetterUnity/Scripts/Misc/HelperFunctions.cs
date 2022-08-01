@@ -80,6 +80,17 @@ public static class HelperFunctions
     }
 
     /// <summary>
+    /// Add one float value from x, y, z components of a Vector3.
+    /// </summary>
+    /// <param name="vector">Vector to be added to.</param>
+    /// <param name="f">The value to be added.</param>
+    /// <returns>A new Vector3 with added value.</returns>
+    public static Vector3 PlusFloatVector3(this Vector3 vector, float f)
+    {
+        return new Vector3(vector.x + f, vector.y + f, vector.z + f);
+    }
+
+    /// <summary>
     /// Add a float to the x component and return the vector3.
     /// </summary>
     /// <param name="vector">Vector to be added to.</param>

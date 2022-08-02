@@ -16,6 +16,9 @@ public class TestScript : MonoBehaviour
     [InspectorButton("myFunc", 200)]
     public char big;
 
+    [InspectorButton("myFunc","Custom name here!")]
+    public char bigCustom;
+
     [InspectorText("This is a normal text")]
     public char normText;
 
@@ -25,10 +28,7 @@ public class TestScript : MonoBehaviour
     [NullCheck]
     public Transform myField;
 
-    public Transform isThatSo2;
-
-
-
+    public Transform fieldWithoutNullCheck;
 
     void myFunc()
     {
@@ -41,11 +41,18 @@ public class TestScript : MonoBehaviour
         test2.ScaleRange(0, 100, 30, 40);
 
         Vector3.Lerp(test,test,0);
-
-        
-        
     }
 
-    
+    [CallInEditor]
+    void Unreal()
+    {
+        Debug.Log("This is unreal!");
+    }
+
+    [CallInEditor]
+    protected static void ImportantFunc()
+    {
+        Debug.Log("a very important function");
+    }
   
 }

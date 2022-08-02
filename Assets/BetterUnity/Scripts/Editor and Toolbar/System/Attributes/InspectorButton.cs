@@ -78,6 +78,25 @@ public class InspectorButtonAttribute : PropertyAttribute
             dynamicWidth = true;
         }
     }
+
+    /// <summary>
+    /// Create a inspector button with the button text being based on the suceeding variable's name.
+    /// </summary>
+    /// <param name="methodNamePassed">The name of the method to be called.</param>
+    /// <param name="buttonWidth">The width of the button, keep it greater than 80 as below that becomes too small. Pass 0 for dynamic scaling. </param>
+    /// <param name="buttonText">The text inside the button [when using this, the variable name will be ignored]. </param>
+    /// <returns>Creates a button in inspector.</returns>
+    public InspectorButtonAttribute(string methodNamePassed, string buttonText)
+    {
+        this.methodToBeCalled = methodNamePassed;
+ 
+
+        this.buttonText = buttonText;
+
+        
+        dynamicWidth = true;
+        
+    }
 }
 
 #if UNITY_EDITOR
@@ -90,8 +109,7 @@ public class InspectorButtonPropertyDrawer : PropertyDrawer
     {
         InspectorButtonAttribute inspectorButtonAttribute = (InspectorButtonAttribute)attribute;
 
-        string currentLabel = "";
-
+        string currentLabel;
         if (inspectorButtonAttribute.buttonText.Equals(""))
             currentLabel = label.text;
         else
@@ -120,3 +138,53 @@ public class InspectorButtonPropertyDrawer : PropertyDrawer
     }
 }
 #endif
+
+
+//Call in editor Unity
+
+[System.AttributeUsage(System.AttributeTargets.Method)]
+public class CallInEditorAttribute : PropertyAttribute
+{
+
+}
+
+[CanEditMultipleObjects]
+[CustomEditor(typeof(MonoBehaviour), true)]
+public class MonoBehaviourCustomEditor : Editor
+{
+    private MethodInfo _eventMethodInfo = null;
+
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector(); // We wanna maintain everything else in the inspector
+
+        // Similar to prop.serializedObject.targetObject.GetType() - Get the type information for our current selected MonoBehaviour script
+        var type = target.GetType();
+
+        // Fetch all functions
+        foreach (var method in type.GetMethods(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static))
+        {
+
+            var attributes = method.GetCustomAttributes(typeof(CallInEditorAttribute), true); // check if they have our attribute
+            if (attributes.Length > 0)
+            {
+                if (GUILayout.Button("Execute: " + method.Name))
+                {
+                    //((MonoBehaviour)target).Invoke(method.Name, 0f); //Invoking through an event method info is much faster than invoking through a method name
+
+                    System.Type eventOwnerType = type;
+
+                    string eventName = method.Name;
+
+                    if (_eventMethodInfo == null)
+                        _eventMethodInfo = eventOwnerType.GetMethod(eventName, BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+
+                    if (_eventMethodInfo != null)
+                        _eventMethodInfo.Invoke(target, null);
+                    else
+                        Debug.LogWarning(string.Format("InspectorButton: Unable to find method {0} in {1}", eventName, eventOwnerType));
+                }
+            }
+        }
+    }
+}

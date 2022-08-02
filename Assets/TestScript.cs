@@ -54,5 +54,11 @@ public class TestScript : MonoBehaviour
     {
         Debug.Log("a very important function");
     }
+    
+    [CallInEditor]
+    void HelloGitFunction()
+    {
+
+    }
   
 }

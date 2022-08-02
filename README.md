@@ -13,8 +13,25 @@ You can download the latest ```.unitypackage``` through [Releases](https://githu
 
 ## 1. Inspector Additions
 
-### 1.1 Inspector Button
-You can expose normally variables and fields to the inspector in Unity and modify them in-realtime, and it works great. Sometimes, you would want to have a button set to easily call a function of your liking from the inspector and I tend to use workarounds (such as, setting a boolean and then calling a function after checking the boolean from Update) or creating your custom inspector and having a button there. This is a much more easier and simpler addition to your existing scripts and can be called using simple property attributes.
+### 1.1 Inspector Button / Call Function in Editor
+
+Allows you to call/execute functions in your script from your inspector.
+
+You can expose normally to the inspector in Unity and it works great. Sometimes, you would want to have a button set to call a function of your liking from the inspector and I tend to use workarounds (such as, setting a boolean and then calling a function after checking the boolean from Update) or creating your custom inspector and having a button there. 
+
+This is a much more easier and simpler addition to your existing scripts and can be called using a simple attribute.
+
+Usage:
+```C#
+[CallInEditor]
+void HelloGitFunction(){
+    ....
+```
+
+!["1.1 Demo - Call in Editor"](Demo/2_2_2_HelloGit.png)
+
+
+You may want finer control over your button that appears in the inspector in the terms of the size and the label. In that case, you can use the alternative attribute field described below.
 
 Usage:
 ```C#
@@ -22,7 +39,7 @@ Usage:
 public char myButton;
 ```
 
-The above snippet will create a button named My Button and will call <i>funcToBeCalled</i> function when pressed.
+The above snippet will create a button named My Button and will call <i>`funcToBeCalled`</i> function from inside your script when pressed. The public character can be any variable type, I prefer `char` for saving miniscule memory.
 
 !["1.1 Demo - Inpsector Button"](Demo/2_2_Button.gif)
 
@@ -36,12 +53,18 @@ public char myButton;
 
 You can also specify a custom text for your button (by default, it takes button name from the variable name below it [the aforementioned variable will still be required in the script regardless of if we use this]):
 ```C#
-[InspectorButton("funcToBeCalled",100,"My Button Text")]
+[InspectorButton("funcToBeCalled",100,"Custom Name Here!")]
 public char myButton;
 ```
 
-*The extra step to create a character and invoke the function through specifying the name is for abstraction and prevent unnecessarily having to make functions public just for them to work on inspectors [a better solution involving invoking even private functions probably exists, will explore later].
+For dynamic size:
+```C#
+[InspectorButton("funcToBeCalled","Custom Name Here!")]
+public char myButton;
+```
 
+*The extra step to create a character and invoke the function through specifying the name is because of trying to workaround OnGUI/OnInspectorGUI; a better solution definitely exists and I will explore it at a later time.
+<br>
 <br>
 
 ### 1.2 Inspector Fields
@@ -64,6 +87,11 @@ public Transform myField;
 ```
 
 !["1.2 Demo - Inpsector Button"](Demo/2_3_InspectorFields.png)
+
+<br>
+
+Output of the aforementioned tools all together:<br>
+!["1.2 Demo - Full"](Demo/2_2_2_FullBtn.png)
 
 ### 1.3 Better Rename
 A lot of the times when developing, you have similar children which you want to be named incrementally with your desired prefix. Instead of manually going in and doing it, this module allows me to do more it quickly and effeciently, by attaching a script to the parent.
@@ -151,12 +179,14 @@ Performs a Ease-In Interpolation on our specified Vector3.
 ```C#
 myVector3.EaseInLerp(myFinalVector3,currentTime);
 ```
+<br>
 
 ### 2.8 Ease Out Interpolation
 Performs a Ease-Out Interpolation on our specified Vector3.
 ```C#
 myVector3.EaseOutLerp(myFinalVector3,currentTime);
 ```
+<br>
 
 ### 2.9 Smooth Step Float Interpolation
 Returns a smooth stepping interpolation between two floats.
@@ -164,7 +194,7 @@ Returns a smooth stepping interpolation between two floats.
 HelperFunctions.SmoothStep(currentTime,startFloat,EndFloat);
 ```
 
-
+<br>
 
 ## 3. Toolbar Tools
 
@@ -275,6 +305,7 @@ Generate a pull request for whatever change you feel is necessary and I will be 
 - Store GIFs on the cloud.
 - Organize and document Helper Functions (in categories and with more information and preferably screenshots)
 - A better way of installation - possibly with a package through our Git url and inbuilt Unity's package manager.
+- Fix README's alt text naming.
 
 ### Navigation To-Do:
 - ~~Multiple lanes/paths~~

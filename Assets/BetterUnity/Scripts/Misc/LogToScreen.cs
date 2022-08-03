@@ -4,19 +4,36 @@ using UnityEditor;
 
 public class LogToScreen : MonoBehaviour
 {
+    [SerializeField]
+    Color logColor = Color.yellow;
+
+    [SerializeField]
+    private bool displayFps = true;
+
+    [SerializeField]
+    Color fpsColor = Color.blue;
+
     string tempLogString;
     Queue logQueue = new Queue();   
 
     private GUIStyle defaultGUIStyle;
+
+    private int currentFps;
 
     void Start()
     {
         //Set the default style for our GUI elements
         defaultGUIStyle = new GUIStyle(EditorStyles.label);
         defaultGUIStyle.normal.textColor = Color.white; //We can multiply our elements with any color later to get our desired color
+
+        if(displayFps)
+            InvokeRepeating(nameof(RefreshFPS), 1, 1);
     }
 
-  
+    void RefreshFPS()
+    {
+        currentFps = (int)(1f / Time.unscaledDeltaTime);
+    }
 
     void OnEnable()
     {
@@ -57,7 +74,13 @@ public class LogToScreen : MonoBehaviour
 
     void OnGUI()
     {
-        GUI.contentColor = Color.yellow;
+        if(displayFps)
+            GUI.contentColor = fpsColor;    
+            GUILayout.Label(" FPS: " + currentFps.ToString());
+
+
+        GUI.contentColor = logColor;
+
         GUILayout.Label(tempLogString);
     }
 

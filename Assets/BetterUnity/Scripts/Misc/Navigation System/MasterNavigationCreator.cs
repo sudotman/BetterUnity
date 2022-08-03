@@ -4,16 +4,21 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.Animations;
 
-public class CreateRandomNavigationSystem : MonoBehaviour
+public class MasterNavigationCreator : MonoBehaviour
 {
-    [Header("General Settings")]
+    [Header("General Settings // Creation | Non-Variables")]
     [SerializeField] int amountOfPoints = 6;
 
     [SerializeField] int amountOfPeople = 6;
 
-    [Header("Number of lanes to walk on")]
+   
+    [InspectorFocusText("Variables (can be updated)",true)]
+
+    [Tooltip("The number of lanes in our outlined path to walk on.")]
     [SerializeField] int numberOfLanes = 1;
     [SerializeField] float distanceBetweenLanes = 0.5f;
+    [Tooltip("Randomly choose a lane everytime you play.")]
+
     [SerializeField] bool randomlyAssignLane = false;
 
     [Header("The startpoint for the characters")]
@@ -37,14 +42,15 @@ public class CreateRandomNavigationSystem : MonoBehaviour
     [InspectorButton("RandomizePoints", 0)]
     public char randomizePoints;
 
-    [Header("Press again, if this doesnt clear at once")]
+    [Header("Press again, if the previous existing system doesnt all clear at once")]
     [InspectorButton("CleanUp", 0)]
     public char cleanUpObject;
 
-    [Header("Use this to update any variables changes without disturbing already placed paths/people")]
+    [Header("Use this to update any variable changes without disturbing already placed paths/people")]
     [InspectorButton("UpdateVariables", 0)]
     public char updateVariables;
 
+    [Tooltip("All variable changes will be reflected automatically.")]
     [SerializeField] private bool updateAutomatically = false;
 
     GameObject pointsParent;
@@ -113,7 +119,11 @@ public class CreateRandomNavigationSystem : MonoBehaviour
             currentCW.startAt = startPoint;
 
             //Animation thingies / beautiful code btw satyam, whoa
+
             Animator animator = gb.GetComponent<Animator>();
+
+            if (animator == null)
+                Debug.LogError("Please make sure your prefab has an animator attached to it with proper animation states.");
 
             var controller = (AnimatorController)animator.runtimeAnimatorController;
 

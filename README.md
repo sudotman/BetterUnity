@@ -82,9 +82,13 @@ public char normalText;
 [InspectorFocusText("This is a text with focus")]
 public char focusText;
 
+[InsepctorFocusText("This is a text with focus aligned to the left",true)]
+public char leftAlignedFocusText;
+
 [NullCheck]
 public Transform myField;
 ```
+*Individual Char variable definition not necessary for Text Fields but I prefer to include it to keep it more organized since the order gets reversed otherwise.
 
 !["1.2 Demo - Inpsector Button"](Demo/2_3_InspectorFields.png)
 
@@ -287,9 +291,39 @@ Make an object always align with our headset's level.
 Various basic controller templates, such as FPS, VR.
 
 ### 8.2 Navigation System
-A simple walking navigation system for NPCs with appropriate turning/path following.
+A NPC walking/navigation system which is modular and fully configurable.
 
-Group all points into one parent and drop the parent into the points prefab and configure everything accordingly. You can keep the entire points children messy and maybe use BetterRename to organize them (wink, wink).
+Demo:
+
+!["7.1 Demo - HeadLevel"](Demo/8_2_1_NavigationMaster.gif)
+
+<br>
+
+You can reconfigure individual points/characters after using the Master Creator or you can choose to attach scripts individually and configure settings manually - both would work, and that would also work in conjunction to both 
+approaches.
+
+<br>
+
+<b>Doing it manually</b>:
+Group all the points you wish to navigate into one parent and drop the parent into the points prefab and configure everything accordingly. You can keep the PointParnet's children messy and maybe use BetterRename to organize them (wink, wink).
+
+Individual scripts:
+!["8.2 - Navigation System"](Demo/8_NavigationManual.png)
+
+<br>
+
+A quick guiding GIF on a quick setup is given below:
+!["8.2 - Navigation System"](Demo/8_2_2_Setup.gif)
+
+<b> General Information</b>:
+
+* If using Master Creator, remember to attach an animator to your prefab and have the two walking and running state inside the animator (No state machine connections necessary). This will also be displayed as error but seems to be a common issue
+* When using master creator, a generic walking/running speed is calculated. Feel free to modify it individually or in-group as convenient.
+* Avoid turns which are too steep, even though there is a custom interpolation built-in, if turns are too steep, it will look not so great.
+
+<br>
+
+Navigation System working as it should:
 
 !["8.2 - Navigation System"](Demo/8_2_Navigation.gif)
 
@@ -302,10 +336,13 @@ Generate a pull request for whatever change you feel is necessary and I will be 
 - ~~Update RenameSuite's gif.~~
 - Add more controllers templates.
 - Add more VR utiltiy scripts.
-- Store GIFs on the cloud.
+- <b>Store GIFs on the cloud</b>. [Very essential, the repo is growing fast]
 - Organize and document Helper Functions (in categories and with more information and preferably screenshots)
 - A better way of installation - possibly with a package through our Git url and inbuilt Unity's package manager.
 - Fix README's alt text naming.
+- Create one prefab to enable all major thingies inside of our scene.
+- Make ScreenToLog scale according to our window size. [possible solution is to use GUI.matrix]
+- Update dynamic scaling of InspectorText. [using a bandaid fix for now which is really triggering]	
 
 ### Navigation To-Do:
 - ~~Multiple lanes/paths~~
@@ -313,8 +350,10 @@ Generate a pull request for whatever change you feel is necessary and I will be 
 - ~~Use mixamo characters and give selection for different states such as walking, running etc and have a unit scale for speed/animation sync and procedurally modify walking running speeds.~~
 - ~~Continue walking from where the start location as opposed to moving them to the preferred location~~
 - ~~Give options to control animation states from the inspector.~~
-- Create an accompanying editor script so that the Inspector isnt as confusing as it is right now.
-- Add a more robust documentation/screenshots accompanying the parent script/individual scripts and the working of it.
+- ~~Create an accompanying editor script so that the Inspector isnt as confusing as it is right now.~~
+- Add a more robust documentation/screenshots accompanying the parent script/individual scripts and the working of it. // sorta done for now but will remove this after some consideration.
+- Add a dynamic intersection detection with other NPCs.
+
 
 
 

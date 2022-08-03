@@ -44,6 +44,25 @@ public static class HelperFunctions
     }
 
     /// <summary>
+    /// Scale a value from a previous range to a new range (remap it linearly).
+    /// </summary>
+    /// <param name="OldMin">Original range's minimum value.</param>
+    /// <param name="OldMax">Original range's maximum value.</param>
+    /// <param name="NewMin">New range's minimum value.</param>
+    /// <param name="NewMax">New range's maximum value.</param>
+    /// <param name="OldValue">The value that is to be fit into the new range.</param>
+    /// <returns>A int scaled to the new specfied range.</returns>
+    public static int ScaleRange(this int OldValue, int OldMin, int OldMax, int NewMin, int NewMax)
+    {
+
+        int OldRange = (OldMax - OldMin);
+        int NewRange = (NewMax - NewMin);
+        int NewValue = (((OldValue - OldMin) * NewRange) / OldRange) + NewMin;
+
+        return (NewValue);
+    }
+
+    /// <summary>
     /// Destroy all children of a parent.
     /// </summary>
     /// <param name="_transform">Parent transform.</param>
@@ -66,7 +85,6 @@ public static class HelperFunctions
             Object.DestroyImmediate(child.gameObject);
         }
     }
-
 
     /// <summary>
     /// Subtract one float value from x, y, z components of a Vector3.

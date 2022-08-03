@@ -4,6 +4,7 @@ using UnityEngine.UIElements;
 using UnityEditor;
 #endif
 using System.Reflection;
+using UnityEngine.UI;
 
 /// <summary>
 /// Suceed this with a field where you specify the button's text as the variable name
@@ -11,11 +12,14 @@ using System.Reflection;
 [System.AttributeUsage(System.AttributeTargets.All)]
 public class InspectorTextAttribute : PropertyAttribute
 {
+
     public static float defaultButtonWidth = 80;
 
     public float textWidth = defaultButtonWidth;
 
     public string text = "";
+
+    public bool leftAlign = false;
 
     /// <summary>
     /// Create a inspector button with the button text being based on the suceeding variable's name.
@@ -26,6 +30,22 @@ public class InspectorTextAttribute : PropertyAttribute
     {
         this.text = methodNamePassed;
         this.textWidth = text.Length;
+
+        this.leftAlign = false;
+    }
+
+    /// <summary>
+    /// Create a inspector button with the button text being based on the suceeding variable's name.
+    /// </summary>
+    /// <param name="methodNamePassed">The name of the method to be called.</param>
+    /// <param name="leftAlign">Set true for the text to align to left.</param>
+    /// <returns>Creates a button in inspector.</returns>
+    public InspectorTextAttribute(string methodNamePassed, bool leftAlign)
+    {
+        this.text = methodNamePassed;
+        this.textWidth = text.Length;
+
+        this.leftAlign = leftAlign;
     }
 
 }
@@ -42,6 +62,10 @@ public class InspectorFocusTextAttribute : PropertyAttribute
 
     public string text = "";
 
+    public bool leftAlign = false;
+
+    TextElement te = new TextElement();
+
     /// <summary>
     /// Create a inspector button with the button text being based on the suceeding variable's name.
     /// </summary>
@@ -50,26 +74,64 @@ public class InspectorFocusTextAttribute : PropertyAttribute
     public InspectorFocusTextAttribute(string methodNamePassed)
     {
         this.text = methodNamePassed;
-        this.textWidth = text.Length;
 
-        Debug.Log(text.Length);
+        this.textWidth = CalculateSizeAndReturn();
+
+        this.leftAlign = false;
+    }
 
 
-        //Its late and I am crying that this was the implementation I came up with. A non-linear remapping would work better
-        if (text.Length < 10)
-        {
-            this.textWidth = HelperFunctions.ScaleRange(this.textWidth, 1, 100, 40, this.textWidth * HelperFunctions.ScaleRange(this.textWidth, 1, 9, 13, 9));
-        }
-        else if(text.Length >= 10)
-        {
-            this.textWidth = HelperFunctions.ScaleRange(this.textWidth, 10, 100, 80, this.textWidth * HelperFunctions.ScaleRange(this.textWidth, 10, 60, 20, 11));
-        }
-        else if (text.Length > 100)
-        {
-            this.textWidth = HelperFunctions.ScaleRange(this.textWidth, 1, 100, 80, this.textWidth * HelperFunctions.ScaleRange(this.textWidth, 100, 200, 15, 10));
+    /// <summary>
+    /// Create a inspector button with the button text being based on the suceeding variable's name.
+    /// </summary>
+    /// <param name="methodNamePassed">The name of the method to be called.</param>
+    /// <param name="leftAlign">Set true for the text to align to left.</param>
+    /// <returns>Creates a button in inspector.</returns>
+    public InspectorFocusTextAttribute(string methodNamePassed, bool leftAlign)
+    {
+        this.text = methodNamePassed;
 
-        }
+        this.textWidth = CalculateSizeAndReturn();
 
+        this.leftAlign = leftAlign;
+    }
+
+    /// <summary>
+    /// Create a inspector button with the button text being based on the suceeding variable's name.
+    /// </summary>
+    /// <param name="methodNamePassed">The name of the method to be called.</param>
+    /// <param name="textWidth">Specify text width (if dynamic sizing breaks).</param>
+    /// <returns>Creates a button in inspector.</returns>
+    public InspectorFocusTextAttribute(string methodNamePassed, bool leftAlign, int textWidth)
+    {
+        this.text = methodNamePassed;
+
+        this.textWidth = textWidth;
+
+        this.leftAlign = leftAlign;
+    }
+
+    float CalculateSizeAndReturn()
+    {
+        // a very bandaidy fix / spent a lot of time trying to look for solutions and alternatives to this.
+        // I tried using TextElement, TextGenerator, VisualElements but nothing worked sadly. I dont like doing this but this works accurately,
+        // and I have spent the past few hours on such a menial problem so please enlighten me if possible.
+
+        // doesn't work past 130 length of a string but how wide can an inspector really be? (i did bandaid fix previously but it looks cleaner
+        // without it so again, please enlighten me.
+
+        float add;
+        if (text.Length >= 100)
+            add = HelperFunctions.ScaleRange((float)text.Length, 100, 160, 0.9f, 0.85f);
+        else if (text.Length >= 25)
+            add = HelperFunctions.ScaleRange((float)text.Length, 25, 100, 0.95f, 0.9f);
+        else if (text.Length < 9)
+            add = 1.25f;
+        else
+            add = 1;
+
+        float temp = text.Length * 7 * add;
+        return temp;
     }
 }
 
@@ -93,9 +155,16 @@ public class InspectorTextPropertyDrawer : PropertyDrawer
 
         InspectorTextAttribute InspectorTextAttribute = (InspectorTextAttribute)attribute;
 
-        InspectorTextAttribute.textWidth = HelperFunctions.ScaleRange(InspectorTextAttribute.text.Length, 1, InspectorTextAttribute.text.Length, 80, InspectorTextAttribute.text.Length * 8);
- 
-        Rect buttonRect = new Rect(position.x, position.y, InspectorTextAttribute.textWidth, position.height + 5f);
+        Rect buttonRect;
+
+        if (InspectorTextAttribute.leftAlign)
+        {
+            buttonRect = new Rect(position.x, position.y, InspectorTextAttribute.textWidth, position.height + 5f);
+        }
+        else
+        {
+            buttonRect = new Rect(position.x, position.y, position.width,position.height);
+        }
 
         //GUI.Box(buttonRect, InspectorTextAttribute.text);
 
@@ -114,10 +183,17 @@ public class InspectorFocusTextPropertyDrawer : PropertyDrawer
 
         InspectorFocusTextAttribute InspectorFocusTextAttribute = (InspectorFocusTextAttribute)attribute;
 
-        //InspectorFocusTextAttribute.textWidth = HelperFunctions.ScaleRange(InspectorFocusTextAttribute.text.Length, 1, InspectorFocusTextAttribute.text.Length, 80, InspectorFocusTextAttribute.text.Length * 8);
+        Rect buttonRect;
 
+        if (InspectorFocusTextAttribute.leftAlign)
+        {
+            buttonRect = new Rect(position.x, position.y, InspectorFocusTextAttribute.textWidth, position.height + 3f);
 
-        Rect buttonRect = new Rect(position.x, position.y, InspectorFocusTextAttribute.textWidth, position.height + 3f);
+        }
+        else
+        {
+            buttonRect = new Rect(position.x, position.y, position.width, position.height);
+        }
 
         GUI.Box(buttonRect, InspectorFocusTextAttribute.text);
     }

@@ -1436,7 +1436,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.2735849, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.9528302, g: 0, b: 0, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -1772,6 +1772,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aba1d6c9e12c4541ab6dbe2372e7a2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  logColor: {r: 1, g: 0.015686274, b: 0.10989005, a: 1}
+  displayFps: 0
+  fpsColor: {r: 0, g: 0, b: 1, a: 1}
 --- !u!1 &1419816614
 GameObject:
   m_ObjectHideFlags: 0

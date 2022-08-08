@@ -232,6 +232,11 @@ Right click on any GameObject in the heirarchy to "Resolve Import Issues". A lot
 
 ## 5. Debug Tools
 
+All of the following is without any unnecessary canvases.
+
+<b>How to use:</b>
+Add LogToScreen to any GameObject without doing anything else.
+
 ### 5.1 Debug Log to Screen:
 Unity has a great Debug system but lacks in outputting it while full-screened/inside VR and hence this is an Unreal-Inpsired simple way to display all Debug Log messages on the screen. All messages fade away after a while and also start replacing old logs if too many are outputted quickly.
 
@@ -249,8 +254,11 @@ A very simple skeletal frames-per-second counter. Inverses unscaled delta time t
 ## 6. Better Transform
 An extension of the existing Transform component to include some ease-to-use features.
 
+!["6 Demo - Better Transform Overview"](Demo/1_0_Global.png)
 
-!["6 Demo - Better Transform Overview"](Demo/1_BetterTransformOverview.png)
+
+### 6.0 Local/Global Switch
+!["6 Demo - Better Transform Overview"](Demo/1_0_Local.png)
 
 ### 6.1 Lock Scale Ratio (Uniform Scale):
 Maintain the ratio of the scaling in an object's axes when scaling a GameObject up/down.
@@ -258,7 +266,7 @@ Maintain the ratio of the scaling in an object's axes when scaling a GameObject 
 !["6.1 Demo - Lock Scale"](Demo/1_1_Scale.gif)
 
 ### 6.2 Reset Position, Rotation, Scale:
-Reset the position, rotation and scale of any GameObject with a click instead of resetting the entire transform or manually inputting `0,0,0 / 1,1,1`.
+Reset the position, rotation and scale of any GameObject locally/globally individually.
 
 !["6.2 Demo - Reset"](Demo/1_2_Reset.gif)
 
@@ -334,6 +342,7 @@ Generate a pull request for whatever change you feel is necessary and I will be 
 
 ## Current to-do:
 - ~~Update RenameSuite's gif.~~
+- ~~Make ScreenToLog scale according to our window size. [possible solution is to use GUI.matrix]~~
 - Add more controllers templates.
 - Add more VR utiltiy scripts.
 - <b>Store GIFs on the cloud</b>. [Very essential, the repo is growing fast]
@@ -341,7 +350,6 @@ Generate a pull request for whatever change you feel is necessary and I will be 
 - A better way of installation - possibly with a package through our Git url and inbuilt Unity's package manager.
 - Fix README's alt text naming.
 - Create one prefab to enable all major thingies inside of our scene.
-- Make ScreenToLog scale according to our window size. [possible solution is to use GUI.matrix]
 - Update dynamic scaling of InspectorText. [using a bandaid fix for now which is really triggering]	
 
 ### Navigation To-Do:

@@ -20,6 +20,15 @@ public class LogToScreen : MonoBehaviour
 
     private int currentFps;
 
+    [SerializeField]
+    private int removeLogsAfterTime = 6;
+
+    [InspectorFocusText("Amount of logs after which previous ones get overwritten (-1 for unlimited)", true)]
+    public char t;
+
+    [SerializeField]
+    private int maximumLogsAllowed = 21;
+
     void Start()
     {
         //Set the default style for our GUI elements
@@ -28,6 +37,11 @@ public class LogToScreen : MonoBehaviour
 
         if(displayFps)
             InvokeRepeating(nameof(RefreshFPS), 1, 1);
+
+        RandomLogsForTesting();
+
+        //remove debug elements after a certain time
+        InvokeRepeating("RemoveInTime", 2, removeLogsAfterTime);
     }
 
     void RefreshFPS()
@@ -61,10 +75,13 @@ public class LogToScreen : MonoBehaviour
             tempLogString += mylog;
         }
 
-        if (logQueue.Count > 21)
+        if(maximumLogsAllowed > 0)
         {
-            logQueue.Dequeue();
-        }
+            if (logQueue.Count > maximumLogsAllowed)
+            {
+                logQueue.Dequeue();
+            }
+        }  
     }
 
     void LogTest()
@@ -114,8 +131,7 @@ public class LogToScreen : MonoBehaviour
         //a repeating function to test logging
         InvokeRepeating("LogTest", 1, 2);
 
-        //remove debug elements after a certain time
-        InvokeRepeating("RemoveInTime", 2, 5);
+        
 
     }
 

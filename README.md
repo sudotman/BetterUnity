@@ -349,7 +349,8 @@ Generate a pull request for whatever change you feel is necessary and I will be 
 - Organize and document Helper Functions (in categories and with more information and preferably screenshots)
 - A better way of installation - possibly with a package through our Git url and inbuilt Unity's package manager.
 - Fix README's alt text naming.
-- Create one prefab to enable all major thingies inside of our scene.
+- Create one universal prefab to enable all functionality inside of our scene.
+- Modify CallInEditor to encompass text-change parameters and size instead of a seperate wrapper of InspectorButton. [Debating this as I really like the simplicity of CallInEditor]
 - Update dynamic scaling of InspectorText. [using a bandaid fix for now which is really triggering]	
 
 ### Navigation To-Do:

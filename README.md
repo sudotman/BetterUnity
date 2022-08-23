@@ -343,9 +343,9 @@ Generate a pull request for whatever change you feel is necessary and I will be 
 ## Current to-do:
 - ~~Update RenameSuite's gif.~~
 - ~~Make ScreenToLog scale according to our window size. [possible solution is to use GUI.matrix]~~
+- ~~<b>Store GIFs on the cloud</b>. [Very essential, the repo is growing fast]~~
 - Add more controllers templates.
 - Add more VR utiltiy scripts.
-- <b>Store GIFs on the cloud</b>. [Very essential, the repo is growing fast]
 - Organize and document Helper Functions (in categories and with more information and preferably screenshots)
 - A better way of installation - possibly with a package through our Git url and inbuilt Unity's package manager.
 - Fix README's alt text naming.

@@ -75,3 +75,15 @@ crashlytics-build.properties
 /[Aa]ssets/[Ee]xtras
 
 /Assets/Scenes
+
+# Navigation system's testing fbx
+/Assets/BetterUnity/Scripts/VR/Walking.fbx
+/Assets/BetterUnity/Scripts/VR/Walking.anim
+/Assets/BetterUnity/Scripts/VR/Running.anim
+/Assets/BetterUnity/Scripts/VR/Ch16_1001_Normal.png
+/Assets/BetterUnity/Scripts/VR/Ch16_1001_Diffuse.png
+/Assets/BetterUnity/Scripts/VR/Ch16_1001_Glossiness.png
+
+/Assets/BetterUnity/Scripts/VR/Ch16_1002_Normal.png
+/Assets/BetterUnity/Scripts/VR/Ch16_1002_Diffuse.png
+/Assets/BetterUnity/Scripts/VR/Ch16_1002_Glossiness.png

@@ -41,7 +41,7 @@ public char myButton;
 
 The above snippet will create a button named My Button and will call <i>`funcToBeCalled`</i> function from inside your script when pressed. The public character can be any variable type, I prefer `char` for saving miniscule memory.
 
-!["1.1 Demo - Inpsector Button"](Demo/2_2_Button.gif)
+!["1.1 Demo - Inpsector Button"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/2_2_Button.gif)
 
 You can also specify the size of the button (by default, it will try to scale your button size to your text size):
 ```C#
@@ -49,7 +49,7 @@ You can also specify the size of the button (by default, it will try to scale yo
 public char myButton;
 ```
 
-!["1.1 Demo - Inpsector Button"](Demo/2_2_1_Button.png)
+!["1.1 Demo - Inpsector Button"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/2_2_1_Button.png)
 
 You can also specify a custom text for your button (by default, it takes button name from the variable name below it [the aforementioned variable will still be required in the script regardless of if we use this]):
 ```C#
@@ -90,12 +90,12 @@ public Transform myField;
 ```
 *Individual Char variable definition not necessary for Text Fields but I prefer to include it to keep it more organized since the order gets reversed otherwise.
 
-!["1.2 Demo - Inpsector Button"](Demo/2_3_InspectorFields.png)
+!["1.2 Demo - Inpsector Button"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/2_3_InspectorFields.png)
 
 <br>
 
 Output of the aforementioned tools all together:<br>
-!["1.2 Demo - Full"](Demo/2_2_2_FullBtn.png)
+!["1.2 Demo - Full"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/2_2_2_FullBtn.png)
 
 ### 1.3 Better Rename
 A lot of the times when developing, you have similar children which you want to be named incrementally with your desired prefix. Instead of manually going in and doing it, this module allows me to do more it quickly and effeciently, by attaching a script to the parent.
@@ -103,7 +103,7 @@ A lot of the times when developing, you have similar children which you want to 
 Further, when duplicating objects and creating new ones, Unity appends (x) [x being the current duplicate] and sometimes you would want the objects to be named differently. All new objects will also be renamed appropriately, automatically.
 
 
-!["1.3 Demo - Better Rename"](Demo/2_1_Rename.gif)
+!["1.3 Demo - Better Rename"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/2_1_Rename.gif)
 
 <br>
 
@@ -207,12 +207,12 @@ Tools to do various functions, called by menus.
 ### 3.1 Rename Suite
 Works similar to BetterRename except its for remaining them only once. [We can attach the script, do the rename, and then remove it if we would want but this has a much cleaner UX]. Further, it allows you to rename any random [from anywhere to anywhere] selection at any place in the heirarchy.
 
-!["3.1 Demo - Rename"](Demo/6_1_Rename.gif)
+!["3.1 Demo - Rename"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/6_1_Rename.gif)
 
 ### 3.2 Setup Default Project
 A one click button that set-ups directories in our project folder in a standardish way.
 
-!["3.2 Demo - Default"](Demo/6_2_Default.gif)
+!["3.2 Demo - Default"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/6_2_Default.gif)
 
 ## 4. BetterContext
 A collection of additions to various context menus throughout Unity.
@@ -220,14 +220,14 @@ A collection of additions to various context menus throughout Unity.
 ### 4.1 Solve Import
 Right click on any GameObject in the heirarchy to "Resolve Import Issues". A lot of times when importing 3D models, we tend to get empty objects, cameras, lights etc [usually dependent on the way the modeller exports them] and hence this button gets rid of them in one-go.
 
-!["4.1 Demo - Solve Import"](Demo/7_1_SolveImport.gif)
+!["4.1 Demo - Solve Import"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/7_1_SolveImport.gif)
 
 ### 4.2 Other Contexts
 - Rigidbody: I find myself wanting to freeze X, Z rotation and turn interpolation on and also make sure it's not kinematic. Right click and pressing this button does it all for me.
 
 - AudioSource: One key feature missing from inspecting an AudioSource is the ability to play, pause and stop it at will. Right click and pressing this does the aforementioned.
 
-!["4.2 - AudioSource"](Demo/7_2_AudioSource.gif)
+!["4.2 - AudioSource"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/7_2_AudioSource.gif)
 
 
 ## 5. Debug Tools
@@ -240,45 +240,45 @@ Add LogToScreen to any GameObject without doing anything else.
 ### 5.1 Debug Log to Screen:
 Unity has a great Debug system but lacks in outputting it while full-screened/inside VR and hence this is an Unreal-Inpsired simple way to display all Debug Log messages on the screen. All messages fade away after a while and also start replacing old logs if too many are outputted quickly.
 
-!["3.1 Demo - Debug To Screen"](Demo/3_1_ToScreen.gif)
+!["3.1 Demo - Debug To Screen"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/3_1_ToScreen.gif)
 
 <br>
 
 ### 5.2 Simple FPS Counter
 A very simple skeletal frames-per-second counter. Inverses unscaled delta time to output fps on the screen.
 
-!["3.2 Demo - FPS Counter"](Demo/3_2_FPS.png)
+!["3.2 Demo - FPS Counter"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/3_2_FPS.png)
 
 <br>
 
 ## 6. Better Transform
 An extension of the existing Transform component to include some ease-to-use features.
 
-!["6 Demo - Better Transform Overview"](Demo/1_0_Global.png)
+!["6 Demo - Better Transform Overview"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/1_0_Global.png)
 
 
 ### 6.0 Local/Global Switch
-!["6 Demo - Better Transform Overview"](Demo/1_0_Local.png)
+!["6 Demo - Better Transform Overview"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/1_0_Local.png)
 
 ### 6.1 Lock Scale Ratio (Uniform Scale):
 Maintain the ratio of the scaling in an object's axes when scaling a GameObject up/down.
 
-!["6.1 Demo - Lock Scale"](Demo/1_1_Scale.gif)
+!["6.1 Demo - Lock Scale"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/1_1_Scale.gif)
 
 ### 6.2 Reset Position, Rotation, Scale:
 Reset the position, rotation and scale of any GameObject locally/globally individually.
 
-!["6.2 Demo - Reset"](Demo/1_2_Reset.gif)
+!["6.2 Demo - Reset"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/1_2_Reset.gif)
 
 ### 6.3 Visibility Toggle:
 Sometimes you would want to only disable the Mesh Renderers and not Disable the object so that the scripts/components on them still execute. This disables all the Mesh Renderers in this GameObject and all the children renderers.
 
-!["6.3 Demo - Visibility"](Demo/1_3_Visibility.gif)
+!["6.3 Demo - Visibility"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/1_3_Visibility.gif)
 
 ### 6.4 Make Unit Scale Parent:
 For a lot of use-cases in Unity [wanting to have a unit scale or have positioning, rotation start from zero], we tend to create new objects and then assign it as a parent. This button does that.
 
-!["6.4 Demo - Unit Scale"](Demo/1_4_Unit.gif)
+!["6.4 Demo - Unit Scale"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/1_4_Unit.gif)
 
 <br>
 
@@ -290,7 +290,7 @@ Useful scripts that aid in my VR development.
 ### 7.1 Head Level
 Make an object always align with our headset's level.
 
-!["7.1 Demo - HeadLevel"](Demo/5_1_Head.gif)
+!["7.1 Demo - HeadLevel"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/5_1_Head.gif)
 
 
 ## 8. Miscellaneous
@@ -303,7 +303,7 @@ A NPC walking/navigation system which is modular and fully configurable.
 
 Demo:
 
-!["7.1 Demo - HeadLevel"](Demo/8_2_1_NavigationMaster.gif)
+!["7.1 Demo - HeadLevel"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/8_2_1_NavigationMaster.gif)
 
 <br>
 
@@ -316,12 +316,12 @@ approaches.
 Group all the points you wish to navigate into one parent and drop the parent into the points prefab and configure everything accordingly. You can keep the PointParnet's children messy and maybe use BetterRename to organize them (wink, wink).
 
 Individual scripts:
-!["8.2 - Navigation System"](Demo/8_NavigationManual.png)
+!["8.2 - Navigation System"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/8_NavigationManual.png)
 
 <br>
 
 A quick guiding GIF on a quick setup is given below:
-!["8.2 - Navigation System"](Demo/8_2_2_Setup.gif)
+!["8.2 - Navigation System"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/8_2_2_Setup.gif)
 
 <b> General Information</b>:
 
@@ -333,7 +333,7 @@ A quick guiding GIF on a quick setup is given below:
 
 Navigation System working as it should:
 
-!["8.2 - Navigation System"](Demo/8_2_Navigation.gif)
+!["8.2 - Navigation System"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/8_2_Navigation.gif)
 
 <br>
 

@@ -28,7 +28,7 @@ void HelloGitFunction(){
     ....
 ```
 
-!["1.1 Demo - Call in Editor"](Demo/2_2_2_HelloGit.png)
+!["1.1 Demo - Call in Editor"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/2_2_2_HelloGit.png)
 
 
 You may want finer control over your button that appears in the inspector in the terms of the size and the label. In that case, you can use the alternative attribute field described below.

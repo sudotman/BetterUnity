@@ -63,29 +63,39 @@ public static class HelperFunctions
     }
 
     /// <summary>
+    /// Destroy agnostic of play state
+    /// </summary>
+    /// <param name="_transform">Transform of the object to be destroyed.</param>
+    public static void DestroyUniversal(this Transform _transform)
+    {
+        if(Application.isPlaying){
+            Object.Destroy(child.gameObject);  
+        }
+        else{
+            Object.DestroyImmediate(child.gameObject);
+        }        
+    }
+    
+    /// <summary>
     /// Destroy all children of a parent.
     /// </summary>
     /// <param name="_transform">Parent transform.</param>
     public static void DestroyChildren(this Transform _transform)
     {
-        foreach (Transform child in _transform)
-        {
-            Object.Destroy(child.gameObject);
+        if(Application.isPlaying){
+            foreach (Transform child in _transform)
+            {
+                Object.Destroy(child.gameObject);
+            } 
         }
+        else{
+            foreach (Transform child in _transform)
+            {
+                Object.DestroyImmediate(child.gameObject);
+            }
+        }        
     }
-
-    /// <summary>
-    /// Destroy all children of a parent from the editor.
-    /// </summary>
-    /// <param name="_transform">Parent transform.</param>
-    public static void DestroyChildrenEditor(this Transform _transform)
-    {
-        foreach (Transform child in _transform)
-        {
-            Object.DestroyImmediate(child.gameObject);
-        }
-    }
-
+    
     /// <summary>
     /// Subtract one float value from x, y, z components of a Vector3.
     /// </summary>

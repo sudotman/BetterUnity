@@ -38,7 +38,7 @@ public class LogToScreen : MonoBehaviour
         if(displayFps)
             InvokeRepeating(nameof(RefreshFPS), 1, 1);
 
-        RandomLogsForTesting();
+        //RandomLogsForTesting();
 
         //remove debug elements after a certain time
         InvokeRepeating("RemoveInTime", 2, removeLogsAfterTime);

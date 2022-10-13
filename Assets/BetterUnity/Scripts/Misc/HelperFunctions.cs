@@ -63,16 +63,16 @@ public static class HelperFunctions
     }
 
     /// <summary>
-    /// Destroy agnostic of play state
+    /// Destroy agnostic of our current play state
     /// </summary>
     /// <param name="_transform">Transform of the object to be destroyed.</param>
     public static void DestroyUniversal(this Transform _transform)
     {
         if(Application.isPlaying){
-            Object.Destroy(child.gameObject);  
+            Object.Destroy(_transform.gameObject);  
         }
         else{
-            Object.DestroyImmediate(child.gameObject);
+            Object.DestroyImmediate(_transform.gameObject);
         }        
     }
     
@@ -250,8 +250,8 @@ public static class HelperFunctions
     }
 
     /// <summary>
-    /// Not recommended to be used because applying lossy scale is stupid.
     /// Reset global position, rotation, scale to origin.
+    /// Scale is still applied locally because applying lossy scale is stupid.
     /// </summary>
     /// <param name="_transform">The transform to be reset.</param>
     public static void ResetGlobalTransform(this Transform _transform)
@@ -264,6 +264,36 @@ public static class HelperFunctions
         _transform.localScale = new Vector3(1, 1, 1);
 
         _transform.parent = tempParent;
+    }
+
+    /// <summary>
+    /// Return a joined string from a string array.
+    /// </summary>
+    /// <param name="array">The string array from which a string is to be consctructed.</param>
+    public static string UsingStringJoin(this string[] array)
+    {
+        return string.Join(string.Empty, array);
+    }
+
+    /// <summary>
+    /// Convert Hexadecimal color format to RGB format that Unity supports.
+    /// </summary>
+    /// <param name="hex">The hex value to be converted into color.</param>
+    public static Color HexColor(this Color color, string hex)
+    {
+        string rawStringValue = hex;
+
+        Color newColor;
+
+        if (ColorUtility.TryParseHtmlString(rawStringValue, out newColor))
+        {
+            return newColor;
+        }
+        else
+        {
+            Debug.LogWarning("Conversion from hex to rgb failed. Check your hex string being passed.");
+            return new Color(0, 0, 0);
+        }
     }
 
 }

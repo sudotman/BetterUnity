@@ -4,31 +4,40 @@ using UnityEngine;
 
 public class TestScript : MonoBehaviour
 {
-    [InspectorButton("myFunc")]
-    public char myButton;
+    //[InspectorButton("myFunc")]
+    //public char myButton;
 
-    [InspectorButton("myFunc",100)]
-    public char myButtonWide;
+    //[InspectorButton("myFunc",100)]
+    //public char myButtonWide;
 
-    [InspectorButton("myFunc", 40)]
-    public char smol;
+    //[InspectorButton("myFunc", 40)]
+    //public char smol;
 
-    [InspectorButton("myFunc", 200)]
-    public char big;
+    //[InspectorButton("myFunc", 200)]
+    //public char big;
 
-    [InspectorButton("myFunc","Custom name here!")]
-    public char bigCustom;
+    //[InspectorButton("myFunc","Custom name here!")]
+    //public char bigCustom;
 
-    [InspectorText("This is a normal text")]
-    public char normText;
+    //[InspectorText("This is a normal text")]
+    //public char normText;
 
-    [InspectorFocusText("This is a text with focus")]
-    public char focusText;
+    //[InspectorFocusText("This is a text with focus")]
+    //public char focusText;
 
-    [NullCheck]
-    public Transform myField;
+    //[NullCheck]
+    //public Transform myField;
 
-    public Transform fieldWithoutNullCheck;
+    //public Transform fieldWithoutNullCheck;
+
+    public string hexField;
+
+    public Color colorField;
+
+    private void Start()
+    {
+        InvokeRepeating("colorCheck", 1, 1);
+    }
 
     void myFunc()
     {
@@ -43,27 +52,32 @@ public class TestScript : MonoBehaviour
         Vector3.Lerp(test,test,0);
     }
 
-    [CallInEditor]
-    void Unreal()
-    {
-        Debug.Log("This is unreal!");
-    }
+    //[CallInEditor]
+    //void Unreal()
+    //{
+    //    Debug.Log("This is unreal!");
+    //}
 
-    [CallInEditor]
-    protected static void ImportantFunc()
-    {
-        Debug.Log("a very important function");
-    }
+    //[CallInEditor]
+    //protected static void ImportantFunc()
+    //{
+    //    Debug.Log("a very important function");
+    //}
     
-    [CallInEditor]
-    void HelloGitFunction()
-    {
+    //[CallInEditor]
+    //void HelloGitFunction()
+    //{
 
+    //}
+
+    void colorCheck()
+    {
+        colorField = colorField.HexColor(hexField);
     }
 
     private void Update()
     {
-        Debug.Log("mate");
+        
     }
 
 }

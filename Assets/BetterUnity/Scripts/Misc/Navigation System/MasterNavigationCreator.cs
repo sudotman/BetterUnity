@@ -74,7 +74,7 @@ public class MasterNavigationCreator : MonoBehaviour
 
     void CreateNavigationSystem()
     {
-        transform.DestroyChildrenEditor();
+        transform.DestroyChildren();
 
         pointsParent = new GameObject("PointsParent");
         peopleParent = new GameObject("PeopleParent");
@@ -283,7 +283,7 @@ public class MasterNavigationCreator : MonoBehaviour
 
     void CleanUp()
     {
-        transform.DestroyChildrenEditor();
+        transform.DestroyChildren();
     }
 
     void RandomizePoints()

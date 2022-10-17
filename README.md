@@ -199,21 +199,21 @@ HelperFunctions.SmoothStep(currentTime,startFloat,EndFloat);
 ```
 
 ### 2.10 Hex To Color
-Allows you to pass a Hexadecimal color string and use as Unity's rgb color system.
+Allows you to pass a Hexadecimal color string and use in the native Unity's RGB color system.
 ```C#
 Color myColor;
 myColor = myColor.HexColor("#60c47e");
 ```
 !["2.10 - Hex to Color"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/4_colorConversion.png)
 
-If a incorrect hex string is passed and it can't be parsed, a warning is logged while black color is returned.
+If an incorrect hex string is passed and/or it can't be parsed, a warning is logged while a default black color is returned.
 
 !["2.10 - Hex to Color Error"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/4_colorConversionError1.png)
 !["2.10 - Hex to Color Error"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/4_colorConversionError2.png)
 
 
 
-There's plenty more functions which are not mentioned here because of their usages being quite insigniicant. Look through [HelperFunctions.cs](https://github.com/sudotman/BetterUnity/blob/main/Assets/BetterUnity/Scripts/Misc/HelperFunctions.cs) for all the remaining functions, they are aptly documented.
+There are plenty more functions which are not mentioned here because of their usages being quite insigniicant. Look through [HelperFunctions.cs](https://github.com/sudotman/BetterUnity/blob/main/Assets/BetterUnity/Scripts/Misc/HelperFunctions.cs) for all the remaining functions, they are aptly documented.
 
 
 

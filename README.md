@@ -73,6 +73,7 @@ Various inspector fields which can be used to output text to the Inspector witho
 - InspectorText: Outputs normal text.
 - InspectorFocusText: Outputs text with focus, with a rectangle around it.
 - NullCheck: Forces a field to not be null, and if a reference isn't assigned to it, it will be highlighted red.
+- Layer: Allows selection of a single layer as opposed to a layermask.
 
 Usage:
 ```C#
@@ -87,12 +88,16 @@ public char leftAlignedFocusText;
 
 [NullCheck]
 public Transform myField;
+
+[SerializeField, Layer]
+int layer;
 ```
 *Individual Char variable definition not necessary for Text Fields but I prefer to include it to keep it more organized since the order gets reversed otherwise.
 
 !["1.2 Demo - Inpsector Button"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/2_3_InspectorFields.png)
 
 <br>
+
 
 Output of the aforementioned tools all together:<br>
 !["1.2 Demo - Full"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/2_2_2_FullBtn.png)
@@ -233,15 +238,27 @@ A one click button that set-ups directories in our project folder in a standardi
 
 !["3.2 Demo - Default"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/6_2_Default.gif)
 
+### 3.3 Select All With
+Another wizard to select all the objects with the specified:
+- tag
+- layer
+- name
+- having cameras
+- having audio sources
+- having meshes
+
 ## 4. BetterContext
 A collection of additions to various context menus throughout Unity.
 
-### 4.1 Solve Import
+### 4.1 Move ATB
+Right click on any two GameObjects in the heirarchy and move the objects to each other as needed.
+
+### 4.2 Solve Import
 Right click on any GameObject in the heirarchy to "Resolve Import Issues". A lot of times when importing 3D models, we tend to get empty objects, cameras, lights etc [usually dependent on the way the modeller exports them] and hence this button gets rid of them in one-go.
 
 !["4.1 Demo - Solve Import"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/7_1_SolveImport.gif)
 
-### 4.2 Other Contexts
+### 4.3 Other Contexts
 - Rigidbody: I find myself wanting to freeze X, Z rotation and turn interpolation on and also make sure it's not kinematic. Right click and pressing this button does it all for me.
 
 - AudioSource: One key feature missing from inspecting an AudioSource is the ability to play, pause and stop it at will. Right click and pressing this does the aforementioned.
@@ -344,7 +361,7 @@ A quick guiding GIF on a quick setup is given below:
 
 <b> General Information</b>:
 
-* If using Master Creator, remember to attach an animator to your prefab and have the two walking and running state inside the animator (No state machine connections necessary). This will also be displayed as error but seems to be a common issue
+* If using Master Creator, remember to attach an animator to your prefab and have the two walking and running state inside the animator (No state machine connections necessary). This will also be displayed as error but seems to be a common issue so I am spelling it out here.
 * When using master creator, a generic walking/running speed is calculated. Feel free to modify it individually or in-group as convenient.
 * Avoid turns which are too steep, even though there is a custom interpolation built-in, if turns are too steep, it will look not so great.
 

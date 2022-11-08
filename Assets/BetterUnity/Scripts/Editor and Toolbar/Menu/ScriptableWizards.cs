@@ -104,23 +104,159 @@ public class SelectAllTag : ScriptableWizard
         GameObject[] gos = GameObject.FindGameObjectsWithTag(tagName);
         Selection.objects = gos;
     }
+
 }
 
 public class SelectAllLayer : ScriptableWizard
 {
-    [SerializeField]
-    string tagName = "Player";
 
-    [MenuItem("BetterUnity/Select all with/layer", false, 0)]
-    static void SelectAllOfTag()
+    [SerializeField, Layer] int layer;
+
+    [MenuItem("BetterUnity/Select all with/layer", false, 1)]
+    static void SelectAllOfLayer()
     {
         ScriptableWizard.DisplayWizard("Select all with layer..", typeof(SelectAllLayer), "Make selection");
     }
 
     private void OnWizardCreate()
     {
-        GameObject[] gos = GameObject.FindGameObjectsWithTag(tagName);
-        Selection.objects = gos;
+        
+        GameObject[] gos = GameObject.FindObjectsOfType<GameObject>();
+        List<GameObject> temp = new List<GameObject>();
+
+        foreach(GameObject gb in gos)
+        {
+            if(gb.layer == layer)
+            {
+                temp.Add(gb);
+            }
+        }
+        if(temp.Count < 1)
+        {
+            Debug.LogWarning("No objects with the specified layer found.");
+        }
+        else
+        {
+            Selection.objects = temp.ToArray();
+        }
+    }
+}
+
+public class SelectAllName : ScriptableWizard
+{
+
+    [SerializeField] string objectName = "Cube";
+
+    [MenuItem("BetterUnity/Select all with/name", false, 2)]
+    static void SelectAllOfName()
+    {
+        ScriptableWizard.DisplayWizard("Select all with name..", typeof(SelectAllName), "Make Selection");
+    }
+
+    private void OnWizardCreate()
+    {
+        GameObject[] gos = GameObject.FindObjectsOfType<GameObject>();
+        List<GameObject> temp = new List<GameObject>();
+
+        foreach (GameObject gb in gos)
+        {
+            if (gb.name.Contains(objectName))
+            {
+                temp.Add(gb);
+            }
+        }
+        if (temp.Count < 1)
+        {
+            Debug.LogWarning("No objects with the specified name found.");
+        }
+        else
+        {
+            Selection.objects = temp.ToArray();
+        }
+
+    }
+}
+public class SelectAllMesh : ScriptableWizard
+{
+
+    [MenuItem("BetterUnity/Select all with/having mesh", false, 14)]
+    static void SelectMeshes()
+    {
+        GameObject[] gos = GameObject.FindObjectsOfType<GameObject>();
+        List<GameObject> temp = new List<GameObject>();
+
+        foreach (GameObject gb in gos)
+        {
+            if (gb.GetComponent<MeshRenderer>() || gb.GetComponent<SkinnedMeshRenderer>())
+            {
+                temp.Add(gb);
+            }
+        }
+        if (temp.Count < 1)
+        {
+            Debug.LogWarning("No objects with meshes found.");
+        }
+        else
+        {
+            Selection.objects = temp.ToArray();
+        }
+
+    }
+}
+
+public class SelectAllAudio : ScriptableWizard
+{
+
+    [MenuItem("BetterUnity/Select all with/having audio source", false, 15)]
+    static void SelectAudios()
+    {
+        GameObject[] gos = GameObject.FindObjectsOfType<GameObject>();
+        List<GameObject> temp = new List<GameObject>();
+
+        foreach (GameObject gb in gos)
+        {
+            if (gb.GetComponent<AudioSource>())
+            {
+                temp.Add(gb);
+            }
+        }
+        if (temp.Count < 1)
+        {
+            Debug.LogWarning("No objects with audio sources found.");
+        }
+        else
+        {
+            Selection.objects = temp.ToArray();
+        }
+
+    }
+}
+
+public class SelectAllCameras : ScriptableWizard
+{
+
+    [MenuItem("BetterUnity/Select all with/having cameras", false, 16)]
+    static void SelectCameras()
+    {
+        GameObject[] gos = GameObject.FindObjectsOfType<GameObject>();
+        List<GameObject> temp = new List<GameObject>();
+
+        foreach (GameObject gb in gos)
+        {
+            if (gb.GetComponent<Camera>())
+            {
+                temp.Add(gb);
+            }
+        }
+        if (temp.Count < 1)
+        {
+            Debug.LogWarning("No objects with cameras found.");
+        }
+        else
+        {
+            Selection.objects = temp.ToArray();
+        }
+
     }
 }
 

@@ -19,7 +19,10 @@ public class CustomWalkingEditor : Editor
 
     private int startIndex;
 
+
+#pragma warning disable IDE0052 // Remove unread private members
     private bool randomizeMasterBool;
+#pragma warning restore IDE0052 // Remove unread private members
 
     // Scale Thingies
     private bool lockScaleInternal;

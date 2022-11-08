@@ -67,21 +67,7 @@ public class ContextMenus : EditorWindow
         }
     }
 
-    [MenuItem("GameObject/Better Unity/Select All Tag", false, 0)]
-    static void MakeChild(MenuCommand command)
-    {
-        if (Selection.objects.Length > 2)
-        {
-            Debug.LogError("select two objects");
-        }
-        else
-        {
-            GameObject obj1 = (GameObject)Selection.objects[0];
-            GameObject obj2 = (GameObject)Selection.objects[1];
-
-            obj2.transform.position = obj1.transform.position;
-        }
-    }
+ 
 
 
     // Add a menu item called "usual player settings" to a Rigidbody's context menu.

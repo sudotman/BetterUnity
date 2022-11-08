@@ -29,6 +29,9 @@ public class LogToScreen : MonoBehaviour
     [SerializeField]
     private int maximumLogsAllowed = 21;
 
+    [Header("Debug")]
+    [SerializeField] bool randomLogsForTesting = false;
+
     void Start()
     {
         //Set the default style for our GUI elements
@@ -38,7 +41,8 @@ public class LogToScreen : MonoBehaviour
         if(displayFps)
             InvokeRepeating(nameof(RefreshFPS), 1, 1);
 
-        //RandomLogsForTesting();
+        if(randomLogsForTesting)
+            RandomLogsForTesting();
 
         //remove debug elements after a certain time
         InvokeRepeating("RemoveInTime", 2, removeLogsAfterTime);

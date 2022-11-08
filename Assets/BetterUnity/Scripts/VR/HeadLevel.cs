@@ -4,8 +4,8 @@ public class HeadLevel : MonoBehaviour
 {
     float timeElapsed;
     
-    float startValue = 0;
-    float endValue = 10;
+    //float startValue = 0;
+    //float endValue = 10;
     float valueToLerp;
 
     [Tooltip("Center Eye Anchor (represents head) to follow.")]

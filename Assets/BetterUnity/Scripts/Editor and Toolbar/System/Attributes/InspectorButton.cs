@@ -139,13 +139,34 @@ public class InspectorButtonPropertyDrawer : PropertyDrawer
 }
 #endif
 
+#if UNITY_EDITOR
+[CustomPropertyDrawer(typeof(LayerAttribute))]
+class LayerAttributeEditor : PropertyDrawer
+{
+
+    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+    {
+        // One line of  oxygen free code.
+        property.intValue = EditorGUI.LayerField(position, label, property.intValue);
+    }
+}
+#endif
+
+/// <summary>
+/// Attribute to select a single layer.
+/// </summary>
+public class LayerAttribute : PropertyAttribute
+{
+    // NOTHING - just oxygen.
+}
+
 
 //Call in editor Unity
 
 [System.AttributeUsage(System.AttributeTargets.Method)]
 public class CallInEditorAttribute : PropertyAttribute
 {
-
+    // nothing - just oxygen innit
 }
 
 [CanEditMultipleObjects]

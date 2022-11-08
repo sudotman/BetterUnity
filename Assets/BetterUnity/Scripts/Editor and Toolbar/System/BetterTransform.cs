@@ -222,7 +222,7 @@ public class BetterTransform : Editor
 
             if (EditorGUILayout.DropdownButton(new GUIContent("Make Unit Scale Parent"), FocusType.Keyboard))
             {
-                Debug.Log("pressed");
+                //Debug.Log("pressed");
 
                 GameObject newChild = new GameObject("test");
                 //newChild.transform.loca

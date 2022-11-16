@@ -1,0 +1,23 @@
+{
+  "name": "com.sudotman.betterunity",
+  "version": "0.2.0",
+  "displayName": "BetterUnity",
+  "description": "A bunch of tools to make your life easier.",
+  "unity": "2021.3",
+  "unityRelease": "12f1",
+  "documentationUrl": "https://github.com/sudotman/BetterUnity",
+  "changelogUrl": "https://github.com/sudotman/BetterUnity",
+  "licensesUrl": "https://github.com/sudotman/BetterUnity",
+  "dependencies": {
+ 
+ },
+ "keywords": [
+    "betterunity",
+    "unity"
+  ],
+  "author": {
+    "name": "Satyam Kashyap",
+    "email": "satyamsudo@gmail.com",
+    "url": "https://sudotman.github.io"
+  }
+}

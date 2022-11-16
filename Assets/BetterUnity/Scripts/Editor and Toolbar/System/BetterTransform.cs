@@ -242,7 +242,6 @@ public class BetterTransform : Editor
 
             //Debug.Log(Selection.activeContext);
 
-
             if (transform != null)
             {
                 if (locked && !lockScaleInternal)
@@ -272,11 +271,5 @@ public class BetterTransform : Editor
         }      
 
     }
-
-  
-
-
-
- 
 
 }

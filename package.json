@@ -9,7 +9,7 @@
   "changelogUrl": "https://github.com/sudotman/BetterUnity",
   "licensesUrl": "https://github.com/sudotman/BetterUnity",
   "dependencies": {
- 
+	"com.sudotman.betterunity" : "https://github.com/sudotman/BetterUnity.git?path=/Assets/BetterUnity"
  },
  "keywords": [
     "betterunity",

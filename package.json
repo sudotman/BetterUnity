@@ -1,23 +1,8 @@
 {
-  "name": "com.sudotman.betterunity",
-  "version": "0.2.0",
+  "name": "man.sudotman.betterunity",
   "displayName": "BetterUnity",
-  "description": "A bunch of tools to make your life easier.",
+  "description": "Tools to make stuff easier in Unity.",
+  "version": "0.2.0",
   "unity": "2021.3",
-  "unityRelease": "12f1",
-  "documentationUrl": "https://github.com/sudotman/BetterUnity",
-  "changelogUrl": "https://github.com/sudotman/BetterUnity",
-  "licensesUrl": "https://github.com/sudotman/BetterUnity",
-  "dependencies": {
-	"com.sudotman.betterunity" : "https://github.com/sudotman/BetterUnity.git?path=/Assets/BetterUnity"
- },
- "keywords": [
-    "betterunity",
-    "unity"
-  ],
-  "author": {
-    "name": "Satyam Kashyap",
-    "email": "satyamsudo@gmail.com",
-    "url": "https://sudotman.github.io"
-  }
+  "type": "tool"
 }

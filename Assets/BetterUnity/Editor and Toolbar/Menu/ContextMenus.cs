@@ -111,4 +111,13 @@ public class ContextMenus : EditorWindow
         Debug.Log("Pausing audio now.");
     }
 
+    [MenuItem("CONTEXT/MeshFilter/BetterUnity/Pause this source")]
+    static void MeshFilter(MenuCommand command)
+    {
+        AudioSource src = (AudioSource)command.context;
+        src.Pause();
+        //Debug.Log("Doubled Rigidbody's Mass to " + body.mass + " from Context Menu.");
+        Debug.Log("Pausing audio now.");
+    }   
+
 }

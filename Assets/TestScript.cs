@@ -34,6 +34,9 @@ public class TestScript : MonoBehaviour
 
     public Color colorField;
 
+    [Watch]
+    public int testInt;
+
     private void Start()
     {
         InvokeRepeating("colorCheck", 1, 1);

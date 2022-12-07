@@ -11,16 +11,19 @@ public class FPSController : MonoBehaviour
 {
     // Information in inspector
     [Header("")]
-    
-    [Header("2. Attach a camera on a child GameObject, and assign it below.")]
-    [Header("1. Attach this script to the parent (Character, Capsule etc) GameObject. ")]
     [Header("A simple First Person controller template.")]
+    [Header("1. Attach this script to the parent (Character, Capsule etc) GameObject. ")]
+
+    [Header("2. Attach a camera on a child GameObject, and assign it below.")]
+    
 
     [Header("")]
 
     // User inputted speed
     [Tooltip("Speed of movement")]
     [SerializeField] private float speed = 5.0f;
+
+    [SerializeField] private float sprintSpeedMultiplier = 2;
 
     [Tooltip("Speed of the jump")]
     [SerializeField] private float jumpForce = 5.0f;
@@ -42,6 +45,9 @@ public class FPSController : MonoBehaviour
 
     [Tooltip("Sensitivity of looking around")]
     [SerializeField] private float mouseSensitivity = 3.0f;
+
+    [Tooltip("The velocity of the rigidbody after which a second jump is allowed")]
+    [SerializeField] private float jumpingAllowedOffset = 0.1f;
 
     private bool isCursorLocked = true;
 
@@ -73,12 +79,24 @@ public class FPSController : MonoBehaviour
         mouseRotation_X = Input.GetAxisRaw("Mouse Y");
         rotation_camera = new Vector3(mouseRotation_X, 0, 0) * mouseSensitivity;
 
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            speed *= sprintSpeedMultiplier;
+        }
 
         // Input for jump
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            moveVelocity = new Vector3(moveVelocity.x, 50 * jumpForce, moveVelocity.z);
-            //m_Rigid.AddForce(new Vector3(0, jumpSpeed, 0));
+            if(rb.velocity.y > -jumpingAllowedOffset)
+            {
+                moveVelocity = new Vector3(moveVelocity.x, 50 * jumpForce, moveVelocity.z);
+                //m_Rigid.AddForce(new Vector3(0, jumpSpeed, 0));
+            }
+            else
+            {
+                moveVelocity = new Vector3(moveVelocity.x, 0, moveVelocity.z);
+            }
+
         }   
 
         //Apply the velocities to our player rigidbody

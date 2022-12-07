@@ -226,6 +226,7 @@ public static class HelperFunctions
         return list[Random.Range(0, list.Count)];
     }
 
+
     //06 - July
     /// <summary>
     /// Changes a Vector3 without modifying the Y-component.
@@ -285,6 +286,8 @@ public static class HelperFunctions
 
         Color newColor;
 
+        Debug.Log("test");
+
         if (ColorUtility.TryParseHtmlString(rawStringValue, out newColor))
         {
             return newColor;
@@ -296,4 +299,26 @@ public static class HelperFunctions
         }
     }
 
+  
+
+}
+
+public static class BD
+{
+    static public void Log(object message)
+    {
+        Object[] isArray = message as Object[];
+
+        if (isArray != null)
+        {
+            foreach (Object testA in isArray)
+            {
+                Debug.Log(testA);
+            }
+        }
+        else
+        {
+            Debug.Log(message);
+        }
+    }
 }

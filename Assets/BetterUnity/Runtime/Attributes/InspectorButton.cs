@@ -169,6 +169,21 @@ public class CallInEditorAttribute : PropertyAttribute
     // nothing - just oxygen innit
 }
 
+[System.AttributeUsage(System.AttributeTargets.Field)]
+public class WatchAttribute : PropertyAttribute
+{
+    // nothing - just oxygen innit
+    
+}
+
+public class WatchAttributeClass : GUI
+{
+    private void OnGUI()
+    {
+        GUILayout.TextArea("test");
+    }
+}
+
 [CanEditMultipleObjects]
 [CustomEditor(typeof(MonoBehaviour), true)]
 public class MonoBehaviourCustomEditor : Editor

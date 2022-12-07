@@ -280,7 +280,16 @@ Unity has a great Debug system but lacks in outputting it while full-screened/in
 
 <br>
 
-### 5.2 Simple FPS Counter
+### 5.2 BD:
+BD (BetterDebug) is a bunch of extensions to the default Debug class which allows greater control over Debugging/Logging.
+
+- <b> BD.Log </b> : Is able to log and print any string or array. (tiny code but effective for quick debugging)
+
+```C#
+BD.Log("Test");
+```
+
+### 5.3 Simple FPS Counter
 A very simple skeletal frames-per-second counter. Inverses unscaled delta time to output fps on the screen.
 
 !["3.2 Demo - FPS Counter"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/3_2_FPS.png)
@@ -318,23 +327,29 @@ For a lot of use-cases in Unity [wanting to have a unit scale or have positionin
 
 <br>
 
+## 7. World Settings
+A bunch of world settings inspired by the same-name Unreal settings which have a bunch of functionalites missing in Unity.
+
+### 7.1 KillY (KillZ from UE)
+The value of KillY dictates the Y-Position threshold of any object below which it gets automatically destroyed.
 
 
-## 7. VR Scripts
+
+## 8. VR Scripts
 Useful scripts that aid in my VR development.
 
-### 7.1 Head Level
+### 8.1 Head Level
 Make an object always align with our headset's level.
 
-!["7.1 Demo - HeadLevel"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/5_1_Head.gif)
+!["8.1 Demo - HeadLevel"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/5_1_Head.gif)
 
 
-## 8. Miscellaneous
+## 9. Miscellaneous
 
-### 8.1 Controllers
+### 9.1 Controllers
 Various basic controller templates, such as FPS, VR.
 
-### 8.2 Navigation System
+### 9.2 Navigation System
 A NPC walking/navigation system which is modular and fully configurable.
 
 Demo:

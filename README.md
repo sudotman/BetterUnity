@@ -15,21 +15,16 @@ You can import it through Unity's package manager using the url:
 https://github.com/sudotman/BetterUnity.git
 ```
 
-Installation instruction:
+<i>Installation instruction:</i>
 !["Installation Demo"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/InstallationGit.gif)
 
 ## Contribute to the project
-[Collaboration Information](#contribution)
+[Click here to see general collaboration information](#contribution)
 
-<br>
 
 # Contents / Documentation
 
 Table of Contents:
-* [Better Unity](#better-unity)
-  * [Purpose](#purpose)
-  * [Installation](#installation)
-  * [Contribute to the project](#contribute-to-the-project)
 * [Contents / Documentation](#contents--documentation)
   * [1\. Inspector Additions](#1-inspector-additions)
     * [1\.1 Inspector Button / Call Function in Editor](#11-inspector-button--call-function-in-editor)

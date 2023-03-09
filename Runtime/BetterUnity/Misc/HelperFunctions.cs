@@ -284,9 +284,14 @@ public static class HelperFunctions
     {
         string rawStringValue = hex;
 
+        if (!rawStringValue.StartsWith("#"))
+        {
+            rawStringValue = rawStringValue.Insert(0,"#");
+        }
+     
+
         Color newColor;
 
-        Debug.Log("test");
 
         if (ColorUtility.TryParseHtmlString(rawStringValue, out newColor))
         {

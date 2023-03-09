@@ -20,7 +20,10 @@ public class WorldSettings : MonoBehaviour
     [SerializeField] private bool overrideWorldGravity = false;
     [SerializeField] private float worldGravity = -1;
 
-    
+    [Header("Default Player/Camera")]
+    [SerializeField] private bool setDefaultGameCamera = false;
+    [SerializeField] private Camera defaultPlayerCam;
+
 
     public void Awake()
     {
@@ -36,7 +39,8 @@ public class WorldSettings : MonoBehaviour
         if(overrideWorldGravity)
             Physics.gravity = new Vector3(0, worldGravity, 0);
 
-
+        if (defaultPlayerCam)
+            defaultPlayerCam.depth = 10;
 
         InvokeRepeating("CheckForY", seconds, seconds);
     }

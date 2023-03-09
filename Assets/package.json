@@ -1,8 +1,0 @@
-{
-  "name": "man.sudotman.betterunity",
-  "displayName": "BetterUnity",
-  "description": "Tools to make stuff easier in Unity.",
-  "version": "0.2.0",
-  "unity": "2021.3",
-  "type": "tool"
-}

@@ -1,0 +1,21 @@
+{
+    "name": "com.sudotman.betterunity",
+    "displayName": "BetterUnity",
+    "version": "1.0.0",
+    "description": "A package consisting of shaders, scripts and inspector modifications to aid in development.",
+    "keywords": [
+        "scripts",
+        "inspector",
+        "modifications",
+        "shaders"
+    ],
+    "category": "Scripts",
+    "files": [
+        "/README.md",
+        "/README.md.meta",
+        "/package.json",
+        "/package.json.meta",
+        "/BetterUnity",
+        "/BetterUnity.meta"
+    ]
+}

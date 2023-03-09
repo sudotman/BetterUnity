@@ -4,6 +4,15 @@ using UnityEditor;
 
 public class LogToScreen : MonoBehaviour
 {
+    [Header("Toggle")]
+    public bool toggleWithKey = false;
+
+    public KeyCode keyCode = KeyCode.Tilde;
+
+    private bool showRightNow = false;
+
+    [Header("Misc")]
+
     [SerializeField]
     Color logColor = Color.yellow;
 
@@ -46,11 +55,22 @@ public class LogToScreen : MonoBehaviour
 
         //remove debug elements after a certain time
         InvokeRepeating("RemoveInTime", 2, removeLogsAfterTime);
+
+        //start log disabled
+        showRightNow = false;
     }
 
     void RefreshFPS()
     {
         currentFps = (int)(1f / Time.unscaledDeltaTime);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(keyCode))
+        {
+            showRightNow = !showRightNow;
+        }
     }
 
     void OnEnable()
@@ -95,9 +115,24 @@ public class LogToScreen : MonoBehaviour
 
     void OnGUI()
     {
-        if(displayFps)
-            GUI.contentColor = fpsColor;    
-            GUILayout.Label(" FPS: " + currentFps.ToString());
+        if (toggleWithKey)
+        {
+            if(showRightNow)
+                ProcessGUI();
+        }
+        else
+        {
+            ProcessGUI();
+        }
+
+        
+    }
+
+    void ProcessGUI()
+    {
+        if (displayFps)
+            GUI.contentColor = fpsColor;
+        GUILayout.Label(" FPS: " + currentFps.ToString());
 
 
         GUI.contentColor = logColor;

@@ -1047,6 +1047,10 @@ PrefabInstance:
       value: LogToScreen
       objectReference: {fileID: 0}
     - target: {fileID: 4983183233340937029, guid: ea11514bf79b75c42b1ef9a14513cfed, type: 3}
+      propertyPath: keyCode
+      value: 96
+      objectReference: {fileID: 0}
+    - target: {fileID: 4983183233340937029, guid: ea11514bf79b75c42b1ef9a14513cfed, type: 3}
       propertyPath: fpsColor.b
       value: 0
       objectReference: {fileID: 0}
@@ -1057,6 +1061,10 @@ PrefabInstance:
     - target: {fileID: 4983183233340937029, guid: ea11514bf79b75c42b1ef9a14513cfed, type: 3}
       propertyPath: fpsColor.r
       value: 0.08884275
+      objectReference: {fileID: 0}
+    - target: {fileID: 4983183233340937029, guid: ea11514bf79b75c42b1ef9a14513cfed, type: 3}
+      propertyPath: toggleWithKey
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4983183233340937029, guid: ea11514bf79b75c42b1ef9a14513cfed, type: 3}
       propertyPath: randomLogsForTesting

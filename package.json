@@ -3,6 +3,13 @@
     "displayName": "BetterUnity",
     "version": "1.0.0",
     "description": "A package consisting of shaders, scripts and inspector modifications to aid in development.",
+    "license": "MIT",
+    "author": {
+        "name": "Satyam Kashyap",
+        "email": "satyamsudo@gmail.com",
+        "url": "https://sudotman.github.io/"
+    },
+    "documentationUrl": "https://github.com/sudotman/BetterUnity/blob/main/README.md#contents--documentation",
     "keywords": [
         "scripts",
         "inspector",
@@ -14,8 +21,7 @@
         "/README.md",
         "/README.md.meta",
         "/package.json",
-        "/package.json.meta",
-        "/BetterUnity",
-        "/BetterUnity.meta"
+        "/package.json.meta"
     ]
+ 
 }

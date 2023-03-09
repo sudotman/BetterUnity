@@ -8,8 +8,22 @@ There are some key features pan other game engines that seem to be lacking in Un
 ## Installation
 You can download the latest ```.unitypackage``` through [Releases](https://github.com/sudotman/BetterUnity/releases/) and double-click to import it.
 
+or
 
-# Contents
+You can import it through Unity's package manager using the url: 
+```html
+https://github.com/sudotman/BetterUnity.git
+```
+
+Installation instruction:
+!["Installation Demo"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/InstallationGit.gif)
+
+## Contribute to the project
+[Collaboration Information](#contribution)
+
+<br>
+
+# Contents / Documentation
 
 ## 1. Inspector Additions
 
@@ -390,6 +404,8 @@ Navigation System working as it should:
 
 # Contribution
 Generate a pull request for whatever change you feel is necessary and I will be happy to review and add them.
+
+The project should be good to go as is on most modern Unity versions. Prefer to not update any dependencies or any other prompts auto-detected by Unity.
 
 ## Current to-do:
 - ~~Update RenameSuite's gif.~~

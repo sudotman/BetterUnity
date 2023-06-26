@@ -60,6 +60,7 @@ Table of Contents:
     * [6\.2 Reset Position, Rotation, Scale:](#62-reset-position-rotation-scale)
     * [6\.3 Visibility Toggle:](#63-visibility-toggle)
     * [6\.4 Make Unit Scale Parent:](#64-make-unit-scale-parent)
+	* [6\.5 Make Unit Scale Parent:](#65-unreal-styled-camera-bookmark-hotkeys)
   * [7\. World Settings](#7-world-settings)
     * [7\.1 KillY (KillZ from UE)](#71-killy-killz-from-ue)
   * [8\. VR Scripts](#8-vr-scripts)
@@ -386,7 +387,7 @@ For a lot of use-cases in Unity [wanting to have a unit scale or have positionin
 !["6.4 Demo - Unit Scale"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/1_4_Unit.gif)
 
 ### 6.5 Unreal-Styled Camera Bookmark Hotkeys
-Unreal offers a way in the scene to set "camera" position/rotation as bookmarks with "Ctrl+1/Ctrl+2/Ctrl+3" to set the bookmarks and then "1,2,3" respectively to jump to those bookmarks.
+Unreal offers a way in the scene to set "camera" position/rotation as bookmarks with "Ctrl+1/Ctrl+2/Ctrl+3" to set the bookmarks and then "1,2,3" respectively to jump to those bookmarks. [This shortcut might already be bound to something else. Resolve any conflicts as you please]
 
 !["6.4 Demo - Unit Scale"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/6_UnrealBookmarks.gif)
 

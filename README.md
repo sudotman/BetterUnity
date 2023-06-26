@@ -60,7 +60,7 @@ Table of Contents:
     * [6\.2 Reset Position, Rotation, Scale:](#62-reset-position-rotation-scale)
     * [6\.3 Visibility Toggle:](#63-visibility-toggle)
     * [6\.4 Make Unit Scale Parent:](#64-make-unit-scale-parent)
-	* [6\.5 Make Unit Scale Parent:](#65-unreal-styled-camera-bookmark-hotkeys)
+	* [6\.5 Unreal Styled Camera Bookmark Hotkeys:](#65-unreal-styled-camera-bookmark-hotkeys)
   * [7\. World Settings](#7-world-settings)
     * [7\.1 KillY (KillZ from UE)](#71-killy-killz-from-ue)
   * [8\. VR Scripts](#8-vr-scripts)

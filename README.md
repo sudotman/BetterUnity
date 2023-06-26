@@ -385,6 +385,11 @@ For a lot of use-cases in Unity [wanting to have a unit scale or have positionin
 
 !["6.4 Demo - Unit Scale"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/1_4_Unit.gif)
 
+### 6.5 Unreal-Styled Camera Bookmark Hotkeys
+Unreal offers a way in the scene to set "camera" position/rotation as bookmarks with "Ctrl+1/Ctrl+2/Ctrl+3" to set the bookmarks and then "1,2,3" respectively to jump to those bookmarks.
+
+!["6.4 Demo - Unit Scale"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/6_UnrealBookmarks.gif)
+
 <br>
 
 ## 7. World Settings

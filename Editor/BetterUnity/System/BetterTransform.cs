@@ -73,6 +73,8 @@ public class BetterTransform : Editor
         }
     }
 
+    
+
     void ResetScale(object parameter)
     {
         switch (parameter)
@@ -271,5 +273,11 @@ public class BetterTransform : Editor
         }      
 
     }
+
+
+ 
+
+    
+
 
 }

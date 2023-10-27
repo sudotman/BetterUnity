@@ -31,8 +31,12 @@ public class BetterTransform : Editor
     GenericMenu menu_reset;
     GenericMenu menu_freeze;
 
+    static float customScale = 0.0f;
+
     private string currentLocGlob = "Local";
     private bool currentlyLocBool = true;
+
+    //float InspectorTime;
 
     private bool[] freezeArray = new bool[6];
 
@@ -65,9 +69,12 @@ public class BetterTransform : Editor
         menu_visibility.AddItem(new GUIContent("Make Object Visible"), false, ObjectVisiblity, 1);
         menu_visibility.AddItem(new GUIContent("Make Object Invisible"), false, ObjectVisiblity, 2);
 
-        menu_freeze = new GenericMenu();
+        customScale = transform.localScale.x;
 
-        for(int i = 0; i < 6; i++)
+        menu_freeze = new GenericMenu();
+        //InspectorTime = 0;
+
+        for (int i = 0; i < 6; i++)
         {
             freezeArray[i] = false;
         }
@@ -82,10 +89,12 @@ public class BetterTransform : Editor
             case 1:
                 if (currentlyLocBool)
                 {
+                    Undo.RecordObject(transform, "Local Transform Before Resetting");
                     transform.localPosition = new Vector3(0, 0, 0);
                 }
                 else
                 {
+                    Undo.RecordObject(transform, "Transform Before Resetting");
                     transform.position = new Vector3(0, 0, 0);
                 }
                 
@@ -94,10 +103,12 @@ public class BetterTransform : Editor
 
                 if (currentlyLocBool)
                 {
+                    Undo.RecordObject(transform, "Local Rot Before Resetting");
                     transform.localRotation = Quaternion.identity;
                 }
                 else
                 {
+                    Undo.RecordObject(transform, "Rot Before Resetting");
                     transform.rotation = Quaternion.identity;
                 }
 
@@ -118,6 +129,7 @@ public class BetterTransform : Editor
 
                 foreach(MeshRenderer mr in temp)
                 {
+                    Undo.RecordObject(mr, "Mesh Renderer before Visible");
                     mr.enabled = true;
                 }
 
@@ -127,18 +139,22 @@ public class BetterTransform : Editor
 
                 foreach (MeshRenderer mr in temp2)
                 {
+                    Undo.RecordObject(mr, "Mesh Renderer before Invisible");
                     mr.enabled = false;
                 }
                 break;
         }
     }
 
+
     public override void OnInspectorGUI()
     {
         if (m_object != null)
         {
             m_object.Update();
-    
+
+            //InspectorTime += Time.deltaTime;
+            //Debug.Log(InspectorTime);
 
             GUILayout.BeginHorizontal();
 
@@ -205,8 +221,31 @@ public class BetterTransform : Editor
 
             EditorGUILayout.PropertyField(m_Scale, new GUIContent("Scale"));
 
-            //GUI.contentColor = Color.yellow;
-            locked = EditorGUILayout.ToggleLeft("Lock Scale Ratio", locked);
+            //Display global lossy scale data
+            if (!currentlyLocBool)
+            {
+                Vector3 scaleLossy = transform.lossyScale;
+
+                GUI.color = Color.yellow;
+                EditorGUILayout.LabelField("Lossy Scale (x,y,z) : " + scaleLossy.ToString());
+
+                GUI.color = Color.white;
+            }
+
+            SessionState.SetBool("scaleUniform", EditorGUILayout.ToggleLeft("Lock Scale Ratio", SessionState.GetBool("scaleUniform", false)));
+            locked = SessionState.GetBool("scaleUniform", false);
+
+            if (locked)
+            {
+                //customScale = transform.localScale.x;
+                customScale = EditorGUILayout.Slider(customScale, 0, 100);
+
+
+            }
+            else
+            {
+               
+            }
 
             EditorGUILayout.Separator();
 
@@ -224,16 +263,9 @@ public class BetterTransform : Editor
 
             if (EditorGUILayout.DropdownButton(new GUIContent("Make Unit Scale Parent"), FocusType.Keyboard))
             {
-                //Debug.Log("pressed");
-
-                GameObject newChild = new GameObject("test");
-                //newChild.transform.loca
-
-                //newChild.transform.parent = transform;
-
-                transform.parent = newChild.transform;
-
-                newChild.name = transform.gameObject.name + "Parent";
+                GameObject newChild = new GameObject(transform.gameObject.name + "Parent");
+   
+                Undo.SetTransformParent(transform, newChild.transform, "Set new parent");
             }
 
           
@@ -259,9 +291,13 @@ public class BetterTransform : Editor
                 else if (locked && lockScaleInternal)
                 {
 
-                    if (transform.localScale.x / transform.localScale.y != 1 / xy)
-                        transform.localScale = new Vector3(transform.localScale.x, transform.localScale.x * xy, transform.localScale.x * xz);
+                    //if (transform.localScale.x / transform.localScale.y != 1 / xy)
+                    //{
+                    //    transform.localScale = new Vector3(customScale, transform.localScale.x * xy, transform.localScale.x * xz);
+                    //}
 
+                    
+                    transform.localScale = new Vector3(customScale, transform.localScale.x * xy, transform.localScale.x * xz);
 
                 }
                 else if (!locked)
@@ -273,6 +309,13 @@ public class BetterTransform : Editor
         }      
 
     }
+
+    void SaveLocalScaleUndo()
+    {
+        
+    }
+
+
 
 
  

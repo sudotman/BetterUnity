@@ -367,9 +367,9 @@ An extension of the existing Transform component to include some ease-to-use fea
 !["6 Demo - Better Transform Overview"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/1_0_Local.png)
 
 ### 6.1 Lock Scale Ratio (Uniform Scale):
-Maintain the ratio of the scaling in an object's axes when scaling a GameObject up/down.
+Maintain the ratio of the scaling in an object's axes when scaling a GameObject up/down. Gives a slider with an option to configure the ceiling value for the slider.
 
-!["6.1 Demo - Lock Scale"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/1_1_Scale.gif)
+!["6.1 Demo - Lock Scale"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/1_1_Scale.png)
 
 ### 6.2 Reset Position, Rotation, Scale:
 Reset the position, rotation and scale of any GameObject locally/globally individually.

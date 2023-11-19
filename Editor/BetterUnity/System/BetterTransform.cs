@@ -295,8 +295,8 @@ public class BetterTransform : Editor
                     if (transform.localScale.x / transform.localScale.y != 1 / xy)
                     {
 
-                        xy = transform.localScale.y == 0 ? 0 : xy;
-                        xz = transform.localScale.z == 0 ? 0 : xz;
+                        xy = transform.localScale.y == 0 ? 1 : xy;
+                        xz = transform.localScale.z == 0 ? 1 : xz;
 
                    
                         transform.localScale = new Vector3(customScale, transform.localScale.x * xy, transform.localScale.x * xz);

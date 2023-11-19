@@ -6,7 +6,7 @@ public class BetterTransform : Editor
 {
     // Colors and all
     private GUIStyle white;
-    
+
     private SerializedObject m_object;
     private SerializedProperty m_Position;
     private SerializedProperty m_Rotation;
@@ -31,17 +31,21 @@ public class BetterTransform : Editor
     GenericMenu menu_reset;
     GenericMenu menu_freeze;
 
+    float maximumSliderSetting = 1;
+
     static float customScale = 0.0f;
 
     private string currentLocGlob = "Local";
     private bool currentlyLocBool = true;
+
+    bool fetchedOnce = false;
 
     //float InspectorTime;
 
     private bool[] freezeArray = new bool[6];
 
     private void OnEnable()
-    {   
+    {
         //GUI Style gets multiplied by the GUI content color so lets do this
         //white = new GUIStyle(EditorStyles.label);
         //white.normal.textColor = Color.white;
@@ -49,13 +53,12 @@ public class BetterTransform : Editor
         m_object = new SerializedObject(target);
 
         m_Position = m_object.FindProperty("m_LocalPosition");
-        m_Rotation  = m_object.FindProperty("m_LocalRotation");
-        m_Scale  = m_object.FindProperty("m_LocalScale");
+        m_Rotation = m_object.FindProperty("m_LocalRotation");
+        m_Scale = m_object.FindProperty("m_LocalScale");
 
         m_test = m_object.FindProperty("m_LocalScale");
 
-        
-            
+
         transform = Selection.activeTransform;
 
         locked = false;
@@ -69,7 +72,8 @@ public class BetterTransform : Editor
         menu_visibility.AddItem(new GUIContent("Make Object Visible"), false, ObjectVisiblity, 1);
         menu_visibility.AddItem(new GUIContent("Make Object Invisible"), false, ObjectVisiblity, 2);
 
-        customScale = transform.localScale.x;
+        //customScale = transform.localScale.x;
+        maximumSliderSetting = 10;
 
         menu_freeze = new GenericMenu();
         //InspectorTime = 0;
@@ -79,8 +83,6 @@ public class BetterTransform : Editor
             freezeArray[i] = false;
         }
     }
-
-    
 
     void ResetScale(object parameter)
     {
@@ -97,7 +99,7 @@ public class BetterTransform : Editor
                     Undo.RecordObject(transform, "Transform Before Resetting");
                     transform.position = new Vector3(0, 0, 0);
                 }
-                
+
                 break;
             case 2:
 
@@ -115,9 +117,9 @@ public class BetterTransform : Editor
                 break;
             case 3:
                 locked = false;
-                transform.localScale = new Vector3(1,1,1);
+                transform.localScale = new Vector3(1, 1, 1);
                 break;
-        }   
+        }
     }
 
     void ObjectVisiblity(object parameter)
@@ -127,7 +129,7 @@ public class BetterTransform : Editor
             case 1:
                 MeshRenderer[] temp = transform.GetComponentsInChildren<MeshRenderer>();
 
-                foreach(MeshRenderer mr in temp)
+                foreach (MeshRenderer mr in temp)
                 {
                     Undo.RecordObject(mr, "Mesh Renderer before Visible");
                     mr.enabled = true;
@@ -163,12 +165,12 @@ public class BetterTransform : Editor
 
             if (GUILayout.Button("Toggle"))
             {
-                if(currentlyLocBool == true)
+                if (currentlyLocBool == true)
                 {
                     currentLocGlob = "Global Transform";
 
                     EditorGUILayout.PropertyField(m_test, new GUIContent("test"));
-                    
+
                     currentlyLocBool = false;
                 }
                 else
@@ -187,7 +189,7 @@ public class BetterTransform : Editor
                 currentLocGlob = "Local Transform";
 
                 EditorGUILayout.PropertyField(m_Position, new GUIContent("Position", "Local Position of the GameObject"));
-              
+
             }
             else
             {
@@ -196,7 +198,7 @@ public class BetterTransform : Editor
                 myClass = target as Transform;
 
                 myClass.position = EditorGUILayout.Vector3Field("Position", myClass.position);
-  
+
             }
 
             //EditorGUILayout.InspectorTitlebar(true, target);
@@ -211,10 +213,10 @@ public class BetterTransform : Editor
             //Display global rotation data
             if (!currentlyLocBool)
             {
-                Vector4 test = new Vector4(myClass.rotation.w,myClass.rotation.x, myClass.rotation.y, myClass.rotation.z);
+                Vector4 test = new Vector4(myClass.rotation.w, myClass.rotation.x, myClass.rotation.y, myClass.rotation.z);
 
                 GUI.color = Color.yellow;
-                EditorGUILayout.LabelField("Q (w,x,y,z) : "+test.ToString());
+                EditorGUILayout.LabelField("Q (w,x,y,z) : " + test.ToString());
 
                 GUI.color = Color.white;
             }
@@ -237,14 +239,13 @@ public class BetterTransform : Editor
 
             if (locked)
             {
-                //customScale = transform.localScale.x;
-                customScale = EditorGUILayout.Slider(customScale, 0, 100);
-
-
+                maximumSliderSetting = EditorGUILayout.FloatField("Upper Scale Limit:", maximumSliderSetting);
+                customScale = EditorGUILayout.Slider("Scale:",FetchOnce(), 0, maximumSliderSetting);
+                Undo.RecordObject(transform, "Scaling undo");
             }
             else
             {
-               
+
             }
 
             EditorGUILayout.Separator();
@@ -264,11 +265,11 @@ public class BetterTransform : Editor
             if (EditorGUILayout.DropdownButton(new GUIContent("Make Unit Scale Parent"), FocusType.Keyboard))
             {
                 GameObject newChild = new GameObject(transform.gameObject.name + "Parent");
-   
+
                 Undo.SetTransformParent(transform, newChild.transform, "Set new parent");
             }
 
-          
+
             // set the GUI to use the color stored in m_Color
             //GUI.color = m_Color;
 
@@ -291,13 +292,23 @@ public class BetterTransform : Editor
                 else if (locked && lockScaleInternal)
                 {
 
-                    //if (transform.localScale.x / transform.localScale.y != 1 / xy)
-                    //{
-                    //    transform.localScale = new Vector3(customScale, transform.localScale.x * xy, transform.localScale.x * xz);
-                    //}
+                    if (transform.localScale.x / transform.localScale.y != 1 / xy)
+                    {
 
-                    
-                    transform.localScale = new Vector3(customScale, transform.localScale.x * xy, transform.localScale.x * xz);
+                        xy = transform.localScale.y == 0 ? 0 : xy;
+                        xz = transform.localScale.z == 0 ? 0 : xz;
+
+                   
+                        transform.localScale = new Vector3(customScale, transform.localScale.x * xy, transform.localScale.x * xz);
+
+                    }
+                    else
+                    {
+                        transform.localScale = new Vector3(customScale, transform.localScale.x * xy, transform.localScale.x * xz);
+                    }
+
+
+
 
                 }
                 else if (!locked)
@@ -306,21 +317,29 @@ public class BetterTransform : Editor
                 }
             }
 
-        }      
+        }
 
     }
 
-    void SaveLocalScaleUndo()
+    float FetchOnce()
     {
-        
+        if (!fetchedOnce)
+        {
+            fetchedOnce = true;
+            return transform.localScale.x;
+        }
+        else
+        {
+            return customScale;
+        }
     }
 
 
 
 
- 
 
-    
+
+
 
 
 }

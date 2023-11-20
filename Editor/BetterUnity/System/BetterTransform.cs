@@ -7,6 +7,7 @@ public class BetterTransform : Editor
     // Colors and all
     private GUIStyle white;
 
+    // Serialized Properties
     private SerializedObject m_object;
     private SerializedProperty m_Position;
     private SerializedProperty m_Rotation;

@@ -427,6 +427,8 @@ Demo:
 You can reconfigure individual points/characters after using the Master Creator or you can choose to attach scripts individually and configure settings manually - both would work, and that would also work in conjunction to both 
 approaches.
 
+Import the sample from the package manager to get a preconfigured scene if needed.
+
 <br>
 
 <b>Doing it manually</b>:

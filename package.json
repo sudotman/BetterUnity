@@ -1,7 +1,7 @@
 {
     "name": "com.sudotman.betterunity",
     "displayName": "BetterUnity",
-    "version": "0.7.0",
+    "version": "0.7.1",
     "description": "A package consisting of shaders, scripts and inspector modifications to aid in development.",
     "license": "MIT",
     "author": {

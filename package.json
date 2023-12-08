@@ -16,6 +16,13 @@
         "modifications",
         "shaders"
     ],
-    "category": "Scripts"
+    "category": "Scripts",
+	"samples": [
+		{
+			"displayName": "BetterScenes",
+			"description": "Contains a 1. NavigationSample scene and 2. a pre-configured scene with post-processing enabled - a basic plane surface - a non generic skybox - two basic materials",
+			"path": "Samples~/BetterScenes"
+		}	
+	]
  
 }

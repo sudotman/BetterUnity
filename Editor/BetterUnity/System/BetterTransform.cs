@@ -241,7 +241,16 @@ public class BetterTransform : Editor
             if (locked)
             {
                 maximumSliderSetting = EditorGUILayout.FloatField("Upper Scale Limit:", maximumSliderSetting);
-                customScale = EditorGUILayout.Slider("Scale:",FetchOnce(), 0, maximumSliderSetting);
+
+                float fetchValue = FetchOnce();
+
+                if (fetchValue > maximumSliderSetting)
+                {
+                    Debug.LogWarning("Attempted to set scale's upper limit lower than the scale slider.");
+                    maximumSliderSetting = fetchValue;
+                }
+
+                customScale = EditorGUILayout.Slider("Scale:", fetchValue, 0, maximumSliderSetting);
                 Undo.RecordObject(transform, "Scaling undo");
             }
             else

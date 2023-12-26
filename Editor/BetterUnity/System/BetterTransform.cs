@@ -209,7 +209,33 @@ public class BetterTransform : Editor
             //EditorGUILayout.GradientField(new Gradient()); // make a script to quickly modify the gradient of a new gameobject
 
 
-            EditorGUILayout.PropertyField(m_Rotation, new GUIContent("Rotation"));
+            //Fixing Gimbal Lock issues with the rotation
+            EditorGUI.BeginChangeCheck();
+            Quaternion currentRotation = ((Transform)target).localRotation;
+            Vector3 currentEulerAngles = currentRotation.eulerAngles;
+
+            Vector3 newEulerAngles = EditorGUILayout.Vector3Field("Rotation", currentEulerAngles);
+
+            if (EditorGUI.EndChangeCheck())
+            {
+                Undo.RecordObjects(targets, "Change Rotation");
+
+                // Calculate the delta change in rotation
+                Vector3 deltaEulerAngles = newEulerAngles - currentEulerAngles;
+
+                // Apply the change to the rotation
+                Quaternion deltaRotation = Quaternion.Euler(deltaEulerAngles);
+                Quaternion newRotation = deltaRotation * currentRotation;
+
+                // Assign the new rotation
+                foreach (var obj in targets)
+                {
+                    Transform transform = (Transform)obj;
+                    transform.localRotation = newRotation;
+                }
+            }
+
+            //EditorGUILayout.PropertyField(m_Rotation, new GUIContent("Rotation"));
 
             //Display global rotation data
             if (!currentlyLocBool)

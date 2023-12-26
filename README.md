@@ -465,6 +465,7 @@ The project should be good to go as is on most modern Unity versions. Prefer to 
 - ~~Update RenameSuite's gif.~~
 - ~~Make ScreenToLog scale according to our window size. [possible solution is to use GUI.matrix]~~
 - ~~<b>Store GIFs on the cloud</b>. [Very essential, the repo is growing fast]~~
+- ~~Update dynamic scaling of InspectorText. [using a bandaid fix for now which is really triggering]~~	
 - Assembly definitions are not properly architectured, yet. Need to refactor and organize components into proper categories.
 - Add more controllers templates.
 - Add more VR utiltiy scripts.
@@ -473,7 +474,7 @@ The project should be good to go as is on most modern Unity versions. Prefer to 
 - Fix README's alt text naming.
 - Create one universal prefab to enable all functionality inside of our scene.
 - Modify CallInEditor to encompass text-change parameters and size instead of a seperate wrapper of InspectorButton. [Debating this as I really like the simplicity of CallInEditor]
-- Update dynamic scaling of InspectorText. [using a bandaid fix for now which is really triggering]	
+- The eulers of the rotation on Inspector only modify the global rotation -  do something to make it so that the local rotation could also be modified in the inspector itself
 
 ### Navigation To-Do:
 - ~~Multiple lanes/paths~~

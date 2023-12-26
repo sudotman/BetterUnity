@@ -1,5 +1,9 @@
 # Change Log:
 
+## 0.7.2
+
+- Fixed gimbal lock issues when modifying euler angles directly through the inspector.
+
 ## 0.7.1
 
 - Fixed semantics related to the samples.

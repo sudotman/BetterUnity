@@ -68,6 +68,7 @@ Table of Contents:
   * [9\. Miscellaneous](#9-miscellaneous)
     * [9\.1 Controllers](#91-controllers)
     * [9\.2 Navigation System](#92-navigation-system)
+    * [9\.3 Flow Controller](#93-flow-controller)
 * [Contribution](#contribution)
   * [Current to\-do:](#current-to-do)
     * [Navigation To\-Do:](#navigation-to-do)
@@ -453,6 +454,29 @@ A quick guiding GIF on a quick setup is given below:
 Navigation System working as it should:
 
 !["8.2 - Navigation System"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/8_2_Navigation.gif)
+
+<br>
+
+### 9.3 Flow Controller
+A lot of times, there is a need to script events linearly (usually to follow a particular storyboard in a particular order). This scripts entails having multiple variables, multiple functions and in general just a very messy frankensteinian codebase.
+
+This hopes to alleviate some of those messyness - trying to make a more generic flow controller which allows for triggering of events with ease also eliminating the need to do this everytime.
+
+Also, has a Custom Inspector GUI that streamlines it some more.
+
+!["9.3 Demo - Flow Controller"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/8_3_FlowController.png)
+
+General outline:
+
+- <b>Events Associated</b> are the current events to be called when this "Storyboard Event" is hit. Events associated has an array where the first Event element of the Event[] array is called instantly while the rest are called with a 2 seconds delay. Note: The first element of the Event[] array - multiple listeners (functions) can be called inside one UnityEvent.
+- <b>Phase Name</b> defines the name of this storyboard event and also is used as the index for the overall storyboard - gets mapped as an integer in the backend.
+- <b>Phase Description</b> is purely cosmetical and doesn't alter functionality - just for record keeping.
+- <b>Moving Ahead Requirements</b> define the event that you need to trigger to trigger the wait conditions. Once, these booleans are assigned, you will be assigned one bool out of a generic set of bools that you can modify or pass by ref if needed to further modify it and execute the condition on completion.
+
+The script would look this with sample data of a storyboard:
+!["9.3 Demo - Flow Controller"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/8_3_2_FlowController.png)
+
+
 
 <br>
 

@@ -28,7 +28,7 @@ public class FlowController : MonoBehaviour
         genericSetOfBools = new bool[150];
         if (!dontStartAutomatically)
         {
-            Invoke(nameof(BeginEvent), startWithDelay);
+            Invoke(nameof(BeginEvent),startWithDelay);
         }
     }
 
@@ -51,20 +51,18 @@ public class FlowController : MonoBehaviour
 
         //Call delayed events
         if (eventsDividedWithStoryboard[selectedIndex].eventsAssociated.Length > 1)
-            Invoke(nameof(ExecuteDelayedEventsAssociated), 2f);
+        {
+            
+            Invoke(nameof(ExecuteDelayedEventsAssociated), eventsDividedWithStoryboard[selectedIndex].lateEventDelay);
+        }
+            
     }
-
+    
     public void ExecuteDelayedEventsAssociated()
     {
-        int i = 0;
-        foreach (UnityEvent currentEvent in eventsDividedWithStoryboard[selectedIndex].eventsAssociated)
-        {
-            if (i == 0)
-                continue;
+        Debug.Log("Delay executing.");
 
-            i++;
-            currentEvent.Invoke();
-        }
+        eventsDividedWithStoryboard[selectedIndex].eventsAssociated[1].Invoke();
     }
 
     // Update is called once per frame
@@ -113,6 +111,8 @@ public class StoryboardEvents
     public UnityEvent[] eventsAssociated = new UnityEvent[2];
 
     public UnityEvent movingAheadRequirements;
+
+    public float lateEventDelay = 2f;
 
     StoryboardEvents()
     {

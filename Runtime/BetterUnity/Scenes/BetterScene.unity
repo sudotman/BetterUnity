@@ -1322,18 +1322,21 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+    lateEventDelay: 2
   - phaseName: test2
     phaseDescription: 
     eventsAssociated: []
     movingAheadRequirements:
       m_PersistentCalls:
         m_Calls: []
+    lateEventDelay: 2
   - phaseName: test3
     phaseDescription: 
     eventsAssociated: []
     movingAheadRequirements:
       m_PersistentCalls:
         m_Calls: []
+    lateEventDelay: 2
   selectedString: test2
   selectedIndex: 1
   currentlyWaiting: 0

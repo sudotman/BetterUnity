@@ -42,6 +42,7 @@ Table of Contents:
     * [2\.8 Ease Out Interpolation](#28-ease-out-interpolation)
     * [2\.9 Smooth Step Float Interpolation](#29-smooth-step-float-interpolation)
     * [2\.10 Hex To Color](#210-hex-to-color)
+    * [2\.11 Serializers](#211-serializers)
   * [3\. Toolbar Tools](#3-toolbar-tools)
     * [3\.1 Rename Suite](#31-rename-suite)
     * [3\.2 Setup Default Project](#32-setup-default-project)
@@ -280,8 +281,46 @@ If an incorrect hex string is passed and/or it can't be parsed, a warning is log
 
 
 
-There are plenty more functions which are not mentioned here because of their usages being quite insigniicant. Look through [HelperFunctions.cs](https://github.com/sudotman/BetterUnity/blob/main/Assets/BetterUnity/Scripts/Misc/HelperFunctions.cs) for all the remaining functions, they are aptly documented.
+There are plenty more functions which are not mentioned here because of their usages being quite insigniicant. Look through [HelperFunctions.cs](https://github.com/sudotman/BetterUnity/blob/main/Runtime/BetterUnity/Helpers/HelperFunctions.cs) for all the remaining functions, they are aptly documented.
 
+### 2.11 Serializers
+Gives you different serializers which allows you to easily pass common Unity data structures into files and vice versa.
+
+```js
+SerializedVector3 serializedVector3;
+SerializedQuaternion serializedQuaternion;
+```
+
+Quick code to get started with conversion of Vector3 into Serialized JSON data:
+```c#
+List<SerializedVector3> anchorPositions = new List<SerializedVector3>();
+List<SerializedQuaternion> anchorRotations = new List<SerializedQuaternion>();
+
+foreach (var gameObjects in arrayOfGameObjects)
+{
+    Vector3 currentPositionData = anchorGameObject.transform.position;
+
+    Quaternion currentRotData = anchorGameObject.transform.rotation;
+
+    anchorPositions.Add(Vector3Extensions.FromVector3(currentPositionData));
+    anchorRotations.Add(QuaternionExtensions.FromQuaternion(currentRotData));
+}
+
+SerializedVector3[] actualPositions = anchorPositions.ToArray();
+SerializedQuaternion[] actualRotations = anchorRotations.ToArray();
+
+string jsonPositions = JsonConvert.SerializeObject(actualPositions);
+string jsonRotations = JsonConvert.SerializeObject(actualRotations);
+
+byte[] dataPos = Encoding.ASCII.GetBytes(jsonPositions);
+byte[] dataRot = Encoding.ASCII.GetBytes(jsonRotations);
+
+UnityEngine.Windows.File.WriteAllBytes(localJSONPath, dataPos);
+UnityEngine.Windows.File.WriteAllBytes(localJSONPath, dataRot);
+
+```
+
+[Serializables.cs](https://github.com/sudotman/BetterUnity/blob/main/Runtime/BetterUnity/Helpers/Serializers/Serializables.cs) has more information about every function/class and extensions. Deserialization/Serialization is also available in the same script.
 
 
 <br>

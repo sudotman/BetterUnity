@@ -43,6 +43,7 @@ Table of Contents:
     * [2\.9 Smooth Step Float Interpolation](#29-smooth-step-float-interpolation)
     * [2\.10 Hex To Color](#210-hex-to-color)
     * [2\.11 Serializers](#211-serializers)
+    * [2\.12 Serializers](#212-betterraycast)
   * [3\. Toolbar Tools](#3-toolbar-tools)
     * [3\.1 Rename Suite](#31-rename-suite)
     * [3\.2 Setup Default Project](#32-setup-default-project)
@@ -329,6 +330,8 @@ UnityEngine.Windows.File.WriteAllBytes(localJSONPath, dataRot);
 
 ### 2.12 BetterRaycast
 A simple one-liner to allow a better raycast function. Usually, when Raycasting, we also like to Debug and see the visual output of our raycast being hit. This encapsulates it all into one single line.
+
+The hit is passed by reference and is updated automatically.
 
 ```ts
 RaycastHit hit;

@@ -304,7 +304,12 @@ public static class HelperFunctions
         }
     }
 
-  
+    public static RaycastHit BetterRaycast(this ref RaycastHit hit,Vector3 startPosition, Vector3 direction, float raycastDistance)
+    {
+        Physics.Raycast(startPosition, direction, out hit, raycastDistance);
+        Debug.DrawRay(startPosition, direction * hit.distance, Color.red);
+        return hit;
+    }
 
 }
 

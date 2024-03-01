@@ -265,6 +265,7 @@ Returns a smooth stepping interpolation between two floats.
 ```C#
 HelperFunctions.SmoothStep(currentTime,startFloat,EndFloat);
 ```
+<br>
 
 ### 2.10 Hex To Color
 Allows you to pass a Hexadecimal color string and use in the native Unity's RGB color system.
@@ -282,6 +283,8 @@ If an incorrect hex string is passed and/or it can't be parsed, a warning is log
 
 
 There are plenty more functions which are not mentioned here because of their usages being quite insigniicant. Look through [HelperFunctions.cs](https://github.com/sudotman/BetterUnity/blob/main/Runtime/BetterUnity/Helpers/HelperFunctions.cs) for all the remaining functions, they are aptly documented.
+
+<br>
 
 ### 2.11 Serializers
 Gives you different serializers which allows you to easily pass common Unity data structures into files and vice versa.
@@ -322,6 +325,15 @@ UnityEngine.Windows.File.WriteAllBytes(localJSONPath, dataRot);
 
 [Serializables.cs](https://github.com/sudotman/BetterUnity/blob/main/Runtime/BetterUnity/Helpers/Serializers/Serializables.cs) has more information about every function/class and extensions. Deserialization/Serialization is also available in the same script.
 
+<br>
+
+### 2.12 BetterRaycast
+A simple one-liner to allow a better raycast function. Usually, when Raycasting, we also like to Debug and see the visual output of our raycast being hit. This encapsulates it all into one single line.
+
+```ts
+RaycastHit hit;
+hit.BetterRaycast(startPosition, direction, raycastDistance);
+```
 
 <br>
 

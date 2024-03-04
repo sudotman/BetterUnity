@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class TestScript : MonoBehaviour
 {
-
-    [Watch]
+    [Optional]
     public int testInt;
 
 
@@ -20,5 +19,8 @@ public class TestScript : MonoBehaviour
     {
         
     }
+
+    [NullCheck]
+    public GameObject test;
 
 }

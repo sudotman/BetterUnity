@@ -67,8 +67,45 @@ public class ContextMenus : EditorWindow
         }
     }
 
- 
+    [MenuItem("GameObject/Better Unity/Select all with/having text", false, 1)]
+    static void SelectAllTextMeshPros(MenuCommand command)
+    {
+        GameObject obj = (GameObject)command.context;
 
+
+        TextMesh[] tempArray = obj.transform.GetComponentsInChildren<TextMesh>();
+
+
+        if (tempArray.Length < 1)
+        {
+            Debug.LogWarning("No objects with text found.");
+        }
+        else
+        {
+            Selection.objects = tempArray;
+        }
+
+    }
+
+    [MenuItem("GameObject/Better Unity/Select all with/generic", false, 1)]
+    static void SelectAllGeneric(MenuCommand command)
+    {
+        GameObject obj = (GameObject)command.context;
+
+
+        TextMesh[] tempArray = obj.transform.GetComponentsInChildren<TextMesh>();
+
+
+        if (tempArray.Length < 1)
+        {
+            Debug.LogWarning("No objects with text found.");
+        }
+        else
+        {
+            Selection.objects = tempArray;
+        }
+
+    }
 
     // Add a menu item called "usual player settings" to a Rigidbody's context menu.
     [MenuItem("CONTEXT/Rigidbody/BetterUnity/Usual Player Settings")]

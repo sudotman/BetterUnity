@@ -45,6 +45,98 @@ public class RenameChildren : EditorWindow
     }
 }
 
+public class SelectAllGeneric : EditorWindow
+{
+    private static readonly Vector2Int size = new Vector2Int(350, 200);
+    private string childrenPrefix;
+    private int startIndex;
+    private Object objectToFind;
+
+    public MonoScript selectedType;
+
+    private SerializedObject serializedObject;
+    private SerializedProperty selectedTypeProperty;
+
+    public GameObject selectedGameObject;
+    public Component selectedComponent;
+
+    private int selectedComponentIndex = -1;
+    private List<Component> components;
+
+    [MenuItem("BetterUnity/select all generic", false, 11)]
+    public static void ShowWindow()
+    {
+        EditorWindow window = GetWindow<SelectAllGeneric>("Selector");
+        window.minSize = size;
+        window.maxSize = size;
+    }
+
+    private void OnEnable()
+    {
+        serializedObject = new SerializedObject(this);
+        selectedTypeProperty = serializedObject.FindProperty("selectedType");
+    }
+
+    private void OnGUI()
+    {
+
+        GUILayout.Label("Select the GameObject that has the Component you wish to select all from.");
+
+        selectedGameObject = EditorGUILayout.ObjectField("GameObject", selectedGameObject, typeof(GameObject), true) as GameObject;
+
+        if (selectedGameObject != null)
+        {
+            components = new List<Component>(selectedGameObject.GetComponents<Component>());
+            List<string> componentNames = new List<string>();
+            foreach (Component component in components)
+            {
+                componentNames.Add(component.GetType().Name);
+            }
+            EditorGUI.BeginChangeCheck();
+            selectedComponentIndex = EditorGUILayout.Popup("Component", selectedComponentIndex, componentNames.ToArray());
+            if (EditorGUI.EndChangeCheck())
+            {
+                selectedComponent = components[selectedComponentIndex];
+            }
+        }
+
+        if (GUILayout.Button("Select GameObjects with Component"))
+        {
+            if (selectedComponent != null)
+            {
+                System.Type type = selectedComponent.GetType();
+
+                Debug.Log(type);
+                if (type != null && typeof(Component).IsAssignableFrom(type))
+                {
+                    Object[] objectArray = GameObject.FindObjectsByType(type, FindObjectsSortMode.None) as Object[];
+                    Debug.Log(objectArray.Length);
+
+                    Selection.objects = objectArray;
+                }
+                else
+                {
+                    Debug.LogWarning("Invalid component type selected.");
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Please select a valid component.");
+            }
+        }
+
+    }
+
+    private System.Type GetTypeFromMonoScript(MonoScript monoScript)
+    {
+        if (monoScript != null)
+        {
+            return monoScript.GetClass();
+        }
+        return null;
+    }
+}
+
 
 //Inspired by Jason Storey
 
@@ -259,4 +351,5 @@ public class SelectAllCameras : ScriptableWizard
 
     }
 }
+
 

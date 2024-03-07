@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.080316946, g: 0.11588766, b: 0.16685855, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1756,7 +1756,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90a36aa442210f4459fa5d08e5b518cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testInt: 15
+  testInt: 61
   test: {fileID: 0}
 --- !u!65 &1314147169
 BoxCollider:

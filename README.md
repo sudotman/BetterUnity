@@ -48,6 +48,7 @@ Table of Contents:
     * [3\.1 Rename Suite](#31-rename-suite)
     * [3\.2 Setup Default Project](#32-setup-default-project)
     * [3\.3 Select All With](#33-select-all-with)
+    * [3\.4 Mesh Combine Wizard](#34-mesh-combine-wizard-tool)
   * [4\. BetterContext](#4-bettercontext)
     * [4\.1 Move ATB](#41-move-atb)
     * [4\.2 Solve Import](#42-solve-import)

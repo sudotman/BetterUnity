@@ -1,5 +1,11 @@
 # Change Log:
 
+## 0.9
+- Added new scriptable wizards for mesh combining abilities.
+- Added new Insepctor attributes.
+- Added a new generic select tool.
+- Updated the headlevel script to include various new settings for VR based element movement.
+
 ## 0.7.2
 
 - Fixed gimbal lock issues when modifying euler angles directly through the inspector.

@@ -135,26 +135,33 @@ public char myButton;
 Various inspector fields which can be used to output text to the Inspector without having to write a custom editor GUI for simple text labels. [a better solution involving attributes without need for a variable should exist, will look into it later]
 
 - InspectorText: Outputs normal text.
-- InspectorFocusText: Outputs text with focus, with a rectangle around it.
+- InspectorFocusText: Outputs text with focus, with a rectangle around it. [has an overload for aligning it to the left]
 - NullCheck: Forces a field to not be null, and if a reference isn't assigned to it, it will be highlighted red.
+- Optional: Designates a field as Optional which changes it's appearance accordingly.
 - Layer: Allows selection of a single layer as opposed to a layermask.
 
 Usage:
 ```C#
+[Optional]
+public int additionalPoints;
+
+// Standard Variable
+public float mainPoints;
+
 [InspectorText("This is a normal text")]
 public char normalText;
 
 [InspectorFocusText("This is a text with focus")]
 public char focusText;
 
-[InsepctorFocusText("This is a text with focus aligned to the left",true)]
+[InspectorFocusText("This is a text with focus aligned to the left",true)]
 public char leftAlignedFocusText;
-
-[NullCheck]
-public Transform myField;
 
 [SerializeField, Layer]
 int layer;
+
+[NullCheck]
+public Transform myField;
 ```
 *Individual Char variable definition not necessary for Text Fields but I prefer to include it to keep it more organized since the order gets reversed otherwise.
 
@@ -363,6 +370,22 @@ Another wizard to select all the objects with the specified:
 - having audio sources
 - having meshes
 
+!["3.3 Demo - Select"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/3_3_SelectAll.png)
+
+### 3.3.1 Select All with Generic
+Often times we end up with frankenstienian structure in the heierarchy of our project. Imagine a dashboard inside of a car being setup using a canvas with various TextMeshPro's being nested inside more Canvas Elements until there are atleast 20-30 elements inside other sub components. The normal search function (including the aforementioned BetterUnity's select all with) ends up showing objects in the entire heirarchy during a search even if we search by type. 
+
+'Select all with generic' allows you to select any object type that exists below the currently selected object - allowing faster modifications of components at the same time. 
+
+!["3.3 Demo - Select Generic"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/3_3_1_SelectAllGeneric.png)
+
+### 3.4 Mesh Combine Wizard Tool
+Made from taking the tool by @sirgru as the base of it. Allows you to combine multiple meshes into one in one easy click.
+Allows the generation of Secondary Meshes too if needed. Combines mesh renderer and the mesh filter together of any two meshes into one also making it into prefab.
+
+!["3.4 Demo - Mesh Combine Wizard"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/3_4_MeshCombineTool.png)
+
+
 ## 4. BetterContext
 A collection of additions to various context menus throughout Unity.
 
@@ -455,12 +478,16 @@ A bunch of world settings inspired by the same-name Unreal settings which have a
 The value of KillY dictates the Y-Position threshold of any object below which it gets automatically destroyed.
 
 
-
 ## 8. VR Scripts
 Useful scripts that aid in my VR development.
 
 ### 8.1 Head Level
 Make an object always align with our headset's level.
+
+Mainly derived from MRTK's head aligning script with some extra small modifications to the whole script that best suits my (and hopefully, other developers') needs.
+
+!["8.1 Demo - HeadLevel"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/5_1_1_Head.png)
+ 
 
 !["8.1 Demo - HeadLevel"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/5_1_Head.gif)
 

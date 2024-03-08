@@ -5,22 +5,22 @@ using UnityEngine;
 public class TestScript : MonoBehaviour
 {
     [Optional]
-    public int testInt;
+    public int additionalPoints;
 
+    public float mainPoints;
 
-    private void Start()
-    {
-        RaycastHit hit;
-        
-    }
+    [InspectorText("This is a normal text")]
+    public char normalText;
 
- 
-    private void Update()
-    {
-        
-    }
+    [InspectorFocusText("This is a text with focus")]
+    public char focusText;
+
+    [InspectorFocusText("This is a text with focus aligned to the left", true)]
+    public char leftAlignedFocusText;
+
+    [SerializeField, Layer]
+    int layer;
 
     [NullCheck]
-    public GameObject test;
-
+    public Transform myField;
 }

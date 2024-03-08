@@ -153,9 +153,10 @@ public class MeshCombineWizard : ScriptableWizard
     public GameObject combineParent;
     public string resultPath = "";
     public bool is32bit = true;
+    public bool generateSecondaryUVs = false;
 
-    private static new readonly Vector2Int minSize = new Vector2Int(450, 200);
-    private static new readonly Vector2Int maxSize = new Vector2Int(1200, 200);
+    private static readonly Vector2Int minSize = new Vector2Int(700, 430);
+    private static readonly Vector2Int maxSize = new Vector2Int(1200, 430);
 
     [MenuItem("BetterUnity/Mesh Combine Wizard")]
     static void CreateWizard()
@@ -172,7 +173,45 @@ public class MeshCombineWizard : ScriptableWizard
         }
     }
 
-    void OnWizardCreate()
+    void OnGUI()
+    {
+        GUILayout.Label("Settings while combining meshes.", EditorStyles.boldLabel);
+
+        GUILayout.Space(20);
+
+        GUILayout.Label("Parent Object", EditorStyles.boldLabel);
+        EditorGUILayout.LabelField("The parent object should have the meshes, which we want to combine, as its children.");
+        EditorGUILayout.LabelField("By default, the currently selected object in heirarchy will be assigned.");
+        combineParent = EditorGUILayout.ObjectField("Parent Object:", combineParent, typeof(GameObject), true) as GameObject;
+
+        GUILayout.Space(20);
+
+        GUILayout.Label("Path Settings", EditorStyles.boldLabel);
+        EditorGUILayout.LabelField("Keeping the path empty will create the combined mesh prefab in the root 'Assets' folder.");
+        resultPath = EditorGUILayout.TextField("Result Path:", resultPath);
+
+        GUILayout.Space(20);
+
+        GUILayout.Label("Indices Settings", EditorStyles.boldLabel);
+        EditorGUILayout.LabelField("Enable 32-bit index if the combined mesh has more than 65535 vertices. (to avoid scrambled meshes)");
+        is32bit = EditorGUILayout.Toggle("Use 32-bit Index:", is32bit);
+
+        GUILayout.Space(20);
+
+        GUILayout.Label("Secondary UVs Settings", EditorStyles.boldLabel);
+        EditorGUILayout.LabelField("When you import a model, you can compute a lightmap UV for it using [[ModelImporter-generateSecondaryUV]]");
+        EditorGUILayout.LabelField("or the Model Import Settings Inspector. This allows you to do the same to procedural meshes.");
+        generateSecondaryUVs = EditorGUILayout.Toggle("Generate Secondary UVs:", generateSecondaryUVs);
+
+        GUILayout.Space(20);
+
+        if (GUILayout.Button("Combine Meshes"))
+        {
+            CombineMeshes();
+        }
+    }
+
+    void CombineMeshes()
     {
         if (combineParent == null)
         {
@@ -226,6 +265,17 @@ public class MeshCombineWizard : ScriptableWizard
 
             Mesh combinedMesh = new Mesh { indexFormat = is32bit ? IndexFormat.UInt32 : IndexFormat.UInt16 };
             combinedMesh.CombineMeshes(combine);
+
+            //Generate Secondary UVs
+            if (generateSecondaryUVs)
+            {
+                //Unity 2022 or later has a return code for generating secondary UVs. Uncomment this for 2022 or later - use this as is otherwise.
+                //if (!UnityEditor.Unwrapping.GenerateSecondaryUVSet(combinedMesh))
+                //{
+                //    Debug.LogWarning("Mesh Combine Wizard: Could not generate secondary UVs. See https://docs.unity3d.com/2022.2/Documentation/ScriptReference/Unwrapping.GenerateSecondaryUVSet.html");
+                //}
+                UnityEditor.Unwrapping.GenerateSecondaryUVSet(combinedMesh);
+            }
 
             string assetName = "CombinedMeshes_" + materialName;
             string assetPath = Path.Combine(assetFolderResultPath, assetName + ".asset");

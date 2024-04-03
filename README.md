@@ -408,26 +408,36 @@ Right click on any GameObject in the heirarchy to "Resolve Import Issues". A lot
 
 ## 5. Debug Tools
 
-All of the following is without any unnecessary canvases.
+Some small tools to allow for more effecient debugging.
+
+### 5.1 BetterDebug:
+BD (BetterDebug) is a bunch of extensions to the default Debug class which allows greater control over Debugging/Logging.
+
+- <b> BD.Log </b> : Is able to log and print any string or array. (tiny code but effective for quick debugging)
+
+```cs
+BD.Log("Test");
+```
+- <b> BD.Log[n] </b> : A lot of times while debugging variables, there is a need to format them, add spaces as such " " between them to make it readable. This tiny code reduces them into one small function to be called.
+
+```cs
+int testCounter = 0;
+float testTimer = 0.6f;
+BD.Log2(testCounter,testVar);
+```
+
+
+### 5.2 BD Universal:
+Unity has a great Debug system but lacks in outputting it while full-screened/inside VR and hence this is an Unreal-Inpsired simple way to display all Debug Log messages on the screen. All messages fade away after a while and also start replacing old logs if too many are outputted quickly.
+
 
 <b>How to use:</b>
-Add LogToScreen to any GameObject without doing anything else.
-
-### 5.1 Debug Log to Screen:
-Unity has a great Debug system but lacks in outputting it while full-screened/inside VR and hence this is an Unreal-Inpsired simple way to display all Debug Log messages on the screen. All messages fade away after a while and also start replacing old logs if too many are outputted quickly.
+Add LogToScreen as a component to any GameObject in your scene. And, every log subsequently called using 'Debug.Log' will be automatically outputted to both the console and the screen.
 
 !["3.1 Demo - Debug To Screen"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/3_1_ToScreen.gif)
 
 <br>
 
-### 5.2 BD:
-BD (BetterDebug) is a bunch of extensions to the default Debug class which allows greater control over Debugging/Logging.
-
-- <b> BD.Log </b> : Is able to log and print any string or array. (tiny code but effective for quick debugging)
-
-```C#
-BD.Log("Test");
-```
 
 ### 5.3 Simple FPS Counter
 A very simple skeletal frames-per-second counter. Inverses unscaled delta time to output fps on the screen.

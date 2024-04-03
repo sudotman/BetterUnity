@@ -305,7 +305,7 @@ GameObject:
   m_Layer: 0
   m_Name: LinearController
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -536,6 +536,7 @@ MonoBehaviour:
   mainPoints: 5
   normalText: 0
   focusText: 0
+  leftAlignedFocusText: 0
   layer: 5
   myField: {fileID: 0}
 --- !u!1 &608754882
@@ -1776,6 +1777,7 @@ MonoBehaviour:
   mainPoints: 0
   normalText: 0
   focusText: 0
+  leftAlignedFocusText: 0
   layer: 0
   myField: {fileID: 0}
 --- !u!1 &1279735354
@@ -1898,6 +1900,7 @@ MonoBehaviour:
   mainPoints: 0
   normalText: 0
   focusText: 0
+  leftAlignedFocusText: 0
   layer: 0
   myField: {fileID: 0}
 --- !u!65 &1314147169
@@ -2072,7 +2075,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4983183233340937029, guid: ea11514bf79b75c42b1ef9a14513cfed, type: 3}
       propertyPath: randomLogsForTesting
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4983183233340937050, guid: ea11514bf79b75c42b1ef9a14513cfed, type: 3}
       propertyPath: m_RootOrder
@@ -2633,7 +2636,7 @@ GameObject:
   m_Layer: 0
   m_Name: FlowController
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

@@ -110,7 +110,7 @@ public class LogToScreen : MonoBehaviour
 
     void LogTest()
     {
-        Debug.Log("Current time: " + Time.time);
+        BD.Log2(test1Counter, timer);
     }
 
     void OnGUI()
@@ -154,6 +154,10 @@ public class LogToScreen : MonoBehaviour
     //    yield return new WaitForSeconds(4f);
     //    myLogQueue.Dequeue();
     //}
+
+    int test1Counter = 3;
+    float timer = 4.0f;
+
     void RandomLogsForTesting()
     {
         Debug.Log("Log1");

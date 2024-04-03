@@ -331,4 +331,25 @@ public static class BD
             Debug.Log(message);
         }
     }
+
+    static public void Log1(object var)
+    {
+        Debug.Log("BD Var: " + ": " + var);
+    }
+
+    static public void Log1(object var, string varName)
+    {
+        Debug.Log(varName + ": " + var);
+    }
+
+    static public void Log2(object var1, object var2)
+    {
+
+        Debug.Log("BD Var 1: " + var1 + "BD Var 2: " + var2);
+    }
+
+    static public void Log2(object var1, string var1Name, object var2, string var2Name)
+    {
+        Debug.Log(var1Name + ": " + var1 + ". " + var2Name + ": " + var2);
+    }
 }

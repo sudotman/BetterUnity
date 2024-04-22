@@ -10,7 +10,7 @@ using UnityEngine.UI;
 /// Suceed this with a field where you specify the button's text as the variable name
 /// </summary>
 [System.AttributeUsage(System.AttributeTargets.All)]
-public class InspectorTextAttribute : PropertyAttribute
+public class LabelAttribute : PropertyAttribute
 {
 
     public static float defaultButtonWidth = 80;
@@ -26,7 +26,7 @@ public class InspectorTextAttribute : PropertyAttribute
     /// </summary>
     /// <param name="methodNamePassed">The name of the method to be called.</param>
     /// <returns>Creates a button in inspector.</returns>
-    public InspectorTextAttribute(string methodNamePassed)
+    public LabelAttribute(string methodNamePassed)
     {
         this.text = methodNamePassed;
         this.textWidth = text.Length;
@@ -40,7 +40,7 @@ public class InspectorTextAttribute : PropertyAttribute
     /// <param name="methodNamePassed">The name of the method to be called.</param>
     /// <param name="leftAlign">Set true for the text to align to left.</param>
     /// <returns>Creates a button in inspector.</returns>
-    public InspectorTextAttribute(string methodNamePassed, bool leftAlign)
+    public LabelAttribute(string methodNamePassed, bool leftAlign)
     {
         this.text = methodNamePassed;
         this.textWidth = text.Length;
@@ -54,11 +54,14 @@ public class InspectorTextAttribute : PropertyAttribute
 /// Suceed this with a field where you specify the button's text as the variable name
 /// </summary>
 [System.AttributeUsage(System.AttributeTargets.Field)]
-public class InspectorFocusTextAttribute : PropertyAttribute
+public class BetterHeaderAttribute : PropertyAttribute
 {
-    public static float defaultButtonWidth = 80;
+    public static float defaultHeaderWidth = 80;
+    public static float defaultHeaderHeight = 80;
 
-    public float textWidth = defaultButtonWidth;
+    public float textWidth = defaultHeaderWidth;
+
+    public float textHeight = defaultHeaderHeight;
 
     public string text = "";
 
@@ -71,11 +74,13 @@ public class InspectorFocusTextAttribute : PropertyAttribute
     /// </summary>
     /// <param name="methodNamePassed">The name of the method to be called.</param>
     /// <returns>Creates a button in inspector.</returns>
-    public InspectorFocusTextAttribute(string methodNamePassed)
+    public BetterHeaderAttribute(string methodNamePassed)
     {
         this.text = methodNamePassed;
 
         this.textWidth = CalculateSizeAndReturn();
+
+        this.textHeight = defaultHeaderHeight;
 
         this.leftAlign = false;
     }
@@ -87,7 +92,7 @@ public class InspectorFocusTextAttribute : PropertyAttribute
     /// <param name="methodNamePassed">The name of the method to be called.</param>
     /// <param name="leftAlign">Set true for the text to align to left.</param>
     /// <returns>Creates a button in inspector.</returns>
-    public InspectorFocusTextAttribute(string methodNamePassed, bool leftAlign)
+    public BetterHeaderAttribute(string methodNamePassed, bool leftAlign)
     {
         this.text = methodNamePassed;
 
@@ -102,7 +107,7 @@ public class InspectorFocusTextAttribute : PropertyAttribute
     /// <param name="methodNamePassed">The name of the method to be called.</param>
     /// <param name="textWidth">Specify text width (if dynamic sizing breaks).</param>
     /// <returns>Creates a button in inspector.</returns>
-    public InspectorFocusTextAttribute(string methodNamePassed, bool leftAlign, int textWidth)
+    public BetterHeaderAttribute(string methodNamePassed, bool leftAlign, int textWidth)
     {
         this.text = methodNamePassed;
 
@@ -184,7 +189,7 @@ public class OptionalAttribute : PropertyAttribute
 //Implementations for Property Attributes:
 
 #if UNITY_EDITOR
-[CustomPropertyDrawer(typeof(InspectorTextAttribute))]
+[CustomPropertyDrawer(typeof(LabelAttribute))]
 public class InspectorTextPropertyDrawer : PropertyDrawer
 {
     
@@ -192,7 +197,7 @@ public class InspectorTextPropertyDrawer : PropertyDrawer
     {
         GUI.color = Color.white;
 
-        InspectorTextAttribute InspectorTextAttribute = (InspectorTextAttribute)attribute;
+        LabelAttribute InspectorTextAttribute = (LabelAttribute)attribute;
 
         Rect buttonRect;
 
@@ -212,7 +217,7 @@ public class InspectorTextPropertyDrawer : PropertyDrawer
     }
 }
 
-[CustomPropertyDrawer(typeof(InspectorFocusTextAttribute))]
+[CustomPropertyDrawer(typeof(BetterHeaderAttribute))]
 public class InspectorFocusTextPropertyDrawer : PropertyDrawer
 {
 
@@ -220,7 +225,7 @@ public class InspectorFocusTextPropertyDrawer : PropertyDrawer
     {
         GUI.color = Color.white;
 
-        InspectorFocusTextAttribute InspectorFocusTextAttribute = (InspectorFocusTextAttribute)attribute;
+        BetterHeaderAttribute InspectorFocusTextAttribute = (BetterHeaderAttribute)attribute;
 
         Rect buttonRect;
 
@@ -231,7 +236,7 @@ public class InspectorFocusTextPropertyDrawer : PropertyDrawer
         }
         else
         {
-            buttonRect = new Rect(position.x, position.y, position.width, position.height);
+            buttonRect = new Rect(position.x, position.y, position.width, position.height + 3f);
         }
 
         GUI.Box(buttonRect, InspectorFocusTextAttribute.text);

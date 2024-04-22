@@ -591,6 +591,8 @@ The project should be good to go as is on most modern Unity versions. Prefer to 
 - Create one universal prefab to enable all functionality inside of our scene.
 - Modify CallInEditor to encompass text-change parameters and size instead of a seperate wrapper of InspectorButton. [Debating this as I really like the simplicity of CallInEditor]
 - The eulers of the rotation on Inspector only modify the global rotation -  do something to make it so that the local rotation could also be modified in the inspector itself
+- Working on individual metrics/scene metrics/normal visualizers - Add a readme for normal and housekeeping on metrics.
+- BetterLog has one skeletal 'trick' as of now - add something exciting to it.
 
 ### Navigation To-Do:
 - ~~Multiple lanes/paths~~

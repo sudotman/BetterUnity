@@ -4,23 +4,30 @@ using UnityEngine;
 
 public class TestScript : MonoBehaviour
 {
+    [BetterHeader("Score")]
+    public char c;
+
     [Optional]
     public int additionalPoints;
 
     public float mainPoints;
 
-    [InspectorText("This is a normal text")]
+    [Label("This is a normal text")]
     public char normalText;
 
-    [InspectorFocusText("This is a text with focus")]
+    [BetterHeader("Layers", true)]
     public char focusText;
-
-    [InspectorFocusText("This is a text with focus aligned to the left", true)]
-    public char leftAlignedFocusText;
 
     [SerializeField, Layer]
     int layer;
 
+    public float testfloat;
+
+    [BetterHeader("Alignment Settings", true)]
+    public char leftAlignedFocusText;
+
     [NullCheck]
     public Transform myField;
+
+    public Color test;
 }

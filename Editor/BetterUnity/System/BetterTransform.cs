@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEditor;
+using static UnityEditor.SceneView;
 
 [CustomEditor(typeof(Transform)), CanEditMultipleObjects]
 public class BetterTransform : Editor
@@ -18,8 +19,6 @@ public class BetterTransform : Editor
 
     private Transform transform;
 
-    private int startIndex;
-
     private bool locked;
 
     // Scale Thingies
@@ -30,7 +29,7 @@ public class BetterTransform : Editor
 
     GenericMenu menu_visibility;
     GenericMenu menu_reset;
-    GenericMenu menu_freeze;
+    GenericMenu menu_normalVisual;
 
     float maximumSliderSetting = 1;
 
@@ -41,16 +40,25 @@ public class BetterTransform : Editor
 
     bool fetchedOnce = false;
 
-    //float InspectorTime;
-
     private bool[] freezeArray = new bool[6];
+
+    private Mesh mesh;
+    private MeshFilter mf;
+    private Vector3[] verts;
+    private Vector3[] normals;
+    private float normalsLength = 1f;
+
+    bool visualizeNormals = false;
+
+    static GUIStyle sceneButtonStyle = new GUIStyle();
+
+    bool viewVerticesInformation;
+
+    float currentTotalVerts = 0.0f;
+    float currentTotalTriangles = 0.0f;
 
     private void OnEnable()
     {
-        //GUI Style gets multiplied by the GUI content color so lets do this
-        //white = new GUIStyle(EditorStyles.label);
-        //white.normal.textColor = Color.white;
-
         m_object = new SerializedObject(target);
 
         m_Position = m_object.FindProperty("m_LocalPosition");
@@ -73,16 +81,24 @@ public class BetterTransform : Editor
         menu_visibility.AddItem(new GUIContent("Make Object Visible"), false, ObjectVisiblity, 1);
         menu_visibility.AddItem(new GUIContent("Make Object Invisible"), false, ObjectVisiblity, 2);
 
-        //customScale = transform.localScale.x;
         maximumSliderSetting = 10;
-
-        menu_freeze = new GenericMenu();
-        //InspectorTime = 0;
 
         for (int i = 0; i < 6; i++)
         {
             freezeArray[i] = false;
         }
+
+        Transform trans = (Transform)target;
+        if (trans.TryGetComponent<MeshFilter>(out mf))
+        {
+            mesh = mf.sharedMesh;
+        }
+        normalsLength = 0.5f;
+
+        currentTotalVerts = EditorPrefs.GetFloat("TotalSceneVerts");
+        currentTotalTriangles = EditorPrefs.GetFloat("TotalSceneTris");
+
+        SceneView.duringSceneGui += OnSceneGUI;
     }
 
     void ResetScale(object parameter)
@@ -149,15 +165,84 @@ public class BetterTransform : Editor
         }
     }
 
+    void VisualizeNormals(object parameter)
+    {
+        visualizeNormals = !visualizeNormals;
+    }
+
+    void SampleFunction()
+    {
+        Debug.Log("Clicked sample function.");
+    }
+
+    public int FetchSceneYPosition(int buttonPosition)
+    {
+        return 5 * buttonPosition;
+    }
+
+    string individualMetrics;
+    string entireSceneMetrics;
+    private void OnSceneGUI(SceneView sceneView)
+    {
+        if (viewVerticesInformation)
+        {
+
+            // Calculate current zoom level
+            if (mesh)
+                individualMetrics = "Selected Object: \nVertices: " + mesh.vertexCount + ", Triangles: " + mesh.triangles.Length;
+            else
+                individualMetrics = "";
+
+            entireSceneMetrics = "Entire Scene: \nVertices: " + currentTotalVerts + ", Triangles: " + currentTotalTriangles; 
+
+            sceneButtonStyle.normal.textColor = Color.yellow;
+            Handles.BeginGUI();
+            if (GUI.Button(new Rect(5, FetchSceneYPosition(1), 100, sceneButtonStyle.lineHeight), entireSceneMetrics + "\n\n" + individualMetrics, sceneButtonStyle))
+                SampleFunction();
+            Handles.EndGUI();
+        }
+
+        if (visualizeNormals)
+        {
+            if (mesh == null)
+            {
+                Debug.Log("There is no mesh attached to this game object.");
+                return;
+            }
+
+            //the matrix calculation inspired by @mandarinx's gist
+            Handles.matrix = mf.transform.localToWorldMatrix;
+            Handles.color = Color.yellow;
+            verts = mesh.vertices;
+            normals = mesh.normals;
+            int len = mesh.vertexCount;
+
+            for (int i = 0; i < len; i++)
+            {
+                Handles.color = Color.yellow;
+
+                if (normalsLength < 0)
+                    Handles.color = Color.red;
+
+                Handles.DrawLine(verts[i], verts[i] + normals[i] * normalsLength);
+
+                if (i % 2 == 0)
+                    Handles.color = Color.white;
+                else
+                    Handles.color = Color.red;
+
+                Handles.DrawSolidDisc(verts[i], normals[i], normalsLength / 25);
+            }
+        }
+
+
+    }
 
     public override void OnInspectorGUI()
     {
         if (m_object != null)
         {
             m_object.Update();
-
-            //InspectorTime += Time.deltaTime;
-            //Debug.Log(InspectorTime);
 
             GUILayout.BeginHorizontal();
 
@@ -235,8 +320,6 @@ public class BetterTransform : Editor
                 }
             }
 
-            //EditorGUILayout.PropertyField(m_Rotation, new GUIContent("Rotation"));
-
             //Display global rotation data
             if (!currentlyLocBool)
             {
@@ -279,10 +362,6 @@ public class BetterTransform : Editor
                 customScale = EditorGUILayout.Slider("Scale:", fetchValue, 0, maximumSliderSetting);
                 Undo.RecordObject(transform, "Scaling undo");
             }
-            else
-            {
-
-            }
 
             EditorGUILayout.Separator();
 
@@ -305,13 +384,109 @@ public class BetterTransform : Editor
                 Undo.SetTransformParent(transform, newChild.transform, "Set new parent");
             }
 
+            EditorGUILayout.Separator();
 
-            // set the GUI to use the color stored in m_Color
-            //GUI.color = m_Color;
+            EditorGUILayout.HelpBox(new GUIContent("Visualizers"));
+
+            GUIStyle yellowButtonStyle = new GUIStyle("Button");
+            yellowButtonStyle.normal.textColor = Color.yellow;
+
+            if (visualizeNormals)
+            {
+                GUIStyle centeredHelpBoxStyle = new GUIStyle(EditorStyles.helpBox);
+                centeredHelpBoxStyle.alignment = TextAnchor.MiddleCenter;
+                GUI.color = Color.white;
+                EditorGUILayout.HelpBox(new GUIContent("Visualizing Normals"));
+                GUI.color = Color.yellow;
+
+                if (EditorGUILayout.DropdownButton(new GUIContent("Stop Visualizing Normals"), FocusType.Keyboard,yellowButtonStyle))
+                {
+                    visualizeNormals = false;
+                    DrawCameraMode cameraMode = DrawCameraMode.Textured;
+                    SceneView.lastActiveSceneView.cameraMode = SceneView.GetBuiltinCameraMode(cameraMode);
+                    SceneView.RepaintAll();
+                }
+
+                EditorGUILayout.LabelField("Visualizing normals right now.");
+
+            }
+            else
+            {
+                if (EditorGUILayout.DropdownButton(new GUIContent("Visualize Normals"), FocusType.Keyboard))
+                {
+                    //default DrawCameraMode
+                    DrawCameraMode cameraMode = DrawCameraMode.Wireframe;
+                    SceneView.lastActiveSceneView.cameraMode = SceneView.GetBuiltinCameraMode(cameraMode);
+                    visualizeNormals = true;
+                    SceneView.RepaintAll();
+                }
+            }
+
+
+            if (visualizeNormals)
+            {
+                GUI.color = Color.yellow;
+                normalsLength = EditorGUILayout.FloatField(new GUIContent("Normals Length"), normalsLength);
+                GUI.color = Color.white;
+                EditorGUILayout.Separator();
+            }
+             
+
+            if (viewVerticesInformation)
+            {
+                EditorGUILayout.Separator();
+
+                EditorGUILayout.HelpBox(new GUIContent("Vertices Information"));
+                GUI.color = Color.yellow;
+                EditorGUILayout.LabelField("Watching vertices right now.");
+
+
+                if (EditorGUILayout.DropdownButton(new GUIContent("Stop Viewing Vertices Information"), FocusType.Keyboard, yellowButtonStyle))
+                {
+                    viewVerticesInformation = false;
+                    SceneView.RepaintAll();   
+                }
+                if (EditorGUILayout.DropdownButton(new GUIContent("Refresh Scene Vertices"), FocusType.Keyboard, yellowButtonStyle))
+                {
+                    Renderer[] allRenderers = FindObjectsOfType<Renderer>();
+
+                    foreach(Renderer renderer in allRenderers)
+                    {
+                        MeshFilter mr = renderer.GetComponent<MeshFilter>();
+
+                        if (mr){
+                            currentTotalVerts += mr.sharedMesh.vertexCount;
+                            currentTotalTriangles += mr.sharedMesh.triangles.Length;
+                        }
+                        else
+                        {
+                            SkinnedMeshRenderer sr = (SkinnedMeshRenderer)renderer;
+                            currentTotalVerts += sr.sharedMesh.vertexCount;
+                            currentTotalTriangles += sr.sharedMesh.triangles.Length;
+                        }
+                    }
+
+                    EditorPrefs.SetFloat("TotalSceneVerts", currentTotalVerts);
+                    EditorPrefs.SetFloat("TotalSceneTris", currentTotalTriangles);
+
+                    SceneView.RepaintAll();
+                }
+
+                GUI.color = Color.white;
+            }
+            else
+            {
+                if (EditorGUILayout.DropdownButton(new GUIContent("View Vertices Information"), FocusType.Keyboard))
+                {
+                    viewVerticesInformation = true;
+                    SceneView.RepaintAll();
+
+                }
+            }
+         
 
             m_object.ApplyModifiedProperties();
 
-            //Debug.Log(Selection.activeContext);
 
             if (transform != null)
             {
@@ -334,17 +509,17 @@ public class BetterTransform : Editor
                         xy = transform.localScale.y == 0 ? 1 : xy;
                         xz = transform.localScale.z == 0 ? 1 : xz;
 
-                   
+                        
                         transform.localScale = new Vector3(customScale, transform.localScale.x * xy, transform.localScale.x * xz);
 
                     }
                     else
                     {
-                        transform.localScale = new Vector3(customScale, transform.localScale.x * xy, transform.localScale.x * xz);
+                        if (customScale != 0)
+                            transform.localScale = new Vector3(customScale, transform.localScale.x * xy, transform.localScale.x * xz);
+                        else
+                            customScale = transform.localScale.x;
                     }
-
-
-
 
                 }
                 else if (!locked)
@@ -370,12 +545,43 @@ public class BetterTransform : Editor
         }
     }
 
+}
 
+// This class stores all the scene overlays which are not toggled through the Inspector.
+// Display a zoom indicator overlay on the 2D scene view.  Click it to reset to 100% zoom
+[InitializeOnLoad]
+public static class AutomaticSceneOveralys
+{
+    static GUIStyle buttonStyle = new GUIStyle();
 
+    static AutomaticSceneOveralys()
+    {
+        //SceneView.duringSceneGui += OnSceneGUI;
+        buttonStyle.normal.textColor = Color.white;
+    }
 
+    static void OnSceneGUI(SceneView sceneView)
+    {
+        if (sceneView.in2DMode)
+        {
+            // Calculate current zoom level
+            float zoom = GetSceneViewHeight(sceneView) / (sceneView.camera.orthographicSize * 2f);
 
+            // Display zoom indicator in top left corner; clicking the indicator resets to 100%
+            Handles.BeginGUI();
+            if (GUI.Button(new Rect(5, 5, 50, buttonStyle.lineHeight), $"{zoom * 100:N0}%", buttonStyle))
+                SetSceneViewZoom(sceneView, 1f);
+            Handles.EndGUI();
+        }
+    }
 
+    static float GetSceneViewHeight(SceneView sceneView)
+    {
+        return 1;
+    }
 
-
-
+    static void SetSceneViewZoom(SceneView sceneView, float zoom)
+    {
+        
+    }
 }

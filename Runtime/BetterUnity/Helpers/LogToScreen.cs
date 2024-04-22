@@ -32,7 +32,7 @@ public class LogToScreen : MonoBehaviour
     [SerializeField]
     private int removeLogsAfterTime = 6;
 
-    [InspectorFocusText("Amount of logs after which previous ones get overwritten (-1 for unlimited)", true)]
+    [BetterHeader("Amount of logs after which previous ones get overwritten (-1 for unlimited)", true)]
     public char t;
 
     [SerializeField]

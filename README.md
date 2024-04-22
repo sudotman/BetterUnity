@@ -578,21 +578,25 @@ Generate a pull request for whatever change you feel is necessary and I will be 
 The project should be good to go as is on most modern Unity versions. Prefer to not update any dependencies or any other prompts auto-detected by Unity.
 
 ## Current to-do:
+
+### Main Changes:
 - ~~Update RenameSuite's gif.~~
 - ~~Make ScreenToLog scale according to our window size. [possible solution is to use GUI.matrix]~~
 - ~~<b>Store GIFs on the cloud</b>. [Very essential, the repo is growing fast]~~
 - ~~Update dynamic scaling of InspectorText. [using a bandaid fix for now which is really triggering]~~	
+- ~~ A better way of installation - possibly with a package through our Git url and inbuilt Unity's package manager.~~
 - Assembly definitions are not properly architectured, yet. Need to refactor and organize components into proper categories.
 - Add more controllers templates.
 - Add more VR utiltiy scripts.
 - Organize and document Helper Functions (in categories and with more information and preferably screenshots)
-- A better way of installation - possibly with a package through our Git url and inbuilt Unity's package manager.
 - Fix README's alt text naming.
 - Create one universal prefab to enable all functionality inside of our scene.
 - Modify CallInEditor to encompass text-change parameters and size instead of a seperate wrapper of InspectorButton. [Debating this as I really like the simplicity of CallInEditor]
 - The eulers of the rotation on Inspector only modify the global rotation -  do something to make it so that the local rotation could also be modified in the inspector itself
 - Working on individual metrics/scene metrics/normal visualizers - Add a readme for normal and housekeeping on metrics.
 - BetterLog has one skeletal 'trick' as of now - add something exciting to it.
+- Remove layerattribute since it's obsolete with the onset of layermasks.
+- Remove the navigation system to a seperate repository. Doesn't really make sense having it in the main one. Or, rather have it as an importable sample through the package manager.
 
 ### Navigation To-Do:
 - ~~Multiple lanes/paths~~
@@ -601,7 +605,8 @@ The project should be good to go as is on most modern Unity versions. Prefer to 
 - ~~Continue walking from where the start location as opposed to moving them to the preferred location~~
 - ~~Give options to control animation states from the inspector.~~
 - ~~Create an accompanying editor script so that the Inspector isnt as confusing as it is right now.~~
-- Add a more robust documentation/screenshots accompanying the parent script/individual scripts and the working of it. // sorta done for now but will remove this after some consideration.
+- ~~Add a more robust documentation/screenshots accompanying the parent script/individual scripts and the working of it. // sorta done for now but will remove this after some consideration.~~
+
 - Add a dynamic intersection detection with other NPCs.
 
 

@@ -57,6 +57,7 @@ public class BetterTransform : Editor
     float currentTotalVerts = 0.0f;
     float currentTotalTriangles = 0.0f;
 
+
     private void OnEnable()
     {
         m_object = new SerializedObject(target);
@@ -97,8 +98,6 @@ public class BetterTransform : Editor
 
         currentTotalVerts = EditorPrefs.GetFloat("TotalSceneVerts");
         currentTotalTriangles = EditorPrefs.GetFloat("TotalSceneTris");
-
-        SceneView.duringSceneGui += OnSceneGUI;
     }
 
     void ResetScale(object parameter)
@@ -182,11 +181,16 @@ public class BetterTransform : Editor
 
     string individualMetrics;
     string entireSceneMetrics;
-    private void OnSceneGUI(SceneView sceneView)
+
+
+    private void OnSceneGUI()
     {
+        if (!(Event.current.type == EventType.Repaint))
+            return;
+
         if (viewVerticesInformation)
         {
-
+            RepaintAll();
             // Calculate current zoom level
             if (mesh)
                 individualMetrics = "Selected Object: \nVertices: " + mesh.vertexCount + ", Triangles: " + mesh.triangles.Length;
@@ -196,10 +200,12 @@ public class BetterTransform : Editor
             entireSceneMetrics = "Entire Scene: \nVertices: " + currentTotalVerts + ", Triangles: " + currentTotalTriangles; 
 
             sceneButtonStyle.normal.textColor = Color.yellow;
+
             Handles.BeginGUI();
             if (GUI.Button(new Rect(5, FetchSceneYPosition(1), 100, sceneButtonStyle.lineHeight), entireSceneMetrics + "\n\n" + individualMetrics, sceneButtonStyle))
                 SampleFunction();
             Handles.EndGUI();
+
         }
 
         if (visualizeNormals)
@@ -402,8 +408,12 @@ public class BetterTransform : Editor
                 if (EditorGUILayout.DropdownButton(new GUIContent("Stop Visualizing Normals"), FocusType.Keyboard,yellowButtonStyle))
                 {
                     visualizeNormals = false;
-                    DrawCameraMode cameraMode = DrawCameraMode.Textured;
-                    SceneView.lastActiveSceneView.cameraMode = SceneView.GetBuiltinCameraMode(cameraMode);
+
+                    //Changes camera mode to textured automatically - commented out since it might be useful to some.
+
+                    //DrawCameraMode cameraMode = DrawCameraMode.Textured;
+                    //SceneView.lastActiveSceneView.cameraMode = SceneView.GetBuiltinCameraMode(cameraMode);
+
                     SceneView.RepaintAll();
                 }
 
@@ -414,9 +424,11 @@ public class BetterTransform : Editor
             {
                 if (EditorGUILayout.DropdownButton(new GUIContent("Visualize Normals"), FocusType.Keyboard))
                 {
-                    //default DrawCameraMode
-                    DrawCameraMode cameraMode = DrawCameraMode.Wireframe;
-                    SceneView.lastActiveSceneView.cameraMode = SceneView.GetBuiltinCameraMode(cameraMode);
+                    //Switching to wireframe mode automatically when visualizing normals - commented for usefulness
+
+                    //DrawCameraMode cameraMode = DrawCameraMode.Wireframe;
+                    //SceneView.lastActiveSceneView.cameraMode = SceneView.GetBuiltinCameraMode(cameraMode);
+
                     visualizeNormals = true;
                     SceneView.RepaintAll();
                 }
@@ -430,7 +442,8 @@ public class BetterTransform : Editor
                 GUI.color = Color.white;
                 EditorGUILayout.Separator();
             }
-             
+
+            viewVerticesInformation = SessionState.GetBool("viewVertices", false);
 
             if (viewVerticesInformation)
             {
@@ -444,6 +457,7 @@ public class BetterTransform : Editor
                 if (EditorGUILayout.DropdownButton(new GUIContent("Stop Viewing Vertices Information"), FocusType.Keyboard, yellowButtonStyle))
                 {
                     viewVerticesInformation = false;
+                    SessionState.SetBool("viewVertices", false);
                     SceneView.RepaintAll();   
                 }
                 if (EditorGUILayout.DropdownButton(new GUIContent("Refresh Scene Vertices"), FocusType.Keyboard, yellowButtonStyle))
@@ -472,18 +486,25 @@ public class BetterTransform : Editor
                     SceneView.RepaintAll();
                 }
 
-                GUI.color = Color.white;
+                GUI.color = Color.white; 
             }
             else
             {
                 if (EditorGUILayout.DropdownButton(new GUIContent("View Vertices Information"), FocusType.Keyboard))
                 {
-                    viewVerticesInformation = true;
+
+                    SessionState.SetBool("viewVertices", true);
+
                     SceneView.RepaintAll();
 
                 }
             }
-         
+
+            EditorGUILayout.HelpBox(new GUIContent("Debug"));
+            if (EditorGUILayout.DropdownButton(new GUIContent("Force Refresh Scene"), FocusType.Keyboard))
+            {
+                SceneView.RepaintAll();
+            }
 
             m_object.ApplyModifiedProperties();
 

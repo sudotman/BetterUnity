@@ -173,23 +173,25 @@ public Transform myField;
 For a starting point getting familiar with the fields, check the test script out: [TestScript.cs](https://github.com/sudotman/BetterUnity/blob/main/Runtime/BetterUnity/TestScripts/TestScript.cs)
 
 ### 1.3 Tidbits
+These are attachable objects/components to GameObjects as opposed to the inspector additions which get injected into the inspector directly.
 
 <br>
 
-### 1.3.1 Better Rename
+### 1.3.1 BetteRename
 A lot of the times when developing, you have similar children which you want to be named incrementally with your desired prefix. Instead of manually going in and doing it, this module allows me to do more it quickly and effeciently, by attaching a script to the parent.
 
 Further, when duplicating objects and creating new ones, Unity appends (x) [x being the current duplicate] and sometimes you would want the objects to be named differently. All new objects will also be renamed appropriately, automatically.
 
-
-!["1.3 Demo - Better Rename"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/2_1_Rename.gif)
-
-<br>
+Attach 'BetteRename' to any game object.
 
 <br>
 
-### 1.3.2 Better Scale
+<br>
+
+### 1.3.2 BetterScale
 Allows you to always have uniform scaling on any GameObject. Works similar to the BetterTransform component but given incase you dont wish to override default transform and just want the uniform scaling on one object.
+
+Attach 'BetterScale' to any game object.
 
 <br>
 
@@ -358,8 +360,6 @@ Tools to do various functions, called by menus.
 ### 3.1 Rename Suite
 Works similar to BetterRename except its for remaining them only once. [We can attach the script, do the rename, and then remove it if we would want but this has a much cleaner UX]. Further, it allows you to rename any random [from anywhere to anywhere] selection at any place in the heirarchy.
 
-!["3.1 Demo - Rename"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/6_1_Rename.gif)
-
 ### 3.2 Setup Default Project
 A one click button that set-ups directories in our project folder in a standardish way.
 
@@ -465,8 +465,6 @@ Maintain the ratio of the scaling in an object's axes when scaling a GameObject 
 
 ### 6.2 Reset Position, Rotation, Scale:
 Reset the position, rotation and scale of any GameObject locally/globally individually.
-
-!["6.2 Demo - Reset"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/1_2_Reset.gif)
 
 ### 6.3 Visibility Toggle:
 Sometimes you would want to only disable the Mesh Renderers and not Disable the object so that the scripts/components on them still execute. This disables all the Mesh Renderers in this GameObject and all the children renderers.

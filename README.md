@@ -491,7 +491,7 @@ One of the most essential information is the number of vertices/triangles in our
 
 The global information is cached to save performance - whenever new object is deleted/added and you want the change to instantly reflect, press the 'Refresh Scene Vertices' button to reflect that change in the global stats.
 
-!["6.7 Metrics Information"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/1_7_VisualizeNormals.png)
+!["6.7 Metrics Information"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/1_7_MetricsInformation.png)
 
 
 <br>
@@ -581,8 +581,6 @@ General outline:
 
 The script would look this with sample data of a storyboard:
 !["9.3 Demo - Flow Controller"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/8_3_2_FlowController.png)
-
-
 
 <br>
 

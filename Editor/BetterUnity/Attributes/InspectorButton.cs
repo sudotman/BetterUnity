@@ -166,7 +166,7 @@ public class LayerAttribute : PropertyAttribute
 [System.AttributeUsage(System.AttributeTargets.Method)]
 public class CallInEditorAttribute : PropertyAttribute
 {
-    // nothing - just oxygen innit
+
 }
 
 [System.AttributeUsage(System.AttributeTargets.Field)]
@@ -194,7 +194,7 @@ public class MonoBehaviourCustomEditor : Editor
     {
         DrawDefaultInspector(); // We wanna maintain everything else in the inspector
 
-        // Similar to prop.serializedObject.targetObject.GetType() - Get the type information for our current selected MonoBehaviour script
+        // Similar to prop.serializedObject.targetObject.GetType() - Get the type information for our current selected MonoBehaviour script 
         var type = target.GetType();
 
         // Fetch all functions
@@ -202,18 +202,16 @@ public class MonoBehaviourCustomEditor : Editor
         {
 
             var attributes = method.GetCustomAttributes(typeof(CallInEditorAttribute), true); // check if they have our attribute
+            
             if (attributes.Length > 0)
             {
                 if (GUILayout.Button("Execute: " + method.Name))
                 {
-                    //((MonoBehaviour)target).Invoke(method.Name, 0f); //Invoking through an event method info is much faster than invoking through a method name
-
                     System.Type eventOwnerType = type;
 
                     string eventName = method.Name;
 
-                    if (_eventMethodInfo == null)
-                        _eventMethodInfo = eventOwnerType.GetMethod(eventName, BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+                    _eventMethodInfo = eventOwnerType.GetMethod(eventName, BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
 
                     if (_eventMethodInfo != null)
                         _eventMethodInfo.Invoke(target, null);

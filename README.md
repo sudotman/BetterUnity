@@ -27,10 +27,11 @@ https://github.com/sudotman/BetterUnity.git
 Table of Contents:
 * [Contents / Documentation](#contents--documentation)
   * [1\. Inspector Additions](#1-inspector-additions)
-    * [1\.1 Inspector Button / Call Function in Editor](#11-inspector-button--call-function-in-editor)
-    * [1\.2 Inspector Fields](#12-inspector-fields)
-    * [1\.3 Better Rename](#13-better-rename)
-    * [1\.4 Better Scale](#14-better-scale)
+    * [1\.1 Call In Editor](#11-callineditor)
+    * [1\.2 Better Decoration](#12-better-decoration)
+    * [1\.3 Tidbits](#13-tidbits)
+      * [1\.3.1 Better Rename](#131-better-rename)
+      * [1\.3.2 Better Scale](#132-better-scale)
   * [2\. Helpers](#2-helpers)
     * [2\.1 Scale Range](#21-scale-range)
     * [2\.2 Destory Children](#22-destory-children)
@@ -78,11 +79,11 @@ Table of Contents:
 
 ## 1. Inspector Additions
 
-### 1.1 Inspector Button / Call Function in Editor
+### 1.1 CallInEditor
 
 Allows you to call/execute functions in your script from your inspector.
 
-You can expose normally to the inspector in Unity and it works great. Sometimes, you would want to have a button set to call a function of your liking from the inspector and I tend to use workarounds (such as, setting a boolean and then calling a function after checking the boolean from Update) or creating your custom inspector and having a button there. 
+You can expose normally to the inspector in Unity and it works great. Sometimes, you would want to have a button set to call a function of your liking from the inspector and people tend to use workarounds (such as, setting a boolean and then calling a function after checking the boolean from Update) or creating your custom inspector and having a button there. 
 
 This is a much more easier and simpler addition to your existing scripts and can be called using a simple attribute.
 
@@ -96,15 +97,15 @@ void HelloGitFunction(){
 !["1.1 Demo - Call in Editor"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/2_2_2_HelloGit.png)
 
 
-You may want finer control over your button that appears in the inspector in the terms of the size and the label. In that case, you can use the alternative attribute field described below.
+You may want finer control over your button that appears in the inspector in the terms of the size, the label or the place it appears at. In that case, you can use the alternative attribute field described below.
 
 Usage:
 ```C#
 [InspectorButton("funcToBeCalled")]
-public char myButton;
+public char random;
 ```
 
-The above snippet will create a button named My Button and will call <i>`funcToBeCalled`</i> function from inside your script when pressed. The public character can be any variable type, I prefer `char` for saving miniscule memory.
+The above snippet will create a button named My Button and will call <i>`funcToBeCalled`</i> function from inside your script when pressed. The public character can be any variable type, I prefer `char` for saving miniscule memory. 
 
 !["1.1 Demo - Inpsector Button"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/2_2_Button.gif)
 
@@ -128,12 +129,12 @@ For dynamic size:
 public char myButton;
 ```
 
-*The extra step to create a character and invoke the function through specifying the name is because of trying to workaround OnGUI/OnInspectorGUI; a better solution definitely exists and I will explore it at a later time.
+*The extra step to create a character and invoke the function through specifying the name is because of trying to workaround OnGUI/OnInspectorGUI; this is the only workaround as of now due to the way Unity is built - the CallInEditor attribute relies on reflection to find the proper function, too. 
 <br>
 <br>
 
-### 1.2 Inspector Fields
-Various inspector fields which can be used to output text to the Inspector without having to write a custom editor GUI for simple text labels. [a better solution involving attributes without need for a variable should exist, will look into it later]
+### 1.2 Better Decoration
+Various inspector fields which can be used to output text to the Inspector without having to write a custom editor GUI for simple text labels or to have more pleasing looking headers.
 
 - InspectorText: Outputs normal text.
 - InspectorFocusText: Outputs text with focus, with a rectangle around it. [has an overload for aligning it to the left]
@@ -149,14 +150,13 @@ public int additionalPoints;
 // Standard Variable
 public float mainPoints;
 
-[InspectorText("This is a normal text")]
-public char normalText;
+[Label("This is a normal label")]
 
-[InspectorFocusText("This is a text with focus")]
-public char focusText;
+[BetterHeader("Main Header")]
 
-[InspectorFocusText("This is a text with focus aligned to the left",true)]
-public char leftAlignedFocusText;
+[BetterHeader("Main Header aligned to the left", true)]
+
+[BetterHeader("Sub Heading aligned to the left",true,true)]
 
 [SerializeField, Layer]
 int layer;
@@ -164,17 +164,19 @@ int layer;
 [NullCheck]
 public Transform myField;
 ```
-*Individual Char variable definition not necessary for Text Fields but I prefer to include it to keep it more organized since the order gets reversed otherwise.
 
-!["1.2 Demo - Inpsector Button"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/2_3_InspectorFields.png)
+
+!["1.2 Demo - Inspector Fields"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/2_3_InspectorFields.png)
 
 <br>
 
+For a starting point getting familiar with the fields, check the test script out: [TestScript.cs](https://github.com/sudotman/BetterUnity/blob/main/Runtime/BetterUnity/TestScripts/TestScript.cs)
 
-Output of the aforementioned tools all together:<br>
-!["1.2 Demo - Full"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/2_2_2_FullBtn.png)
+### 1.3 Tidbits
 
-### 1.3 Better Rename
+<br>
+
+### 1.3.1 Better Rename
 A lot of the times when developing, you have similar children which you want to be named incrementally with your desired prefix. Instead of manually going in and doing it, this module allows me to do more it quickly and effeciently, by attaching a script to the parent.
 
 Further, when duplicating objects and creating new ones, Unity appends (x) [x being the current duplicate] and sometimes you would want the objects to be named differently. All new objects will also be renamed appropriately, automatically.
@@ -184,7 +186,9 @@ Further, when duplicating objects and creating new ones, Unity appends (x) [x be
 
 <br>
 
-### 1.4 Better Scale
+<br>
+
+### 1.3.2 Better Scale
 Allows you to always have uniform scaling on any GameObject. Works similar to the BetterTransform component but given incase you dont wish to override default transform and just want the uniform scaling on one object.
 
 <br>
@@ -288,7 +292,6 @@ If an incorrect hex string is passed and/or it can't be parsed, a warning is log
 
 !["2.10 - Hex to Color Error"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/4_colorConversionError1.png)
 !["2.10 - Hex to Color Error"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/4_colorConversionError2.png)
-
 
 
 There are plenty more functions which are not mentioned here because of their usages being quite insigniicant. Look through [HelperFunctions.cs](https://github.com/sudotman/BetterUnity/blob/main/Runtime/BetterUnity/Helpers/HelperFunctions.cs) for all the remaining functions, they are aptly documented.
@@ -478,7 +481,22 @@ For a lot of use-cases in Unity [wanting to have a unit scale or have positionin
 ### 6.5 Unreal-Styled Camera Bookmark Hotkeys
 Unreal offers a way in the scene to set "camera" position/rotation as bookmarks with "Ctrl+1/Ctrl+2/Ctrl+3" to set the bookmarks and then "1,2,3" respectively to jump to those bookmarks. [This shortcut might already be bound to something else. Resolve any conflicts as you please]
 
-!["6.4 Demo - Unit Scale"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/6_UnrealBookmarks.gif)
+!["6.5 Demo - Unreal"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/6_UnrealBookmarks.gif)
+
+### 6.6 Visualize Normals
+We need to visualize normals plenty of times for multiple of reasons when working in 3D. This simple click will start visualizing the normals in the sceneview on the currently selected object.
+
+You can define 'normal length' to define the size with which normals are displayed.
+
+!["6.6 Visualize Normals"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/1_6_VisualizeNormals.png)
+
+### 6.7 Metrics Information
+One of the most essential information is the number of vertices/triangles in our current scene or in our current object. Unity's 'Stats' window displays only the vertices visible in the current POV and not the entire number of vertices/triangles currently existing. 
+
+The global information is cached to save performance - whenever new object is deleted/added and you want the change to instantly reflect, press the 'Refresh Scene Vertices' button to reflect that change in the global stats.
+
+!["6.7 Metrics Information"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/1_7_VisualizeNormals.png)
+
 
 <br>
 

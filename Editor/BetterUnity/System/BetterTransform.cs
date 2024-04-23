@@ -500,11 +500,11 @@ public class BetterTransform : Editor
                 }
             }
 
-            EditorGUILayout.HelpBox(new GUIContent("Debug"));
-            if (EditorGUILayout.DropdownButton(new GUIContent("Force Refresh Scene"), FocusType.Keyboard))
-            {
-                SceneView.RepaintAll();
-            }
+            //EditorGUILayout.HelpBox(new GUIContent("Debug"));
+            //if (EditorGUILayout.DropdownButton(new GUIContent("Force Refresh Scene"), FocusType.Keyboard))
+            //{
+            //    SceneView.RepaintAll();
+            //}
 
             m_object.ApplyModifiedProperties();
 

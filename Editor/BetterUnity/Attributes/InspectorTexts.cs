@@ -7,7 +7,7 @@ using System.Reflection;
 using UnityEngine.UI;
 
 /// <summary>
-/// Suceed this with a field where you specify the button's text as the variable name
+/// Insert a simple text label in the inspector
 /// </summary>
 [System.AttributeUsage(System.AttributeTargets.All)]
 public class LabelAttribute : PropertyAttribute
@@ -22,24 +22,22 @@ public class LabelAttribute : PropertyAttribute
     public bool leftAlign = false;
 
     /// <summary>
-    /// Create a inspector button with the button text being based on the suceeding variable's name.
+    /// Creates a simple non-editable text field in the inspector.
     /// </summary>
-    /// <param name="methodNamePassed">The name of the method to be called.</param>
-    /// <returns>Creates a button in inspector.</returns>
-    public LabelAttribute(string methodNamePassed)
+    /// <param name="label">The text to display.</param>
+    public LabelAttribute(string label)
     {
-        this.text = methodNamePassed;
+        this.text = label;
         this.textWidth = text.Length;
 
         this.leftAlign = false;
     }
 
     /// <summary>
-    /// Create a inspector button with the button text being based on the suceeding variable's name.
+    /// Creates a simple non-editable text field in the inspector.
     /// </summary>
-    /// <param name="methodNamePassed">The name of the method to be called.</param>
+    /// <param name="label">The text to display.</param>
     /// <param name="leftAlign">Set true for the text to align to left.</param>
-    /// <returns>Creates a button in inspector.</returns>
     public LabelAttribute(string methodNamePassed, bool leftAlign)
     {
         this.text = methodNamePassed;
@@ -51,9 +49,9 @@ public class LabelAttribute : PropertyAttribute
 }
 
 /// <summary>
-/// Suceed this with a field where you specify the button's text as the variable name
+/// Insert a better looking header into your inspector.
 /// </summary>
-[System.AttributeUsage(System.AttributeTargets.Field)]
+[System.AttributeUsage(System.AttributeTargets.All, Inherited = true, AllowMultiple = true)]
 public class BetterHeaderAttribute : PropertyAttribute
 {
     public static float defaultHeaderWidth = 80;
@@ -67,16 +65,17 @@ public class BetterHeaderAttribute : PropertyAttribute
 
     public bool leftAlign = false;
 
+    public bool subHeading = false;
+
     TextElement te = new TextElement();
 
     /// <summary>
-    /// Create a inspector button with the button text being based on the suceeding variable's name.
+    /// Creates a header text with the string passed.
     /// </summary>
-    /// <param name="methodNamePassed">The name of the method to be called.</param>
-    /// <returns>Creates a button in inspector.</returns>
-    public BetterHeaderAttribute(string methodNamePassed)
+    /// <param name="heading">The name of the header.</param>
+    public BetterHeaderAttribute(string heading)
     {
-        this.text = methodNamePassed;
+        this.text = heading;
 
         this.textWidth = CalculateSizeAndReturn();
 
@@ -85,16 +84,14 @@ public class BetterHeaderAttribute : PropertyAttribute
         this.leftAlign = false;
     }
 
-
     /// <summary>
-    /// Create a inspector button with the button text being based on the suceeding variable's name.
+    /// Creates a header text with the string passed.
     /// </summary>
-    /// <param name="methodNamePassed">The name of the method to be called.</param>
+    /// <param name="heading">The name of the header.</param>
     /// <param name="leftAlign">Set true for the text to align to left.</param>
-    /// <returns>Creates a button in inspector.</returns>
-    public BetterHeaderAttribute(string methodNamePassed, bool leftAlign)
+    public BetterHeaderAttribute(string heading, bool leftAlign)
     {
-        this.text = methodNamePassed;
+        this.text = heading;
 
         this.textWidth = CalculateSizeAndReturn();
 
@@ -102,18 +99,20 @@ public class BetterHeaderAttribute : PropertyAttribute
     }
 
     /// <summary>
-    /// Create a inspector button with the button text being based on the suceeding variable's name.
+    /// Creates a header text with the string passed.
     /// </summary>
-    /// <param name="methodNamePassed">The name of the method to be called.</param>
-    /// <param name="textWidth">Specify text width (if dynamic sizing breaks).</param>
-    /// <returns>Creates a button in inspector.</returns>
-    public BetterHeaderAttribute(string methodNamePassed, bool leftAlign, int textWidth)
+    /// <param name="heading">The name of the header.</param>
+    /// <param name="leftAlign">Set true for the text to align to left.</param>
+    /// <param name="subHeading"> To specify a sub-heading.</param>
+    public BetterHeaderAttribute(string methodNamePassed, bool leftAlign, bool subHeading)
     {
         this.text = methodNamePassed;
 
-        this.textWidth = textWidth;
+        this.textWidth = CalculateSizeAndReturn();
 
         this.leftAlign = leftAlign;
+
+        this.subHeading = subHeading;
     }
 
     float CalculateSizeAndReturn()
@@ -190,10 +189,11 @@ public class OptionalAttribute : PropertyAttribute
 
 #if UNITY_EDITOR
 [CustomPropertyDrawer(typeof(LabelAttribute))]
-public class InspectorTextPropertyDrawer : PropertyDrawer
+public class InspectorTextPropertyDrawer : DecoratorDrawer
 {
-    
-    public override void OnGUI(Rect position, SerializedProperty prop, GUIContent label)
+    float extraSpaceInternal = 1.4f;
+
+    public override void OnGUI(Rect position)
     {
         GUI.color = Color.white;
 
@@ -213,15 +213,22 @@ public class InspectorTextPropertyDrawer : PropertyDrawer
         //GUI.Box(buttonRect, InspectorTextAttribute.text);
 
         GUI.Label(buttonRect, InspectorTextAttribute.text);
+            
+    }
 
+    public override float GetHeight()
+    {
+        return base.GetHeight() * extraSpaceInternal;
     }
 }
 
-[CustomPropertyDrawer(typeof(BetterHeaderAttribute))]
-public class InspectorFocusTextPropertyDrawer : PropertyDrawer
-{
 
-    public override void OnGUI(Rect position, SerializedProperty prop, GUIContent label)
+[CustomPropertyDrawer(typeof(BetterHeaderAttribute))]
+public class BetterHeadAttributeDecorator : DecoratorDrawer
+{
+    float supplementHeight = 2f;
+    float extraSpaceInternal = 1.3f;
+    public override void OnGUI(Rect position)
     {
         GUI.color = Color.white;
 
@@ -231,15 +238,27 @@ public class InspectorFocusTextPropertyDrawer : PropertyDrawer
 
         if (InspectorFocusTextAttribute.leftAlign)
         {
-            buttonRect = new Rect(position.x, position.y, InspectorFocusTextAttribute.textWidth, position.height + 3f);
+            buttonRect = new Rect(position.x, position.y, InspectorFocusTextAttribute.textWidth, position.height/ extraSpaceInternal + supplementHeight);
 
         }
         else
         {
-            buttonRect = new Rect(position.x, position.y, position.width, position.height + 3f);
+            buttonRect = new Rect(position.x, position.y, position.width, position.height/extraSpaceInternal + supplementHeight);
         }
 
-        GUI.Box(buttonRect, InspectorFocusTextAttribute.text);
+        GUIStyle gUIStyle = new GUIStyle(GUI.skin.box);
+
+        if (InspectorFocusTextAttribute.subHeading)
+            gUIStyle.fontStyle = FontStyle.Normal;
+        else
+            gUIStyle.fontStyle = FontStyle.Bold;
+
+        GUI.Box(buttonRect, InspectorFocusTextAttribute.text,gUIStyle);
+    }
+
+    public override float GetHeight()
+    {
+        return base.GetHeight() * extraSpaceInternal;
     }
 }
 
@@ -300,8 +319,6 @@ public class OptionalLabel : PropertyDrawer
         EditorGUI.EndProperty();
     }
 }
-
-
 
 #endif
 

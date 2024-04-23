@@ -105,9 +105,7 @@ Usage:
 public char random;
 ```
 
-The above snippet will create a button named My Button and will call <i>`funcToBeCalled`</i> function from inside your script when pressed. The public character can be any variable type, I prefer `char` for saving miniscule memory. 
-
-!["1.1 Demo - Inpsector Button"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/2_2_Button.gif)
+The above snippet will create a button named Random and will call <i>`funcToBeCalled`</i> function from inside your script when pressed. The public character can be any variable type, I prefer `char` for saving miniscule memory. 
 
 You can also specify the size of the button (by default, it will try to scale your button size to your text size):
 ```C#

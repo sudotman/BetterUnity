@@ -95,3 +95,9 @@ crashlytics-build.properties
 /Assets/BetterUnity/Scripts/VR/Ch16_1002_Glossiness.png
 /Assets/BetterUnity/Scripts/VR/Ch16_1002_Specular.png
 LICENSE.meta
+package.json.meta
+CHANGELOG.md.meta
+README.md.meta
+Runtime.meta
+Editor.meta
+BetterUnity.asmdef.meta

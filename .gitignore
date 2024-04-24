@@ -81,9 +81,6 @@ crashlytics-build.properties
 
 /Assets/Scenes
 
-# Automatically generated meta file for the license
-/LICENSE.meta
-
 # Navigation system's testing fbx
 /Assets/BetterUnity/Scripts/VR/Walking.fbx
 /Assets/BetterUnity/Scripts/VR/Walking.anim
@@ -97,3 +94,4 @@ crashlytics-build.properties
 /Assets/BetterUnity/Scripts/VR/Ch16_1002_Diffuse.png
 /Assets/BetterUnity/Scripts/VR/Ch16_1002_Glossiness.png
 /Assets/BetterUnity/Scripts/VR/Ch16_1002_Specular.png
+LICENSE.meta

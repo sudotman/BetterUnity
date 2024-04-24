@@ -285,7 +285,7 @@ public class NullCheckDrawer : PropertyDrawer
     }
 }
 
-//Null check // Paint the field red if not assigned
+//Optional field - make the field translucent if a field is optional
 [CustomPropertyDrawer(typeof(OptionalAttribute))]
 public class OptionalLabel : PropertyDrawer
 {

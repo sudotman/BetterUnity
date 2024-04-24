@@ -95,7 +95,35 @@ public static class HelperFunctions
             }
         }        
     }
-    
+
+    /// <summary>
+    /// Parses a String to a Vector3.
+    /// </summary>
+    /// <param name="s">String to be parsed.</param>
+    public static Vector3 StringToVector3(this string s)
+    {
+        string[] temp = s.Substring(1, s.Length - 2).Split(',');
+        return new Vector3(float.Parse(temp[0]), float.Parse(temp[1]), float.Parse(temp[2]));
+    }
+
+    public static Quaternion StringToQuaternion(this string quat)
+    {
+        if (quat.StartsWith("(") && quat.EndsWith(")"))
+        {
+            quat = quat.Substring(1, quat.Length - 2);
+        }
+
+        string[] sArray = quat.Split(',');
+        Quaternion result = new Quaternion(
+            float.Parse(sArray[0]),
+            float.Parse(sArray[1]),
+            float.Parse(sArray[2]),
+            float.Parse(sArray[3]));
+
+        return result;
+    }
+
+
     /// <summary>
     /// Subtract one float value from x, y, z components of a Vector3.
     /// </summary>

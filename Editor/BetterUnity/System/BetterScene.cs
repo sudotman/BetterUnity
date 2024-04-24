@@ -1,6 +1,9 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-public static class EditorTest
+
+public static class BetterScene
 {
     [MenuItem("BetterUnity/BetterScene/GetCameraPivot _1")]
     static void GetSceneCameraLocation()
@@ -48,13 +51,23 @@ public static class EditorTest
     static void StoreCamera(int index)
     {
         var scene = SceneView.lastActiveSceneView;
-        Pivots[index] = scene.pivot;
+
+        EditorPrefs.SetString("pivot" + index, scene.pivot.ToString());
+        Pivots[index] = scene.pivot; 
+        EditorPrefs.SetString("rotation" + index, scene.rotation.ToString());
         Rotations[index] = scene.rotation;
+        EditorPrefs.SetString("size" + index, scene.size.ToString());
         Sizes[index] = scene.size;
     }
+
     static void RestoreCamera(int index)
     {
         var scene = SceneView.lastActiveSceneView;
+
+        Pivots[index] = (EditorPrefs.GetString("pivot" + index,"(0.00,0.00,0.00)")).StringToVector3();
+        Rotations[index] = (EditorPrefs.GetString("rotation" + index, "(0.00,0.00,0.00,1)")).StringToQuaternion();
+        Sizes[index] = float.Parse(EditorPrefs.GetString("size" + index, "1f"));
+
         scene.pivot = Pivots[index];
         scene.rotation = Rotations[index];
         scene.size = Sizes[index];

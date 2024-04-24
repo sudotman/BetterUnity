@@ -539,7 +539,11 @@ public class ReverseAnimation : Editor
     {
         var clip = GetSelectedClip();
         if (clip == null)
+        {
+            Debug.LogError("BetterUnity: No animation clip selected to be reversed.");
             return;
+        }
+
         float clipLength = clip.length;
 
         List<AnimationCurve> curves = new List<AnimationCurve>();

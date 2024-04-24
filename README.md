@@ -349,6 +349,13 @@ RaycastHit hit;
 hit.BetterRaycast(startPosition, direction, raycastDistance);
 ```
 
+### 2.13 Vector3FromString
+Is able to parse a Vector3 from a string.
+```ts
+string s = "(-2.24,3.92,0.00)";
+Vector3 test = s.StringToVector3();
+```
+
 <br>
 
 ## 3. Toolbar Tools

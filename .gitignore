@@ -82,7 +82,7 @@ crashlytics-build.properties
 /Assets/Scenes
 
 # Automatically generated meta file for the license
-LICENSE.meta
+/LICENSE.meta
 
 # Navigation system's testing fbx
 /Assets/BetterUnity/Scripts/VR/Walking.fbx

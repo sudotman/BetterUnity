@@ -1,5 +1,12 @@
 # Change Log:
 
+## 0.9.1
+- Additions to BetterTransform (visualizers mainly and some QoL)
+- New Helper Functions.
+- Scene View now persists.
+- Streamlined structure and fixed some small bugs.
+- Added BetterDecoration.
+
 ## 0.9
 - Added new scriptable wizards for mesh combining abilities.
 - Added new Insepctor attributes.

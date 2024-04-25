@@ -155,8 +155,8 @@ public class MeshCombineWizard : ScriptableWizard
     public bool is32bit = true;
     public bool generateSecondaryUVs = false;
 
-    private static readonly Vector2Int minSize = new Vector2Int(700, 430);
-    private static readonly Vector2Int maxSize = new Vector2Int(1200, 430);
+    private static new readonly Vector2Int minSize = new Vector2Int(700, 430);
+    private static new readonly Vector2Int maxSize = new Vector2Int(1200, 430);
 
     [MenuItem("BetterUnity/Mesh Combine Wizard")]
     static void CreateWizard()

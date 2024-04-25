@@ -21,7 +21,7 @@ public class WorldSettings : MonoBehaviour
     [SerializeField] private float worldGravity = -1;
 
     [Header("Default Player/Camera")]
-    [SerializeField] private bool setDefaultGameCamera = false;
+    //[SerializeField] private bool setDefaultGameCamera = false;
     [SerializeField] private Camera defaultPlayerCam;
 
 

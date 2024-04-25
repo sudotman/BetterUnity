@@ -5,25 +5,6 @@ using UnityEngine;
 public static class HelperFunctions
 {
 
-    //Instead of an instance and calling them through this, using an extension class is much better.
-
-
-    /* Archived Code
-    //public static HelperFunctions Instance { get; private set; }
-
-    //private void Awake()
-    //{
-    //    if (Instance != null && Instance != this)
-    //    {
-    //        Destroy(this);
-    //        return;
-    //    }
-    //    Instance = this;
-    //}
-
-    */
-
-
     /// <summary>
     /// Scale a value from a previous range to a new range (remap it linearly).
     /// </summary>

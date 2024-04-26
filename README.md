@@ -520,13 +520,16 @@ A few extensions to the hierarchy window that aids in the better usage of it.
 ### 7.1 Headers/Folders
 An all encompassing Header/Folder system.
 
-To create a header/folder, right click and click on 'Create Header' or rename any empty game object to have a prefix of "= " so for example, "= My Header".
+To create a header/folder, right click and click on 'Create Header' or rename any empty game object to have a prefix of `"= "` so for example, the name could be `"= My Header"`.
 
 A header is essentially just an empty game object drawn differently. You could also use it as a folder and put objects in the child of this 'folder'.
+
+
 !["7.1 BetterHierarchy - Header/Folders"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/FoldersHierarchy.png)
 
 ### 7.2 Toggle Object
 A lot of times, there is a need to quickly enable disable objects directly from the hierarchy - this helps in that. Adds a toggle button next to every element in the hierarchy.
+
 !["7.2 BetterHierarchy - Toggle"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/ToggleForHierarchy.png)
 
 ### 7.3 Go To Parent

@@ -20,7 +20,7 @@ https://github.com/sudotman/BetterUnity.git
 ```
 
 <i>Installation instruction:</i>
-!["Installation Demo"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/InstallationGit.gif)
+!["Installation Demo"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/InstallationGit.gif)
 
 ## Contribute to the project
 [Click here to see general collaboration information](#contribution)
@@ -105,7 +105,7 @@ void HelloGitFunction(){
     ....
 ```
 
-!["1.1 Demo - Call in Editor"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/2_2_2_HelloGit.png)
+!["1.1 Demo - Call in Editor"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/2_2_2_HelloGit.png)
 
 
 You may want finer control over your button that appears in the inspector in the terms of the size, the label or the place it appears at. In that case, you can use the alternative attribute field described below.
@@ -124,7 +124,7 @@ You can also specify the size of the button (by default, it will try to scale yo
 public char myButton;
 ```
 
-!["1.1 Demo - Inpsector Button"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/2_2_1_Button.png)
+!["1.1 Demo - Inpsector Button"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/2_2_1_Button.png)
 
 You can also specify a custom text for your button (by default, it takes button name from the variable name below it [the aforementioned variable will still be required in the script regardless of if we use this]):
 ```C#
@@ -175,7 +175,7 @@ public Transform myField;
 ```
 
 
-!["1.2 Demo - Inspector Fields"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/2_3_InspectorFields.png)
+!["1.2 Demo - Inspector Fields"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/2_3_InspectorFields.png)
 
 <br>
 
@@ -297,12 +297,12 @@ Allows you to pass a Hexadecimal color string and use in the native Unity's RGB 
 Color myColor;
 myColor = myColor.HexColor("#60c47e");
 ```
-!["2.10 - Hex to Color"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/4_colorConversion.png)
+!["2.10 - Hex to Color"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/4_colorConversion.png)
 
 If an incorrect hex string is passed and/or it can't be parsed, a warning is logged while a default black color is returned.
 
-!["2.10 - Hex to Color Error"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/4_colorConversionError1.png)
-!["2.10 - Hex to Color Error"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/4_colorConversionError2.png)
+!["2.10 - Hex to Color Error"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/4_colorConversionError1.png)
+!["2.10 - Hex to Color Error"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/4_colorConversionError2.png)
 
 
 There are plenty more functions which are not mentioned here because of their usages being quite insigniicant. Look through [HelperFunctions.cs](https://github.com/sudotman/BetterUnity/blob/main/Runtime/BetterUnity/Helpers/HelperFunctions.cs) for all the remaining functions, they are aptly documented.
@@ -379,7 +379,7 @@ Works similar to BetterRename except its for remaining them only once. [We can a
 ### 3.2 Setup Default Project
 A one click button that set-ups directories in our project folder in a standardish way.
 
-!["3.2 Demo - Default"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/6_2_Default.gif)
+!["3.2 Demo - Default"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/6_2_Default.gif)
 
 ### 3.3 Select All With
 Another wizard to select all the objects with the specified:
@@ -390,20 +390,20 @@ Another wizard to select all the objects with the specified:
 - having audio sources
 - having meshes
 
-!["3.3 Demo - Select"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/3_3_SelectAll.png)
+!["3.3 Demo - Select"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/3_3_SelectAll.png)
 
 ### 3.3.1 Select All with Generic
 Often times we end up with frankenstienian structure in the heierarchy of our project. Imagine a dashboard inside of a car being setup using a canvas with various TextMeshPro's being nested inside more Canvas Elements until there are atleast 20-30 elements inside other sub components. The normal search function (including the aforementioned BetterUnity's select all with) ends up showing objects in the entire heirarchy during a search even if we search by type. 
 
 'Select all with generic' allows you to select any object type that exists below the currently selected object - allowing faster modifications of components at the same time. 
 
-!["3.3 Demo - Select Generic"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/3_3_1_SelectAllGeneric.png)
+!["3.3 Demo - Select Generic"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/3_3_1_SelectAllGeneric.png)
 
 ### 3.4 Mesh Combine Wizard Tool
 Made from taking the tool by @sirgru as the base of it. Allows you to combine multiple meshes into one in one easy click.
 Allows the generation of Secondary Meshes too if needed. Combines mesh renderer and the mesh filter together of any two meshes into one also making it into prefab.
 
-!["3.4 Demo - Mesh Combine Wizard"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/3_4_MeshCombineTool.png)
+!["3.4 Demo - Mesh Combine Wizard"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/3_4_MeshCombineTool.png)
 
 
 ## 4. BetterContext
@@ -415,14 +415,14 @@ Right click on any two GameObjects in the heirarchy and move the objects to each
 ### 4.2 Solve Import
 Right click on any GameObject in the heirarchy to "Resolve Import Issues". A lot of times when importing 3D models, we tend to get empty objects, cameras, lights etc [usually dependent on the way the modeller exports them] and hence this button gets rid of them in one-go.
 
-!["4.1 Demo - Solve Import"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/7_1_SolveImport.gif)
+!["4.1 Demo - Solve Import"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/7_1_SolveImport.gif)
 
 ### 4.3 Other Contexts
 - Rigidbody: I find myself wanting to freeze X, Z rotation and turn interpolation on and also make sure it's not kinematic. Right click and pressing this button does it all for me.
 
 - AudioSource: One key feature missing from inspecting an AudioSource is the ability to play, pause and stop it at will. Right click and pressing this does the aforementioned.
 
-!["4.2 - AudioSource"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/7_2_AudioSource.gif)
+!["4.2 - AudioSource"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/7_2_AudioSource.gif)
 
 
 ## 5. Debug Tools
@@ -453,7 +453,7 @@ Unity has a great Debug system but lacks in outputting it while full-screened/in
 <b>How to use:</b>
 Add LogToScreen as a component to any GameObject in your scene. And, every log subsequently called using 'Debug.Log' will be automatically outputted to both the console and the screen.
 
-!["3.1 Demo - Debug To Screen"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/3_1_ToScreen.gif)
+!["3.1 Demo - Debug To Screen"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/3_1_ToScreen.gif)
 
 <br>
 
@@ -461,23 +461,23 @@ Add LogToScreen as a component to any GameObject in your scene. And, every log s
 ### 5.3 Simple FPS Counter
 A very simple skeletal frames-per-second counter. Inverses unscaled delta time to output fps on the screen.
 
-!["3.2 Demo - FPS Counter"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/3_2_FPS.png)
+!["3.2 Demo - FPS Counter"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/3_2_FPS.png)
 
 <br>
 
 ## 6. Better Transform
 An extension of the existing Transform component to include some ease-to-use features.
 
-!["6 Demo - Better Transform Overview"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/1_0_Global.png)
+!["6 Demo - Better Transform Overview"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/1_0_Global.png)
 
 
 ### 6.0 Local/Global Switch
-!["6 Demo - Better Transform Overview"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/1_0_Local.png)
+!["6 Demo - Better Transform Overview"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/1_0_Local.png)
 
 ### 6.1 Lock Scale Ratio (Uniform Scale):
 Maintain the ratio of the scaling in an object's axes when scaling a GameObject up/down. Gives a slider with an option to configure the ceiling value for the slider.
 
-!["6.1 Demo - Lock Scale"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/1_1_Scale.png)
+!["6.1 Demo - Lock Scale"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/1_1_Scale.png)
 
 ### 6.2 Reset Position, Rotation, Scale:
 Reset the position, rotation and scale of any GameObject locally/globally individually.
@@ -485,31 +485,31 @@ Reset the position, rotation and scale of any GameObject locally/globally indivi
 ### 6.3 Visibility Toggle:
 Sometimes you would want to only disable the Mesh Renderers and not Disable the object so that the scripts/components on them still execute. This disables all the Mesh Renderers in this GameObject and all the children renderers.
 
-!["6.3 Demo - Visibility"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/1_3_Visibility.gif)
+!["6.3 Demo - Visibility"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/1_3_Visibility.gif)
 
 ### 6.4 Make Unit Scale Parent:
 For a lot of use-cases in Unity [wanting to have a unit scale or have positioning, rotation start from zero], we tend to create new objects and then assign it as a parent. This button does that.
 
-!["6.4 Demo - Unit Scale"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/1_4_Unit.gif)
+!["6.4 Demo - Unit Scale"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/1_4_Unit.gif)
 
 ### 6.5 Unreal-Styled Camera Bookmark Hotkeys
 Unreal offers a way in the scene to set "camera" position/rotation as bookmarks with "Ctrl+1/Ctrl+2/Ctrl+3" to set the bookmarks and then "1,2,3" respectively to jump to those bookmarks. [This shortcut might already be bound to something else. Resolve any conflicts as you please]
 
-!["6.5 Demo - Unreal"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/6_UnrealBookmarks.gif)
+!["6.5 Demo - Unreal"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/6_UnrealBookmarks.gif)
 
 ### 6.6 Visualize Normals
 We need to visualize normals plenty of times for multiple of reasons when working in 3D. This simple click will start visualizing the normals in the sceneview on the currently selected object.
 
 You can define 'normal length' to define the size with which normals are displayed.
 
-!["6.6 Visualize Normals"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/1_6_VisualizeNormals.png)
+!["6.6 Visualize Normals"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/1_6_VisualizeNormals.png)
 
 ### 6.7 Metrics Information
 One of the most essential information is the number of vertices/triangles in our current scene or in our current object. Unity's 'Stats' window displays only the vertices visible in the current POV and not the entire number of vertices/triangles currently existing. 
 
 The global information is cached to save performance - whenever new object is deleted/added and you want the change to instantly reflect, press the 'Refresh Scene Vertices' button to reflect that change in the global stats.
 
-!["6.7 Metrics Information"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/1_7_MetricsInformation.png)
+!["6.7 Metrics Information"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/1_7_MetricsInformation.png)
 
 
 <br>
@@ -525,17 +525,17 @@ To create a header/folder, right click and click on 'Create Header' or rename an
 A header is essentially just an empty game object drawn differently. You could also use it as a folder and put objects in the child of this 'folder'.
 
 
-!["7.1 BetterHierarchy - Header/Folders"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/FoldersHierarchy.png)
+!["7.1 BetterHierarchy - Header/Folders"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/FoldersHierarchy.png)
 
 ### 7.2 Toggle Object
 A lot of times, there is a need to quickly enable disable objects directly from the hierarchy - this helps in that. Adds a toggle button next to every element in the hierarchy.
 
-!["7.2 BetterHierarchy - Toggle"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/ToggleForHierarchy.png)
+!["7.2 BetterHierarchy - Toggle"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/ToggleForHierarchy.png)
 
 ### 7.3 Go To Parent
 Ending up with heavily nested hierarchies is very common. This tool simplifies one pain point of wanting to select the parent object without disturbing the heirarchy - as the LArrow Key closes the hierarchy while selecting the parent.
 
-!["7.3 BetterHierarchy - Go To Parent"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/SelectParent.png)
+!["7.3 BetterHierarchy - Go To Parent"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/SelectParent.png)
 
 
 
@@ -554,10 +554,10 @@ Make an object always align with our headset's level.
 
 Mainly derived from MRTK's head aligning script with some extra small modifications to the whole script that best suits my (and hopefully, other developers') needs.
 
-!["8.1 Demo - HeadLevel"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/5_1_1_Head.png)
+!["8.1 Demo - HeadLevel"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/5_1_1_Head.png)
  
 
-!["8.1 Demo - HeadLevel"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/5_1_Head.gif)
+!["8.1 Demo - HeadLevel"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/5_1_Head.gif)
 
 
 ## 10. Miscellaneous
@@ -570,7 +570,7 @@ A NPC walking/navigation system which is modular and fully configurable.
 
 Demo:
 
-!["7.1 Demo - HeadLevel"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/8_2_1_NavigationMaster.gif)
+!["7.1 Demo - HeadLevel"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/8_2_1_NavigationMaster.gif)
 
 <br>
 
@@ -585,12 +585,12 @@ Import the sample from the package manager to get a preconfigured scene if neede
 Group all the points you wish to navigate into one parent and drop the parent into the points prefab and configure everything accordingly. You can keep the PointParnet's children messy and maybe use BetterRename to organize them (wink, wink).
 
 Individual scripts:
-!["8.2 - Navigation System"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/8_NavigationManual.png)
+!["8.2 - Navigation System"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/8_NavigationManual.png)
 
 <br>
 
 A quick guiding GIF on a quick setup is given below:
-!["8.2 - Navigation System"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/8_2_2_Setup.gif)
+!["8.2 - Navigation System"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/8_2_2_Setup.gif)
 
 <b> General Information</b>:
 
@@ -602,7 +602,7 @@ A quick guiding GIF on a quick setup is given below:
 
 Navigation System working as it should:
 
-!["8.2 - Navigation System"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/8_2_Navigation.gif)
+!["8.2 - Navigation System"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/8_2_Navigation.gif)
 
 <br>
 
@@ -613,7 +613,7 @@ This hopes to alleviate some of those messyness - trying to make a more generic 
 
 Also, has a Custom Inspector GUI that streamlines it some more.
 
-!["9.3 Demo - Flow Controller"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/8_3_FlowController.png)
+!["9.3 Demo - Flow Controller"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/8_3_FlowController.png)
 
 General outline:
 
@@ -623,7 +623,7 @@ General outline:
 - <b>Moving Ahead Requirements</b> define the event that you need to trigger to trigger the wait conditions. Once, these booleans are assigned, you will be assigned one bool out of a generic set of bools that you can modify or pass by ref if needed to further modify it and execute the condition on completion.
 
 The script would look this with sample data of a storyboard:
-!["9.3 Demo - Flow Controller"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/8_3_2_FlowController.png)
+!["9.3 Demo - Flow Controller"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/8_3_2_FlowController.png)
 
 <br>
 

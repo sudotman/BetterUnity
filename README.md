@@ -1,8 +1,12 @@
 # Better Unity
 A collection of modifications/additions (scripts/prefabs) which enhance [for me] the overall flow of using the Unity Engine.
 
+## Philosphy
+A tool that is robust but minimal. Modularly modifiable with minimal cross-dependencies. Avoiding frankensteinian architecture and preferring a simpler, familiar interface and codebase.
+<br>
+
 ## Purpose
-There are some key features pan other game engines that seem to be lacking in Unity and this is a package to resolve those problems.
+There are some key features pan other game engines that seem to be lacking in Unity and this is a package to resolve some of those problems while adding some new ones to their already very solid game engine.
 <br>
 
 ## Installation
@@ -60,22 +64,29 @@ Table of Contents:
     * [5\.3 Simple FPS Counter](#53-simple-fps-counter)
   * [6\. Better Transform](#6-better-transform)
     * [6\.0 Local/Global Switch](#60-localglobal-switch)
-    * [6\.1 Lock Scale Ratio (Uniform Scale):](#61-lock-scale-ratio-uniform-scale)
-    * [6\.2 Reset Position, Rotation, Scale:](#62-reset-position-rotation-scale)
-    * [6\.3 Visibility Toggle:](#63-visibility-toggle)
-    * [6\.4 Make Unit Scale Parent:](#64-make-unit-scale-parent)
-	* [6\.5 Unreal Styled Camera Bookmark Hotkeys:](#65-unreal-styled-camera-bookmark-hotkeys)
-  * [7\. World Settings](#7-world-settings)
-    * [7\.1 KillY (KillZ from UE)](#71-killy-killz-from-ue)
-  * [8\. VR Scripts](#8-vr-scripts)
-    * [8\.1 Head Level](#81-head-level)
-  * [9\. Miscellaneous](#9-miscellaneous)
-    * [9\.1 Controllers](#91-controllers)
-    * [9\.2 Navigation System](#92-navigation-system)
-    * [9\.3 Flow Controller](#93-flow-controller)
+    * [6\.1 Lock Scale Ratio (Uniform Scale)](#61-lock-scale-ratio-uniform-scale)
+    * [6\.2 Reset Position, Rotation, Scale](#62-reset-position-rotation-scale)
+    * [6\.3 Visibility Toggle](#63-visibility-toggle)
+    * [6\.4 Make Unit Scale Parent](#64-make-unit-scale-parent)
+	* [6\.5 Unreal Styled Camera Bookmark Hotkeys](#66-unreal-styled-camera-bookmark-hotkeys)
+	* [6\.6 Visualize Normals](#66-visualize-normals)  
+  	* [6\.7 View Metrics](#67-metrics-information)   
+  * [7\. Better Hierarchy](#7-better-hierarchy)
+    * [7\.1 Headers/Folders](#71-headersfolders)
+    * [7\.2 Toggle Object](#72-toggle-object)
+    * [7\.3 Go To Parent](#73-go-to-parent)    
+  * [8\. World Settings](#8-world-settings)
+    * [8\.1 KillY (KillZ from UE)](#81-killy-killz-from-ue)
+  * [9\. VR Scripts](#9-vr-scripts)
+    * [9\.1 Head Level](#91-head-level)
+  * [10\. Miscellaneous](#10-miscellaneous)
+    * [10\.1 Controllers](#101-controllers)
+    * [10\.2 Navigation System](#102-navigation-system)
+    * [10\.3 Flow Controller](#103-flow-controller)
 * [Contribution](#contribution)
   * [Current to\-do:](#current-to-do)
     * [Navigation To\-Do:](#navigation-to-do)
+
 
 ## 1. Inspector Additions
 
@@ -503,17 +514,39 @@ The global information is cached to save performance - whenever new object is de
 
 <br>
 
-## 7. World Settings
+## 7. Better Hierarchy
+A few extensions to the hierarchy window that aids in the better usage of it.
+
+### 7.1 Headers/Folders
+An all encompassing Header/Folder system.
+
+To create a header/folder, right click and click on 'Create Header' or rename any empty game object to have a prefix of "= " so for example, "= My Header".
+
+A header is essentially just an empty game object drawn differently. You could also use it as a folder and put objects in the child of this 'folder'.
+!["7.1 BetterHierarchy - Header/Folders"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/FoldersHierarchy.png)
+
+### 7.2 Toggle Object
+A lot of times, there is a need to quickly enable disable objects directly from the hierarchy - this helps in that. Adds a toggle button next to every element in the hierarchy.
+!["7.2 BetterHierarchy - Toggle"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/ToggleForHierarchy.png)
+
+### 7.3 Go To Parent
+Ending up with heavily nested hierarchies is very common. This tool simplifies one pain point of wanting to select the parent object without disturbing the heirarchy - as the LArrow Key closes the hierarchy while selecting the parent.
+
+!["7.3 BetterHierarchy - Go To Parent"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/SelectParent.png)
+
+
+
+## 8. World Settings
 A bunch of world settings inspired by the same-name Unreal settings which have a bunch of functionalites missing in Unity.
 
-### 7.1 KillY (KillZ from UE)
+### 8.1 KillY (KillZ from UE)
 The value of KillY dictates the Y-Position threshold of any object below which it gets automatically destroyed.
 
 
-## 8. VR Scripts
+## 9. VR Scripts
 Useful scripts that aid in my VR development.
 
-### 8.1 Head Level
+### 9.1 Head Level
 Make an object always align with our headset's level.
 
 Mainly derived from MRTK's head aligning script with some extra small modifications to the whole script that best suits my (and hopefully, other developers') needs.
@@ -524,12 +557,12 @@ Mainly derived from MRTK's head aligning script with some extra small modificati
 !["8.1 Demo - HeadLevel"](https://github.com/sudotman/sudotman/blob/main/demos/BetterUnity/5_1_Head.gif)
 
 
-## 9. Miscellaneous
+## 10. Miscellaneous
 
-### 9.1 Controllers
+### 10.1 Controllers
 Various basic controller templates, such as FPS, VR.
 
-### 9.2 Navigation System
+### 10.2 Navigation System
 A NPC walking/navigation system which is modular and fully configurable.
 
 Demo:
@@ -570,7 +603,7 @@ Navigation System working as it should:
 
 <br>
 
-### 9.3 Flow Controller
+### 10.3 Flow Controller
 A lot of times, there is a need to script events linearly (usually to follow a particular storyboard in a particular order). This scripts entails having multiple variables, multiple functions and in general just a very messy frankensteinian codebase.
 
 This hopes to alleviate some of those messyness - trying to make a more generic flow controller which allows for triggering of events with ease also eliminating the need to do this everytime.
@@ -601,10 +634,10 @@ The project should be good to go as is on most modern Unity versions. Prefer to 
 ### Main Changes:
 - ~~Update RenameSuite's gif.~~
 - ~~Make ScreenToLog scale according to our window size. [possible solution is to use GUI.matrix]~~
-- ~~<b>Store GIFs on the cloud</b>. [Very essential, the repo is growing fast]~~
-- ~~Update dynamic scaling of InspectorText. [using a bandaid fix for now which is really triggering]~~	
-- ~~ A better way of installation - possibly with a package through our Git url and inbuilt Unity's package manager.~~
-- Assembly definitions are not properly architectured, yet. Need to refactor and organize components into proper categories.
+- ~~<b>Store GIFs/demos on the cloud</b>. [Very essential, the repo is growing fast]~~
+- ~~Update dynamic scaling of InspectorText.~~	
+- ~~Add a package.json to facilitate package install through the git url.~~
+- ~~Assembly definitions are not properly architectured, yet. Need to refactor and organize components into proper categories.~~
 - Add more controllers templates.
 - Add more VR utiltiy scripts.
 - Organize and document Helper Functions (in categories and with more information and preferably screenshots)

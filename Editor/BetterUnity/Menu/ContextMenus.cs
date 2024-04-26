@@ -5,17 +5,6 @@ using UnityEditor;
 
 public class ContextMenus : EditorWindow
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     [MenuItem("GameObject/Better Unity/Solve Import", false,-15)]
     static void SolveImport(MenuCommand command)
@@ -33,6 +22,14 @@ public class ContextMenus : EditorWindow
                 DestroyImmediate(tempArray[i].gameObject);
             }
         }
+    }
+
+    [MenuItem("GameObject/Create Header", false, -15)]
+    static void CreateFolder(MenuCommand command)
+    {
+        GameObject obj = new GameObject();
+
+        obj.name = "= My Header";
     }
 
     [MenuItem("GameObject/Better Unity/Move ATB",false,0)]
@@ -69,26 +66,6 @@ public class ContextMenus : EditorWindow
 
     [MenuItem("GameObject/Better Unity/Select all with/having text", false, 1)]
     static void SelectAllTextMeshPros(MenuCommand command)
-    {
-        GameObject obj = (GameObject)command.context;
-
-
-        TextMesh[] tempArray = obj.transform.GetComponentsInChildren<TextMesh>();
-
-
-        if (tempArray.Length < 1)
-        {
-            Debug.LogWarning("No objects with text found.");
-        }
-        else
-        {
-            Selection.objects = tempArray;
-        }
-
-    }
-
-    [MenuItem("GameObject/Better Unity/Select all with/generic", false, 1)]
-    static void SelectAllGeneric(MenuCommand command)
     {
         GameObject obj = (GameObject)command.context;
 
@@ -147,14 +124,5 @@ public class ContextMenus : EditorWindow
         //Debug.Log("Doubled Rigidbody's Mass to " + body.mass + " from Context Menu.");
         Debug.Log("Pausing audio now.");
     }
-
-    [MenuItem("CONTEXT/MeshFilter/BetterUnity/Pause this source")]
-    static void MeshFilter(MenuCommand command)
-    {
-        AudioSource src = (AudioSource)command.context;
-        src.Pause();
-        //Debug.Log("Doubled Rigidbody's Mass to " + body.mass + " from Context Menu.");
-        Debug.Log("Pausing audio now.");
-    }   
 
 }

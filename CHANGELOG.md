@@ -1,5 +1,10 @@
 # Change Log:
 
+## 0.9.2
+- Added BetterHierarchy.
+- Removed some deprecated functions.
+- Made proper summary for some functions.
+
 ## 0.9.1
 - Additions to BetterTransform (visualizers mainly and some QoL)
 - New Helper Functions.

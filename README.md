@@ -1,4 +1,5 @@
 # Better Unity
+[![openupm](https://img.shields.io/npm/v/com.sudotman.betterunity?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.sudotman.betterunity/)
 A collection of modifications/additions (scripts/prefabs) which enhance [for me] the overall flow of using the Unity Engine.
 
 ## Philosphy

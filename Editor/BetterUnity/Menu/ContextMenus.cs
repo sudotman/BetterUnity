@@ -29,7 +29,10 @@ public class ContextMenus : EditorWindow
     {
         GameObject obj = new GameObject();
 
+
         obj.name = "= My Header";
+
+        Undo.RegisterCreatedObjectUndo(obj, "Created a header.");
     }
 
     [MenuItem("GameObject/Better Unity/Move ATB",false,0)]
@@ -43,6 +46,8 @@ public class ContextMenus : EditorWindow
         {
             GameObject obj1 = (GameObject) Selection.objects[0];
             GameObject obj2 = (GameObject) Selection.objects[1];
+
+            Undo.RecordObject(obj1.transform, "Original Transform of Obj1");
 
             obj1.transform.position = obj2.transform.position;
         }
@@ -62,26 +67,6 @@ public class ContextMenus : EditorWindow
 
             obj2.transform.position = obj1.transform.position;
         }
-    }
-
-    [MenuItem("GameObject/Better Unity/Select all with/having text", false, 1)]
-    static void SelectAllTextMeshPros(MenuCommand command)
-    {
-        GameObject obj = (GameObject)command.context;
-
-
-        TextMesh[] tempArray = obj.transform.GetComponentsInChildren<TextMesh>();
-
-
-        if (tempArray.Length < 1)
-        {
-            Debug.LogWarning("No objects with text found.");
-        }
-        else
-        {
-            Selection.objects = tempArray;
-        }
-
     }
 
     // Add a menu item called "usual player settings" to a Rigidbody's context menu.

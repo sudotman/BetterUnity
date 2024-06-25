@@ -212,7 +212,7 @@ public class BetterTransform : Editor
         {
             if (mesh == null)
             {
-                Debug.Log("There is no mesh attached to this game object.");
+                Debug.LogWarning("Visualize Normals: There is no mesh attached to this game object.");
                 return;
             }
 

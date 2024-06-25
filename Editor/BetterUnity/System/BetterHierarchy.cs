@@ -122,15 +122,22 @@ public static class BetterHierarchy
         GameObject gameObject = EditorUtility.InstanceIDToObject(instanceID) as GameObject;
         if (gameObject != null && gameObject.name.StartsWith("="))
         {
-            EditorGUI.DrawRect(selectionRect, new Color(0.15f,0.15f,0.15f,1f));
+            bool currentlyActive = gameObject.activeInHierarchy;
+            EditorGUI.DrawRect(selectionRect, currentlyActive ? new Color(0.15f,0.15f,0.15f,1f) : new Color(0.2f, 0.2f, 0.2f, 1f));
             GUIStyle style = new GUIStyle(EditorStyles.whiteLabel);
             style.alignment = TextAnchor.MiddleCenter;
             style.fontStyle = FontStyle.Bold;
             style.fontSize = 12; // Adjust font size as needed
-
+            
             // Remove the preceding "= " from the name
             string displayName = gameObject.name.Substring(2);
 
+            if (!currentlyActive)
+            {
+                displayName = "[~] " + displayName;
+                style.normal.textColor = new Color(0.7f, 0.7f, 0.7f, 0.7f);
+            }
+             
             EditorGUI.LabelField(selectionRect, displayName, style);
         }
     }

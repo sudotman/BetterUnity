@@ -27,6 +27,10 @@ https://github.com/sudotman/BetterUnity.git
 ## Contribute to the project
 [Click here to see general collaboration information](#contribution)
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=sudotman/betterunity&type=Date)](https://star-history.com/#sudotman/betterunity&Date)
+
 
 # Contents / Documentation
 

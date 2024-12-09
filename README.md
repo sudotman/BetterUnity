@@ -1,4 +1,6 @@
 # Better Unity
+[![openupm](https://img.shields.io/npm/v/com.sudotman.betterunity?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.sudotman.betterunity/)
+
 A collection of modifications/additions (scripts/prefabs) which enhance [for me] the overall flow of using the Unity Engine.
 
 ## Philosphy
@@ -23,7 +25,7 @@ https://github.com/sudotman/BetterUnity.git
 !["Installation Demo"](https://raw.githubusercontent.com/sudotman/sudotman/main/demos/BetterUnity/InstallationGit.gif)
 
 ## Contribute to the project
-[Click here to see general collaboration information](#contribution)
+[Click here to see general collaboration information and the star history.](#contribution)
 
 
 # Contents / Documentation
@@ -631,6 +633,11 @@ The script would look this with sample data of a storyboard:
 Generate a pull request for whatever change you feel is necessary and I will be happy to review and add them.
 
 The project should be good to go as is on most modern Unity versions. Prefer to not update any dependencies or any other prompts auto-detected by Unity.
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=sudotman/betterunity&type=Date)](https://star-history.com/#sudotman/betterunity&Date)
+
 
 ## Current to-do:
 

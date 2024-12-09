@@ -4,23 +4,11 @@ using UnityEditor;
 
 public class LogToScreen : MonoBehaviour
 {
-    [Header("Toggle")]
-    public bool toggleWithKey = false;
-
-    public KeyCode keyCode = KeyCode.Tilde;
-
-    private bool showRightNow = false;
-
-    [Header("Misc")]
+    [Header("Config")]
 
     [SerializeField]
+    [Tooltip("Color of the logs")]
     Color logColor = Color.yellow;
-
-    [SerializeField]
-    private bool displayFps = true;
-
-    [SerializeField]
-    Color fpsColor = Color.blue;
 
     string tempLogString;
     Queue logQueue = new Queue();   
@@ -30,22 +18,40 @@ public class LogToScreen : MonoBehaviour
     private int currentFps;
 
     [SerializeField]
+    [Tooltip("TTL for any log")]
     private int removeLogsAfterTime = 6;
 
-    [BetterHeader("Amount of logs after which previous ones get overwritten (-1 for unlimited)", true)]
-    public char t;
-
     [SerializeField]
+    [Tooltip("Amount of logs after which previous ones get overwritten (-1 for unlimited)")]
     private int maximumLogsAllowed = 21;
 
+    [Header("Key Toggle")]
+    [Tooltip("If the logs should be toggleable with a key.")]
+    public bool toggleWithKey = false;
+
+    [Tooltip("Key to toggle with.")]
+    public KeyCode keyCode = KeyCode.Tilde;
+
+    private bool showRightNow = false;
+
+    [Header("Skeletal FPS Counter")]
+    [SerializeField]
+    [Tooltip("If FPS should be displayed alongside the logs.")]
+    private bool displayFps = true;
+
+    [SerializeField]
+    [Tooltip("Color of the FPS counter")]
+    Color fpsColor = Color.blue;
+
     [Header("Debug")]
+    [Tooltip("When the scene is started, a function will repeatedly throw logs out to test.")]
     [SerializeField] bool randomLogsForTesting = false;
 
     void Start()
     {
         //Set the default style for our GUI elements
         defaultGUIStyle = new GUIStyle(EditorStyles.label);
-        defaultGUIStyle.normal.textColor = Color.white; //We can multiply our elements with any color later to get our desired color
+        defaultGUIStyle.normal.textColor = Color.white; // We can multiply our elements with any color later to get our desired color
 
         if(displayFps)
             InvokeRepeating(nameof(RefreshFPS), 1, 1);
@@ -53,10 +59,10 @@ public class LogToScreen : MonoBehaviour
         if(randomLogsForTesting)
             RandomLogsForTesting();
 
-        //remove debug elements after a certain time
+        // Remove debug elements after a certain time
         InvokeRepeating("RemoveInTime", 2, removeLogsAfterTime);
 
-        //start log disabled
+        // Start log disabled
         showRightNow = false;
     }
 
@@ -110,7 +116,7 @@ public class LogToScreen : MonoBehaviour
 
     void LogTest()
     {
-        BD.Log2(test1Counter, timer);
+        Debug.Log("Test 1:" + test1Counter + " and: " + timer);
     }
 
     void OnGUI()
@@ -131,9 +137,10 @@ public class LogToScreen : MonoBehaviour
     void ProcessGUI()
     {
         if (displayFps)
+        {
             GUI.contentColor = fpsColor;
-        GUILayout.Label(" FPS: " + currentFps.ToString());
-
+            GUILayout.Label(" FPS: " + currentFps.ToString());
+        }
 
         GUI.contentColor = logColor;
 
@@ -148,12 +155,6 @@ public class LogToScreen : MonoBehaviour
             logQueue.Dequeue();
         }
     }
-
-    //IEnumerator removeInTime(string dequeue)
-    //{
-    //    yield return new WaitForSeconds(4f);
-    //    myLogQueue.Dequeue();
-    //}
 
     int test1Counter = 3;
     float timer = 4.0f;
@@ -173,9 +174,5 @@ public class LogToScreen : MonoBehaviour
 
         //a repeating function to test logging
         InvokeRepeating("LogTest", 1, 2);
-
-        
-
     }
-
 }
